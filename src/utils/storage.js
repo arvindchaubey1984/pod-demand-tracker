@@ -15,8 +15,17 @@ function normalizeDemand(d) {
 }
 
 function normalizeTeamMember(m) {
+  const wasNa = m.pod === 'NA'
+  const pod = wasNa ? 'Shadow' : m.pod
+  const billingStatus =
+    wasNa || (pod === 'Shadow' && !m.billingStatus)
+      ? 'Non-Billable'
+      : m.billingStatus
+
   return {
     ...m,
+    pod,
+    billingStatus,
     endDate: m.endDate || DEFAULT_TEAM_END_DATE,
     account: m.account || DEFAULT_TEAM_ACCOUNT,
     location: m.location || DEFAULT_TEAM_LOCATION,
