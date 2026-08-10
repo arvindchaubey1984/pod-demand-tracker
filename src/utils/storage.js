@@ -86,12 +86,23 @@ export function uniqueSorted(items, key) {
   )
 }
 
+export function isBillableStatus(status) {
+  const s = String(status || '')
+    .trim()
+    .toLowerCase()
+  if (!s) return false
+  if (s.includes('non')) return false
+  return s === 'billable' || s.startsWith('billable')
+}
+
 export function computeStats(teamMembers, openDemands) {
   const activeTeam = teamMembers.filter((m) => m.role || m.assignee)
   const fte = activeTeam.reduce((sum, m) => sum + parseAllocation(m.allocation), 0)
-  const billable = activeTeam.filter((m) =>
-    String(m.billingStatus || '').toLowerCase().includes('billable'),
-  ).length
+  const billable = activeTeam.filter((m) => isBillableStatus(m.billingStatus)).length
+  const nonBillable = activeTeam.filter((m) => {
+    const s = String(m.billingStatus || '').toLowerCase()
+    return s.includes('non')
+  }).length
   const yetToStart = activeTeam.filter((m) =>
     String(m.billingStatus || '').toLowerCase().includes('yet'),
   ).length
@@ -99,6 +110,17 @@ export function computeStats(teamMembers, openDemands) {
     (sum, d) => sum + (Number(d.positions) || 0),
     0,
   )
+
+  const byAccountPod = {}
+  for (const m of activeTeam) {
+    const account = m.account || 'Unassigned'
+    const pod = m.pod || 'Unassigned'
+    if (!byAccountPod[account]) byAccountPod[account] = {}
+    if (!byAccountPod[account][pod]) byAccountPod[account][pod] = { count: 0, fte: 0 }
+    byAccountPod[account][pod].count += 1
+    byAccountPod[account][pod].fte += parseAllocation(m.allocation)
+  }
+
   const byPod = {}
   for (const m of activeTeam) {
     const pod = m.pod || 'Unassigned'
@@ -122,9 +144,11 @@ export function computeStats(teamMembers, openDemands) {
     headcount: activeTeam.length,
     fte,
     billable,
+    nonBillable,
     yetToStart,
     openPositions,
     openRoles: openDemands.length,
+    byAccountPod,
     byPod,
     byProject,
     byLocation,

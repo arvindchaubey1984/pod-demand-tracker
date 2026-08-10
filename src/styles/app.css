@@ -229,9 +229,23 @@ textarea {
 
 .bar-row {
   display: grid;
-  grid-template-columns: 110px 1fr 54px;
+  grid-template-columns: 140px 1fr 54px;
   gap: 0.65rem;
   align-items: center;
+}
+
+.bar-row.account-row span {
+  font-weight: 750;
+  color: var(--ink);
+}
+
+.bar-row.pod-row span {
+  padding-left: 0.35rem;
+  color: var(--ink-soft);
+}
+
+.bar-fill.account-fill {
+  background: linear-gradient(90deg, #045566, #007a93);
 }
 
 .bar-row span {

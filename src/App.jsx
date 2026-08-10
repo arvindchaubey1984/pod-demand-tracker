@@ -45,7 +45,9 @@ export default function App() {
   const [state, setState] = useState(() => loadState())
   const [tab, setTab] = useState('team')
   const [query, setQuery] = useState('')
+  const [accountFilter, setAccountFilter] = useState('All')
   const [podFilter, setPodFilter] = useState('All')
+  const [roleFilter, setRoleFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [modal, setModal] = useState(null)
@@ -68,10 +70,25 @@ export default function App() {
     [state.teamMembers, state.openDemands],
   )
 
-  const pods = useMemo(
-    () => uniqueSorted(state.teamMembers, 'pod'),
+  const accounts = useMemo(
+    () => uniqueSorted(state.teamMembers, 'account'),
     [state.teamMembers],
   )
+  const pods = useMemo(() => {
+    const source =
+      accountFilter === 'All'
+        ? state.teamMembers
+        : state.teamMembers.filter((m) => m.account === accountFilter)
+    return uniqueSorted(source, 'pod')
+  }, [state.teamMembers, accountFilter])
+  const roles = useMemo(() => {
+    const source = state.teamMembers.filter((m) => {
+      if (accountFilter !== 'All' && m.account !== accountFilter) return false
+      if (podFilter !== 'All' && m.pod !== podFilter) return false
+      return true
+    })
+    return uniqueSorted(source, 'role')
+  }, [state.teamMembers, accountFilter, podFilter])
   const projects = useMemo(
     () => uniqueSorted(state.openDemands, 'projectName'),
     [state.openDemands],
@@ -80,15 +97,19 @@ export default function App() {
   const filteredTeam = useMemo(() => {
     const q = query.trim().toLowerCase()
     return state.teamMembers.filter((m) => {
+      if (accountFilter !== 'All' && m.account !== accountFilter) return false
       if (podFilter !== 'All' && m.pod !== podFilter) return false
+      if (roleFilter !== 'All' && m.role !== roleFilter) return false
       if (!q) return true
       return [
-        m.pod,
         m.account,
-        m.location,
+        m.pod,
         m.role,
         m.assignee,
+        m.location,
         m.billingStatus,
+        m.allocation,
+        m.onboardMonth,
         m.endDate,
         m.remarks,
       ]
@@ -96,7 +117,7 @@ export default function App() {
         .toLowerCase()
         .includes(q)
     })
-  }, [state.teamMembers, podFilter, query])
+  }, [state.teamMembers, accountFilter, podFilter, roleFilter, query])
 
   const filteredDemands = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -118,7 +139,34 @@ export default function App() {
     })
   }, [state.openDemands, projectFilter, locationFilter, query])
 
-  const maxPod = Math.max(...Object.values(stats.byPod).map((p) => p.count), 1)
+  const accountPodRows = useMemo(() => {
+    const rows = []
+    for (const [account, podsMap] of Object.entries(stats.byAccountPod || {})) {
+      const podsSorted = Object.entries(podsMap).sort((a, b) => b[1].count - a[1].count)
+      const accountTotal = podsSorted.reduce((sum, [, info]) => sum + info.count, 0)
+      rows.push({ type: 'account', account, count: accountTotal })
+      for (const [pod, info] of podsSorted) {
+        rows.push({ type: 'pod', account, pod, count: info.count })
+      }
+    }
+    return rows.sort((a, b) => {
+      if (a.account !== b.account) {
+        const aTotal = Object.values(stats.byAccountPod[a.account] || {}).reduce(
+          (s, i) => s + i.count,
+          0,
+        )
+        const bTotal = Object.values(stats.byAccountPod[b.account] || {}).reduce(
+          (s, i) => s + i.count,
+          0,
+        )
+        return bTotal - aTotal
+      }
+      if (a.type !== b.type) return a.type === 'account' ? -1 : 1
+      return b.count - a.count
+    })
+  }, [stats.byAccountPod])
+
+  const maxAccountPod = Math.max(...accountPodRows.map((r) => r.count), 1)
   const maxProject = Math.max(...Object.values(stats.byProject), 1)
 
   function notify(message) {
@@ -300,12 +348,12 @@ export default function App() {
             <strong>{stats.billable}</strong>
           </div>
           <div className="stat-card">
-            <span>Open positions</span>
-            <strong>{stats.openPositions}</strong>
+            <span>Non-Billable</span>
+            <strong>{stats.nonBillable}</strong>
           </div>
           <div className="stat-card">
-            <span>Open roles</span>
-            <strong>{stats.openRoles}</strong>
+            <span>Open positions</span>
+            <strong>{stats.openPositions}</strong>
           </div>
         </div>
       </section>
@@ -322,22 +370,33 @@ export default function App() {
 
       <div className="panels">
         <div className="panel">
-          <h2>Team size by POD</h2>
+          <h2>Team size by Account → POD</h2>
           <div className="bar-list">
-            {Object.entries(stats.byPod)
-              .sort((a, b) => b[1].count - a[1].count)
-              .map(([pod, info]) => (
-                <div className="bar-row" key={pod}>
-                  <span title={pod}>{pod}</span>
+            {accountPodRows.map((row) =>
+              row.type === 'account' ? (
+                <div className="bar-row account-row" key={`acct-${row.account}`}>
+                  <span title={row.account}>{row.account}</span>
+                  <div className="bar-track">
+                    <div
+                      className="bar-fill account-fill"
+                      style={{ width: `${(row.count / maxAccountPod) * 100}%` }}
+                    />
+                  </div>
+                  <strong>{row.count}</strong>
+                </div>
+              ) : (
+                <div className="bar-row pod-row" key={`${row.account}-${row.pod}`}>
+                  <span title={`${row.account} → ${row.pod}`}>↳ {row.pod}</span>
                   <div className="bar-track">
                     <div
                       className="bar-fill"
-                      style={{ width: `${(info.count / maxPod) * 100}%` }}
+                      style={{ width: `${(row.count / maxAccountPod) * 100}%` }}
                     />
                   </div>
-                  <strong>{info.count}</strong>
+                  <strong>{row.count}</strong>
                 </div>
-              ))}
+              ),
+            )}
           </div>
         </div>
         <div className="panel">
@@ -391,19 +450,50 @@ export default function App() {
             <div className="filters">
               <input
                 className="search"
-                placeholder="Search role, assignee, remarks..."
+                placeholder="Search account, POD, role, assignee..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
               <select
                 className="field"
+                value={accountFilter}
+                onChange={(e) => {
+                  setAccountFilter(e.target.value)
+                  setPodFilter('All')
+                  setRoleFilter('All')
+                }}
+              >
+                <option value="All">All Accounts</option>
+                {accounts.map((a) => (
+                  <option key={a} value={a}>
+                    {a}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="field"
                 value={podFilter}
-                onChange={(e) => setPodFilter(e.target.value)}
+                onChange={(e) => {
+                  setPodFilter(e.target.value)
+                  setRoleFilter('All')
+                }}
               >
                 <option value="All">All PODs</option>
                 {pods.map((p) => (
                   <option key={p} value={p}>
                     {p}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="field"
+                value={roleFilter}
+                onChange={(e) => setRoleFilter(e.target.value)}
+              >
+                <option value="All">All Roles</option>
+                {roles.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
                   </option>
                 ))}
               </select>
