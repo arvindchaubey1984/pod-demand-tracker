@@ -2,12 +2,24 @@ import seed from '../data/seed.json'
 
 const STORAGE_KEY = 'winfo-pod-demand-v1'
 export const DEFAULT_DEMAND_OPEN_DATE = '2026-08-01'
+export const DEFAULT_TEAM_END_DATE = 'Dec-2026'
+export const DEFAULT_TEAM_ACCOUNT = 'McKesson'
+export const DEFAULT_TEAM_LOCATION = 'India'
 
 function normalizeDemand(d) {
   return {
     ...d,
     demandOpenDate: d.demandOpenDate || DEFAULT_DEMAND_OPEN_DATE,
     onboardedMember: d.onboardedMember ?? '',
+  }
+}
+
+function normalizeTeamMember(m) {
+  return {
+    ...m,
+    endDate: m.endDate || DEFAULT_TEAM_END_DATE,
+    account: m.account || DEFAULT_TEAM_ACCOUNT,
+    location: m.location || DEFAULT_TEAM_LOCATION,
   }
 }
 
@@ -18,6 +30,7 @@ export function loadState() {
       const parsed = JSON.parse(raw)
       return {
         ...parsed,
+        teamMembers: (parsed.teamMembers ?? []).map(normalizeTeamMember),
         openDemands: (parsed.openDemands ?? []).map(normalizeDemand),
       }
     }
@@ -26,7 +39,7 @@ export function loadState() {
   }
   return {
     leadership: seed.leadership ?? [],
-    teamMembers: seed.teamMembers ?? [],
+    teamMembers: (seed.teamMembers ?? []).map(normalizeTeamMember),
     openDemands: (seed.openDemands ?? []).map(normalizeDemand),
   }
 }

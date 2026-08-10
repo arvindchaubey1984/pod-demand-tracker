@@ -1,5 +1,11 @@
 import * as XLSX from 'xlsx'
-import { DEFAULT_DEMAND_OPEN_DATE, uid } from './storage'
+import {
+  DEFAULT_DEMAND_OPEN_DATE,
+  DEFAULT_TEAM_ACCOUNT,
+  DEFAULT_TEAM_END_DATE,
+  DEFAULT_TEAM_LOCATION,
+  uid,
+} from './storage'
 
 function clean(value) {
   return String(value ?? '')
@@ -10,12 +16,15 @@ function clean(value) {
 export function exportWorkbook({ teamMembers, openDemands, leadership }) {
   const teamRows = teamMembers.map((m, i) => ({
     'S.NO': m.sno || i + 1,
+    Account: m.account || DEFAULT_TEAM_ACCOUNT,
     POD: m.pod,
     Role: m.role,
     Assignee: m.assignee,
+    Location: m.location || DEFAULT_TEAM_LOCATION,
     'Billing Status': m.billingStatus,
     Allocation: m.allocation,
     'Onboard Month': m.onboardMonth,
+    'End Date': m.endDate || DEFAULT_TEAM_END_DATE,
     Remarks: m.remarks,
   }))
 
@@ -69,12 +78,15 @@ export async function importWorkbook(file) {
     .map((row, i) => ({
       id: uid('tm'),
       sno: clean(row['S.NO'] ?? row['S.No'] ?? i + 1),
+      account: clean(row.Account ?? '') || DEFAULT_TEAM_ACCOUNT,
       pod: clean(row.POD ?? row.Pod ?? row.Project ?? ''),
       role: clean(row.Role ?? row['Role?'] ?? ''),
       assignee: clean(row.Assignee ?? row['Assignee?'] ?? ''),
+      location: clean(row.Location ?? '') || DEFAULT_TEAM_LOCATION,
       billingStatus: clean(row['Billing Status'] ?? ''),
       allocation: clean(row.Allocation ?? row['Allocation?'] ?? ''),
       onboardMonth: clean(row['Onboard Month'] ?? row['Onboard Month ?'] ?? ''),
+      endDate: clean(row['End Date'] ?? '') || DEFAULT_TEAM_END_DATE,
       remarks: clean(row.Remarks ?? ''),
     }))
     .filter((r) => r.pod || r.role || r.assignee)

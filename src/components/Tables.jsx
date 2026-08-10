@@ -15,12 +15,15 @@ export function TeamTable({ rows, onEdit, onDelete }) {
         <thead>
           <tr>
             <th>#</th>
+            <th>Account</th>
             <th>POD</th>
             <th>Role</th>
             <th>Assignee</th>
+            <th>Location</th>
             <th>Billing</th>
             <th>Allocation</th>
             <th>Onboard</th>
+            <th>End Date</th>
             <th>Remarks</th>
             <th />
           </tr>
@@ -29,11 +32,13 @@ export function TeamTable({ rows, onEdit, onDelete }) {
           {rows.map((m, i) => (
             <tr key={m.id}>
               <td>{m.sno || i + 1}</td>
+              <td>{m.account || '—'}</td>
               <td>
                 <span className="badge badge-info">{m.pod || '—'}</span>
               </td>
               <td>{m.role || '—'}</td>
               <td>{m.assignee || '—'}</td>
+              <td>{m.location || '—'}</td>
               <td>
                 {m.billingStatus ? (
                   <span className={`badge ${billingBadge(m.billingStatus)}`}>
@@ -45,6 +50,7 @@ export function TeamTable({ rows, onEdit, onDelete }) {
               </td>
               <td>{m.allocation || '—'}</td>
               <td>{m.onboardMonth || '—'}</td>
+              <td>{m.endDate || '—'}</td>
               <td>{m.remarks || '—'}</td>
               <td>
                 <div className="row-actions">

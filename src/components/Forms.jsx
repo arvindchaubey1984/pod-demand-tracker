@@ -21,7 +21,15 @@ export function TeamForm({ value, onChange, pods }) {
   return (
     <div className="form-grid">
       <label>
-        POD / Account
+        Account
+        <input
+          value={value.account}
+          onChange={(e) => set('account', e.target.value)}
+          placeholder="McKesson"
+        />
+      </label>
+      <label>
+        POD
         <input
           list="pod-options"
           value={value.pod}
@@ -44,6 +52,18 @@ export function TeamForm({ value, onChange, pods }) {
           value={value.assignee}
           onChange={(e) => set('assignee', e.target.value)}
         />
+      </label>
+      <label>
+        Location
+        <select
+          value={value.location}
+          onChange={(e) => set('location', e.target.value)}
+        >
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="UK">UK</option>
+          <option value="">TBD</option>
+        </select>
       </label>
       <label>
         Billing Status
@@ -71,6 +91,14 @@ export function TeamForm({ value, onChange, pods }) {
           value={value.onboardMonth}
           onChange={(e) => set('onboardMonth', e.target.value)}
           placeholder="April 2026"
+        />
+      </label>
+      <label>
+        End Date
+        <input
+          value={value.endDate}
+          onChange={(e) => set('endDate', e.target.value)}
+          placeholder="Dec-2026"
         />
       </label>
       <label className="full">

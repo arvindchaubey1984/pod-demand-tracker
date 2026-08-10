@@ -11,16 +11,22 @@ import {
   uid,
   uniqueSorted,
   DEFAULT_DEMAND_OPEN_DATE,
+  DEFAULT_TEAM_END_DATE,
+  DEFAULT_TEAM_ACCOUNT,
+  DEFAULT_TEAM_LOCATION,
 } from './utils/storage'
 import './styles/app.css'
 
 const emptyTeam = {
   pod: '',
+  account: DEFAULT_TEAM_ACCOUNT,
+  location: DEFAULT_TEAM_LOCATION,
   role: '',
   assignee: '',
   billingStatus: 'Billable',
   allocation: '100%',
   onboardMonth: '',
+  endDate: DEFAULT_TEAM_END_DATE,
   remarks: '',
 }
 
@@ -76,7 +82,16 @@ export default function App() {
     return state.teamMembers.filter((m) => {
       if (podFilter !== 'All' && m.pod !== podFilter) return false
       if (!q) return true
-      return [m.pod, m.role, m.assignee, m.billingStatus, m.remarks]
+      return [
+        m.pod,
+        m.account,
+        m.location,
+        m.role,
+        m.assignee,
+        m.billingStatus,
+        m.endDate,
+        m.remarks,
+      ]
         .join(' ')
         .toLowerCase()
         .includes(q)
