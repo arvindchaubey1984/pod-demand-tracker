@@ -236,9 +236,12 @@ export default function App() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand">
-          <img src="/winfo-logo.png" alt="Winfo Solutions" />
+          <img
+            src={`${import.meta.env.BASE_URL}winfo-logo.png`}
+            alt="Winfo Solutions"
+          />
           <div className="brand-copy">
-            <strong>PoD Team & Demand</strong>
+            <strong>Data Team & Open Demand</strong>
             <span>Account staffing · open positions</span>
           </div>
         </div>
