@@ -72,7 +72,7 @@ export function TeamForm({ value, onChange, pods }) {
           onChange={(e) => set('billingStatus', e.target.value)}
         >
           <option value="Billable">Billable</option>
-          <option value="Yet to Start">Yet to Start</option>
+          <option value="Yet to Start">Yet to be Billed</option>
           <option value="Non-Billable">Non-Billable</option>
           <option value="">Unspecified</option>
         </select>

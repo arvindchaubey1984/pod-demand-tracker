@@ -344,8 +344,8 @@ export default function App() {
             <strong>{formatFte(stats.fte)}</strong>
           </div>
           <div className="stat-card">
-            <span>Billable</span>
-            <strong>{stats.billable}</strong>
+            <span>Yet to be Billed</span>
+            <strong>{stats.yetToStart}</strong>
           </div>
           <div className="stat-card">
             <span>Non-Billable</span>
