@@ -98,6 +98,88 @@ textarea {
   flex-wrap: wrap;
   gap: 0.55rem;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.15rem;
+}
+
+.login-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(900px 500px at 10% -10%, rgba(0, 168, 197, 0.25), transparent 55%),
+    radial-gradient(800px 420px at 100% 0%, rgba(4, 85, 102, 0.18), transparent 50%),
+    linear-gradient(180deg, #f7fcfd 0%, #e7f2f4 100%);
+}
+
+.login-panel {
+  width: min(440px, 100%);
+  display: grid;
+  gap: 1.1rem;
+  justify-items: center;
+}
+
+.login-brand {
+  text-align: center;
+}
+
+.login-brand img,
+.setup-panel img {
+  height: 52px;
+  width: auto;
+  margin: 0 auto 0.85rem;
+  display: block;
+}
+
+.login-brand h1,
+.setup-panel h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.login-brand p,
+.setup-panel p {
+  margin: 0.45rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.setup-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 22px;
+  padding: 1.4rem 1.35rem 1.5rem;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.setup-panel ol {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.setup-panel code {
+  font-size: 0.84em;
+  background: var(--sand);
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  color: var(--teal-deep);
+}
+
+.setup-panel a {
+  color: var(--teal);
+  font-weight: 650;
 }
 
 .btn {

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { UserButton } from '@clerk/clerk-react'
 import { DemandForm, Modal, TeamForm } from './components/Forms'
 import { DemandTable, TeamTable } from './components/Tables'
 import { exportWorkbook, importWorkbook } from './utils/excel'
@@ -15,7 +16,6 @@ import {
   DEFAULT_TEAM_ACCOUNT,
   DEFAULT_TEAM_LOCATION,
 } from './utils/storage'
-import './styles/app.css'
 
 const emptyTeam = {
   pod: '',
@@ -322,6 +322,9 @@ export default function App() {
           <button className="btn btn-primary" type="button" onClick={onExport}>
             Export Excel
           </button>
+          <div className="user-chip">
+            <UserButton afterSignOutUrl={`${import.meta.env.BASE_URL}`} />
+          </div>
           <input
             ref={fileRef}
             className="hidden-file"
