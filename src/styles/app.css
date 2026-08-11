@@ -278,6 +278,47 @@ textarea {
   box-shadow: var(--shadow);
 }
 
+.sow-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 0.95rem;
+}
+
+.sow-btn {
+  border: 1px solid rgba(0, 122, 147, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--teal-deep);
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.sow-btn:hover {
+  transform: translateY(-1px);
+}
+
+.sow-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--teal-bright), var(--teal-deep));
+  border-color: transparent;
+}
+
+.stat-split {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 1.05rem !important;
+}
+
+.stat-split small {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-weight: 650;
+}
+
 .commercial-stats .stat-card.dark {
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.75);

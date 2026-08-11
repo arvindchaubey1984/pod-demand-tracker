@@ -1,27 +1,36 @@
 import { useMemo, useState } from 'react'
 import {
   computeCommercialStats,
+  filterCommercialBySow,
   formatNumber,
   formatUsd,
   getCommercialData,
+  getSowOptions,
 } from '../utils/commercial'
 
 export default function CommercialPanel() {
   const data = useMemo(() => getCommercialData(), [])
-  const stats = useMemo(() => computeCommercialStats(data), [data])
+  const sowOptions = useMemo(() => getSowOptions(data), [data])
+  const [sowId, setSowId] = useState('combined')
   const [view, setView] = useState('executive')
   const [podFilter, setPodFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
   const [query, setQuery] = useState('')
 
+  const sowView = useMemo(
+    () => computeCommercialStats(filterCommercialBySow(sowId, data)),
+    [sowId, data],
+  )
+  const activeSow = sowOptions.find((s) => s.id === sowId) || sowOptions[0]
+
   const projects = useMemo(
-    () => [...new Set(stats.lineItems.map((i) => i.project).filter(Boolean))].sort(),
-    [stats.lineItems],
+    () => [...new Set(sowView.lineItems.map((i) => i.project).filter(Boolean))].sort(),
+    [sowView.lineItems],
   )
 
   const filteredItems = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return stats.lineItems.filter((item) => {
+    return sowView.lineItems.filter((item) => {
       if (podFilter !== 'All' && item.podCode !== podFilter) return false
       if (projectFilter !== 'All' && item.project !== projectFilter) return false
       if (!q) return true
@@ -30,10 +39,10 @@ export default function CommercialPanel() {
         .toLowerCase()
         .includes(q)
     })
-  }, [stats.lineItems, podFilter, projectFilter, query])
+  }, [sowView.lineItems, podFilter, projectFilter, query])
 
-  const maxPodTotal = Math.max(...stats.pods.map((p) => Number(p.grandTotal) || 0), 1)
-  const maxProject = Math.max(...Object.values(stats.byProject).map((p) => p.amount), 1)
+  const maxPodTotal = Math.max(...sowView.pods.map((p) => Number(p.viewAmount) || 0), 1)
+  const maxProject = Math.max(...Object.values(sowView.byProject).map((p) => p.amount), 1)
 
   return (
     <div className="commercial">
@@ -41,7 +50,7 @@ export default function CommercialPanel() {
         <div>
           <h2>FY27 Commercial</h2>
           <p>
-            McKesson cost model from <em>{data.source}</em> · currency {data.currency}
+            McKesson · {activeSow?.label} — {activeSow?.description || data.source}
           </p>
         </div>
         <div className="view-toggle" role="tablist">
@@ -62,65 +71,118 @@ export default function CommercialPanel() {
         </div>
       </div>
 
+      <div className="sow-toggle" role="tablist" aria-label="SOW views">
+        {sowOptions.map((sow) => (
+          <button
+            key={sow.id}
+            type="button"
+            className={`sow-btn ${sowId === sow.id ? 'active' : ''}`}
+            onClick={() => {
+              setSowId(sow.id)
+              setPodFilter('All')
+              setProjectFilter('All')
+            }}
+          >
+            {sow.label}
+          </button>
+        ))}
+      </div>
+
       <div className="stats commercial-stats">
         <div className="stat-card dark">
-          <span>FY27 Grand Total</span>
-          <strong>{formatUsd(stats.totals.grandTotal)}</strong>
+          <span>{sowId === 'combined' ? 'FY27 Grand Total' : 'SOW Amount'}</span>
+          <strong>{formatUsd(sowView.totals.amount)}</strong>
         </div>
         <div className="stat-card dark">
-          <span>MRx POD Price</span>
-          <strong>{formatUsd(stats.totals.mrxPrice)}</strong>
-        </div>
-        <div className="stat-card dark">
-          <span>Total Hours</span>
-          <strong>{formatNumber(stats.totals.hours)}</strong>
+          <span>Hours</span>
+          <strong>{formatNumber(sowView.totals.hours)}</strong>
         </div>
         <div className="stat-card dark">
           <span>PODs</span>
-          <strong>{stats.podCount}</strong>
+          <strong>{sowView.totals.pods}</strong>
         </div>
         <div className="stat-card dark">
           <span>Roles / Lines</span>
-          <strong>{stats.roleCount}</strong>
+          <strong>{sowView.totals.roles}</strong>
         </div>
+        {sowId === 'combined' ? (
+          <div className="stat-card dark">
+            <span>April SOW / May+ SOW</span>
+            <strong className="stat-split">
+              {formatUsd(sowView.totals.aprilSowCost)}
+              <small> / {formatUsd(sowView.totals.mayOnwardCost)}</small>
+            </strong>
+          </div>
+        ) : (
+          <div className="stat-card dark">
+            <span>Months in view</span>
+            <strong>{sowView.months.length}</strong>
+          </div>
+        )}
       </div>
 
       {view === 'executive' ? (
         <>
           <div className="panels">
             <div className="panel">
-              <h2>POD commercial summary</h2>
+              <h2>
+                {sowId === 'combined'
+                  ? 'POD commercial summary (full FY27)'
+                  : 'POD summary for selected SOW'}
+              </h2>
               <div className="table-wrap compact">
                 <table>
                   <thead>
                     <tr>
                       <th>POD</th>
-                      <th>Est. Price</th>
-                      <th>Winfo Inv.</th>
-                      <th>MRx Price</th>
-                      <th>Blended $/hr</th>
-                      <th>Shift</th>
-                      <th>Travel</th>
-                      <th>Grand Total</th>
+                      {sowId === 'combined' ? (
+                        <>
+                          <th>Est. Price</th>
+                          <th>Winfo Inv.</th>
+                          <th>MRx Price</th>
+                          <th>Blended $/hr</th>
+                          <th>Shift</th>
+                          <th>Travel</th>
+                          <th>Grand Total</th>
+                        </>
+                      ) : (
+                        <>
+                          <th>Roles</th>
+                          <th>Hours</th>
+                          <th>Amount</th>
+                        </>
+                      )}
                     </tr>
                   </thead>
                   <tbody>
-                    {stats.pods.map((pod) => (
+                    {sowView.pods.map((pod) => (
                       <tr key={pod.code}>
                         <td>
                           <strong>
                             {pod.code} · {pod.name}
                           </strong>
                         </td>
-                        <td>{formatUsd(pod.estimatedPrice)}</td>
-                        <td>{formatUsd(pod.winfoInvestment)}</td>
-                        <td>{formatUsd(pod.mrxPrice)}</td>
-                        <td>{formatUsd(pod.blendedRate, 0)}</td>
-                        <td>{formatUsd(pod.shiftExpenses)}</td>
-                        <td>{formatUsd(pod.travelExpense)}</td>
-                        <td>
-                          <strong>{formatUsd(pod.grandTotal)}</strong>
-                        </td>
+                        {sowId === 'combined' ? (
+                          <>
+                            <td>{formatUsd(pod.estimatedPrice)}</td>
+                            <td>{formatUsd(pod.winfoInvestment)}</td>
+                            <td>{formatUsd(pod.mrxPrice)}</td>
+                            <td>{formatUsd(pod.blendedRate, 0)}</td>
+                            <td>{formatUsd(pod.shiftExpenses)}</td>
+                            <td>{formatUsd(pod.travelExpense)}</td>
+                            <td>
+                              <strong>{formatUsd(pod.grandTotal)}</strong>
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td>{pod.roles}</td>
+                            <td>{formatNumber(pod.viewHours)}</td>
+                            <td>
+                              <strong>{formatUsd(pod.viewAmount)}</strong>
+                            </td>
+                          </>
+                        )}
                       </tr>
                     ))}
                   </tbody>
@@ -131,11 +193,11 @@ export default function CommercialPanel() {
 
           <div className="panels">
             <div className="panel">
-              <h2>Grand total by POD</h2>
+              <h2>Amount by POD</h2>
               <div className="bar-list">
-                {stats.pods
+                {sowView.pods
                   .slice()
-                  .sort((a, b) => (b.grandTotal || 0) - (a.grandTotal || 0))
+                  .sort((a, b) => (b.viewAmount || 0) - (a.viewAmount || 0))
                   .map((pod) => (
                     <div className="bar-row" key={pod.code}>
                       <span title={`${pod.code} ${pod.name}`}>
@@ -145,11 +207,11 @@ export default function CommercialPanel() {
                         <div
                           className="bar-fill"
                           style={{
-                            width: `${((pod.grandTotal || 0) / maxPodTotal) * 100}%`,
+                            width: `${((pod.viewAmount || 0) / maxPodTotal) * 100}%`,
                           }}
                         />
                       </div>
-                      <strong>{formatUsd(pod.grandTotal)}</strong>
+                      <strong>{formatUsd(pod.viewAmount)}</strong>
                     </div>
                   ))}
               </div>
@@ -157,7 +219,7 @@ export default function CommercialPanel() {
             <div className="panel">
               <h2>Spend by project</h2>
               <div className="bar-list">
-                {Object.entries(stats.byProject)
+                {Object.entries(sowView.byProject)
                   .sort((a, b) => b[1].amount - a[1].amount)
                   .map(([project, info]) => (
                     <div className="bar-row" key={project}>
@@ -171,17 +233,6 @@ export default function CommercialPanel() {
                       <strong>{formatUsd(info.amount)}</strong>
                     </div>
                   ))}
-              </div>
-              <div className="chips" style={{ marginTop: '1rem' }}>
-                <span className="chip">
-                  Avg blended rate <b>{formatUsd(stats.avgBlended, 0)}/hr</b>
-                </span>
-                <span className="chip">
-                  Shift expenses <b>{formatUsd(stats.totals.shiftExpenses)}</b>
-                </span>
-                <span className="chip">
-                  Travel <b>{formatUsd(stats.totals.travelExpense)}</b>
-                </span>
               </div>
             </div>
           </div>
@@ -202,7 +253,7 @@ export default function CommercialPanel() {
                 onChange={(e) => setPodFilter(e.target.value)}
               >
                 <option value="All">All PODs</option>
-                {stats.pods.map((p) => (
+                {sowView.pods.map((p) => (
                   <option key={p.code} value={p.code}>
                     {p.code} · {p.name}
                   </option>
@@ -235,10 +286,9 @@ export default function CommercialPanel() {
                   <th>Role</th>
                   <th>Location</th>
                   <th>Rate/hr</th>
-                  <th>Alloc %</th>
                   <th>Hours</th>
                   <th>Amount</th>
-                  {stats.months.map((m) => (
+                  {sowView.months.map((m) => (
                     <th key={m}>{m}</th>
                   ))}
                 </tr>
@@ -255,16 +305,15 @@ export default function CommercialPanel() {
                     <td>{item.role}</td>
                     <td>{item.location || '—'}</td>
                     <td>{formatUsd(item.rateHr, 0)}</td>
+                    <td>{formatNumber(item.viewHours)}</td>
                     <td>
-                      {item.allocationPct != null ? `${item.allocationPct}%` : '—'}
+                      <strong>{formatUsd(item.viewAmount)}</strong>
                     </td>
-                    <td>{formatNumber(item.hours)}</td>
-                    <td>
-                      <strong>{formatUsd(item.amount)}</strong>
-                    </td>
-                    {stats.months.map((m) => (
+                    {sowView.months.map((m) => (
                       <td key={`${item.id}-${m}`}>
-                        {item.months?.[m] != null ? formatNumber(item.months[m]) : '—'}
+                        {item.viewMonths?.[m] != null
+                          ? formatNumber(item.viewMonths[m])
+                          : '—'}
                       </td>
                     ))}
                   </tr>

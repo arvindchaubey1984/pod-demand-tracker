@@ -4,6 +4,7 @@
     "account":  "McKesson",
     "currency":  "USD",
     "months":  [
+                   "Apr-26",
                    "May-26",
                    "Jun-26",
                    "Jul-26",
@@ -16,44 +17,102 @@
                    "Feb-27",
                    "Mar-27"
                ],
+    "aprilMonth":  "Apr-26",
+    "mayOnwardMonths":  [
+                            "May-26",
+                            "Jun-26",
+                            "Jul-26",
+                            "Aug-26",
+                            "Sep-26",
+                            "Oct-26",
+                            "Nov-26",
+                            "Dec-26",
+                            "Jan-27",
+                            "Feb-27",
+                            "Mar-27"
+                        ],
+    "aprilSowPodCodes":  [
+                             "POD1",
+                             "POD2",
+                             "POD3"
+                         ],
+    "sows":  [
+                 {
+                     "id":  "combined",
+                     "label":  "Combined FY27",
+                     "description":  "Full FY27 commercial across all PODs and months"
+                 },
+                 {
+                     "id":  "april",
+                     "label":  "April\u002726 SOW (3 PODs)",
+                     "description":  "April cost only for Velocity, VRR/LoopRx, and R\u0026D/Ops (one SOW)",
+                     "podCodes":  [
+                                      "POD1",
+                                      "POD2",
+                                      "POD3"
+                                  ],
+                     "month":  "Apr-26"
+                 },
+                 {
+                     "id":  "mayOnward",
+                     "label":  "May\u002726 onwards SOW",
+                     "description":  "Remaining months May-26 through Mar-27 across PODs (second SOW)",
+                     "months":  [
+                                    "May-26",
+                                    "Jun-26",
+                                    "Jul-26",
+                                    "Aug-26",
+                                    "Sep-26",
+                                    "Oct-26",
+                                    "Nov-26",
+                                    "Dec-26",
+                                    "Jan-27",
+                                    "Feb-27",
+                                    "Mar-27"
+                                ]
+                 }
+             ],
     "pods":  [
                  {
                      "code":  "POD1",
                      "name":  "Velocity",
-                     "estimatedPrice":  894240,
-                     "hours":  15552,
-                     "winfoInvestment":  -44712,
-                     "mrxPrice":  849528,
+                     "estimatedPrice":  993600,
+                     "hours":  17280,
+                     "winfoInvestment":  -49680,
+                     "mrxPrice":  943920,
                      "blendedRate":  54.625,
                      "shiftExpenses":  11250,
                      "travelExpense":  25000,
-                     "grandTotal":  885778,
+                     "grandTotal":  980170,
+                     "inAprilSow":  true,
                      "excelLabel":  "POD 1"
                  },
                  {
                      "code":  "POD2",
                      "name":  "VRR / LoopRx",
-                     "estimatedPrice":  865440,
-                     "hours":  14760,
-                     "winfoInvestment":  -43272,
-                     "mrxPrice":  822168,
-                     "blendedRate":  55.702439024390245,
+                     "estimatedPrice":  967320,
+                     "hours":  16488,
+                     "winfoInvestment":  -48366,
+                     "mrxPrice":  918954,
+                     "blendedRate":  55.734716157205241,
                      "shiftExpenses":  11250,
                      "travelExpense":  25000,
-                     "grandTotal":  858418,
+                     "grandTotal":  955204,
+                     "inAprilSow":  true,
                      "excelLabel":  "POD 2"
                  },
                  {
                      "code":  "POD3",
                      "name":  "R\u0026D / Ops",
-                     "estimatedPrice":  385740,
-                     "hours":  6048,
+                     "estimatedPrice":  426900,
+                     "hours":  6720,
                      "winfoInvestment":  null,
-                     "mrxPrice":  385740,
-                     "blendedRate":  63.779761904761905,
+                     "mrxPrice":  426900,
+                     "blendedRate":  63.526785714285715,
                      "shiftExpenses":  3750,
                      "travelExpense":  null,
-                     "grandTotal":  389490,
+                     "grandTotal":  430650,
+                     "inAprilSow":  true,
                      "excelLabel":  "POD 3"
                  },
                  {
@@ -61,26 +120,28 @@
                      "name":  "UA",
                      "estimatedPrice":  196960,
                      "hours":  3928,
-                     "winfoInvestment":  9848,
+                     "winfoInvestment":  -9848,
                      "mrxPrice":  187112,
                      "blendedRate":  47.635437881873727,
                      "shiftExpenses":  null,
                      "travelExpense":  null,
                      "grandTotal":  187112,
-                     "excelLabel":  "POD 3"
+                     "inAprilSow":  false,
+                     "excelLabel":  "POD 4"
                  },
                  {
                      "code":  "POD5",
                      "name":  "IG",
                      "estimatedPrice":  744160,
                      "hours":  11488,
-                     "winfoInvestment":  37208,
+                     "winfoInvestment":  -37208,
                      "mrxPrice":  706952,
                      "blendedRate":  61.538300835654596,
                      "shiftExpenses":  9048,
                      "travelExpense":  25000,
                      "grandTotal":  741000,
-                     "excelLabel":  "POD 3"
+                     "inAprilSow":  false,
+                     "excelLabel":  "POD 5"
                  }
              ],
     "lineItems":  [
@@ -95,10 +156,11 @@
                           "rateHr":  250,
                           "rateDiscount":  12.5,
                           "rateNet":  237.5,
-                          "hours":  36,
-                          "amount":  9000,
+                          "hours":  40,
+                          "amount":  10000,
                           "allocationPct":  2.5,
                           "months":  {
+                                         "Apr-26":  4,
                                          "May-26":  4,
                                          "Jun-26":  4,
                                          "Jul-26":  4,
@@ -109,9 +171,14 @@
                                          "Dec-26":  4,
                                          "Jan-27":  4
                                      },
+                          "aprilHours":  4,
+                          "aprilCost":  1000,
+                          "mayOnwardHours":  36,
+                          "mayOnwardCost":  9000,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  true
+                          "isShared":  true,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-4",
@@ -124,10 +191,11 @@
                           "rateHr":  175,
                           "rateDiscount":  8.75,
                           "rateNet":  166.25,
-                          "hours":  432,
-                          "amount":  75600,
+                          "hours":  480,
+                          "amount":  84000,
                           "allocationPct":  25,
                           "months":  {
+                                         "Apr-26":  48,
                                          "May-26":  48,
                                          "Jun-26":  48,
                                          "Jul-26":  48,
@@ -138,14 +206,19 @@
                                          "Dec-26":  48,
                                          "Jan-27":  48
                                      },
+                          "aprilHours":  48,
+                          "aprilCost":  8400,
+                          "mayOnwardHours":  432,
+                          "mayOnwardCost":  75600,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  true
+                          "isShared":  true,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-5",
                           "sno":  "3",
-                          "area":  "",
+                          "area":  "Engagement",
                           "project":  "Shared",
                           "role":  "Delivery Lead ( Srinivas Somal)",
                           "teamPod":  "Leadership/Governance",
@@ -153,10 +226,11 @@
                           "rateHr":  85,
                           "rateDiscount":  4.25,
                           "rateNet":  80.75,
-                          "hours":  432,
-                          "amount":  36720,
+                          "hours":  472,
+                          "amount":  40120,
                           "allocationPct":  25,
                           "months":  {
+                                         "Apr-26":  40,
                                          "May-26":  48,
                                          "Jun-26":  48,
                                          "Jul-26":  48,
@@ -167,9 +241,14 @@
                                          "Dec-26":  48,
                                          "Jan-27":  48
                                      },
+                          "aprilHours":  40,
+                          "aprilCost":  3400,
+                          "mayOnwardHours":  432,
+                          "mayOnwardCost":  36720,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  true
+                          "isShared":  true,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-6",
@@ -182,10 +261,11 @@
                           "rateHr":  175,
                           "rateDiscount":  8.75,
                           "rateNet":  166.25,
-                          "hours":  756,
-                          "amount":  132300,
+                          "hours":  840,
+                          "amount":  147000,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  84,
                                          "May-26":  84,
                                          "Jun-26":  84,
                                          "Jul-26":  84,
@@ -196,9 +276,14 @@
                                          "Dec-26":  84,
                                          "Jan-27":  84
                                      },
+                          "aprilHours":  84,
+                          "aprilCost":  14700,
+                          "mayOnwardHours":  756,
+                          "mayOnwardCost":  132300,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-7",
@@ -211,10 +296,11 @@
                           "rateHr":  85,
                           "rateDiscount":  4.25,
                           "rateNet":  80.75,
-                          "hours":  288,
-                          "amount":  24480,
+                          "hours":  328,
+                          "amount":  27880,
                           "allocationPct":  20,
                           "months":  {
+                                         "Apr-26":  40,
                                          "May-26":  32,
                                          "Jun-26":  32,
                                          "Jul-26":  32,
@@ -225,9 +311,14 @@
                                          "Dec-26":  32,
                                          "Jan-27":  32
                                      },
+                          "aprilHours":  40,
+                          "aprilCost":  3400,
+                          "mayOnwardHours":  288,
+                          "mayOnwardCost":  24480,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-8",
@@ -240,10 +331,11 @@
                           "rateHr":  65,
                           "rateDiscount":  3.25,
                           "rateNet":  61.75,
-                          "hours":  756,
-                          "amount":  49140,
+                          "hours":  840,
+                          "amount":  54600,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  84,
                                          "May-26":  84,
                                          "Jun-26":  84,
                                          "Jul-26":  84,
@@ -254,9 +346,14 @@
                                          "Dec-26":  84,
                                          "Jan-27":  84
                                      },
+                          "aprilHours":  84,
+                          "aprilCost":  5460,
+                          "mayOnwardHours":  756,
+                          "mayOnwardCost":  49140,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-9",
@@ -269,10 +366,11 @@
                           "rateHr":  50,
                           "rateDiscount":  2.5,
                           "rateNet":  47.5,
-                          "hours":  756,
-                          "amount":  37800,
+                          "hours":  840,
+                          "amount":  42000,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  84,
                                          "May-26":  84,
                                          "Jun-26":  84,
                                          "Jul-26":  84,
@@ -283,9 +381,14 @@
                                          "Dec-26":  84,
                                          "Jan-27":  84
                                      },
+                          "aprilHours":  84,
+                          "aprilCost":  4200,
+                          "mayOnwardHours":  756,
+                          "mayOnwardCost":  37800,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-10",
@@ -298,10 +401,11 @@
                           "rateHr":  50,
                           "rateDiscount":  2.5,
                           "rateNet":  47.5,
-                          "hours":  1512,
-                          "amount":  75600,
+                          "hours":  1680,
+                          "amount":  84000,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -312,9 +416,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  8400,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  75600,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-11",
@@ -327,10 +436,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -341,9 +451,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-12",
@@ -356,10 +471,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -370,9 +486,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-13",
@@ -385,10 +506,11 @@
                           "rateHr":  40,
                           "rateDiscount":  2,
                           "rateNet":  38,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -399,9 +521,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-14",
@@ -414,10 +541,11 @@
                           "rateHr":  40,
                           "rateDiscount":  2,
                           "rateNet":  38,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -428,9 +556,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-15",
@@ -443,10 +576,11 @@
                           "rateHr":  40,
                           "rateDiscount":  2,
                           "rateNet":  38,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -457,9 +591,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-16",
@@ -472,10 +611,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -486,9 +626,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-17",
@@ -501,10 +646,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -515,9 +661,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD1",
                           "podName":  "Velocity",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-24",
@@ -530,10 +681,11 @@
                           "rateHr":  250,
                           "rateDiscount":  12.5,
                           "rateNet":  237.5,
-                          "hours":  36,
-                          "amount":  9000,
+                          "hours":  40,
+                          "amount":  10000,
                           "allocationPct":  2.5,
                           "months":  {
+                                         "Apr-26":  4,
                                          "May-26":  4,
                                          "Jun-26":  4,
                                          "Jul-26":  4,
@@ -544,9 +696,14 @@
                                          "Dec-26":  4,
                                          "Jan-27":  4
                                      },
+                          "aprilHours":  4,
+                          "aprilCost":  1000,
+                          "mayOnwardHours":  36,
+                          "mayOnwardCost":  9000,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  true
+                          "isShared":  true,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-25",
@@ -559,10 +716,11 @@
                           "rateHr":  175,
                           "rateDiscount":  8.75,
                           "rateNet":  166.25,
-                          "hours":  432,
-                          "amount":  75600,
+                          "hours":  480,
+                          "amount":  84000,
                           "allocationPct":  25,
                           "months":  {
+                                         "Apr-26":  48,
                                          "May-26":  48,
                                          "Jun-26":  48,
                                          "Jul-26":  48,
@@ -573,9 +731,14 @@
                                          "Dec-26":  48,
                                          "Jan-27":  48
                                      },
+                          "aprilHours":  48,
+                          "aprilCost":  8400,
+                          "mayOnwardHours":  432,
+                          "mayOnwardCost":  75600,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  true
+                          "isShared":  true,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-26",
@@ -588,10 +751,11 @@
                           "rateHr":  85,
                           "rateDiscount":  4.25,
                           "rateNet":  80.75,
-                          "hours":  432,
-                          "amount":  36720,
+                          "hours":  472,
+                          "amount":  40120,
                           "allocationPct":  25,
                           "months":  {
+                                         "Apr-26":  40,
                                          "May-26":  48,
                                          "Jun-26":  48,
                                          "Jul-26":  48,
@@ -602,9 +766,14 @@
                                          "Dec-26":  48,
                                          "Jan-27":  48
                                      },
+                          "aprilHours":  40,
+                          "aprilCost":  3400,
+                          "mayOnwardHours":  432,
+                          "mayOnwardCost":  36720,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  true
+                          "isShared":  true,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-27",
@@ -617,10 +786,11 @@
                           "rateHr":  175,
                           "rateDiscount":  8.75,
                           "rateNet":  166.25,
-                          "hours":  756,
-                          "amount":  132300,
+                          "hours":  840,
+                          "amount":  147000,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  84,
                                          "May-26":  84,
                                          "Jun-26":  84,
                                          "Jul-26":  84,
@@ -631,9 +801,14 @@
                                          "Dec-26":  84,
                                          "Jan-27":  84
                                      },
+                          "aprilHours":  84,
+                          "aprilCost":  14700,
+                          "mayOnwardHours":  756,
+                          "mayOnwardCost":  132300,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-28",
@@ -646,10 +821,11 @@
                           "rateHr":  85,
                           "rateDiscount":  4.25,
                           "rateNet":  80.75,
-                          "hours":  288,
-                          "amount":  24480,
+                          "hours":  328,
+                          "amount":  27880,
                           "allocationPct":  20,
                           "months":  {
+                                         "Apr-26":  40,
                                          "May-26":  32,
                                          "Jun-26":  32,
                                          "Jul-26":  32,
@@ -660,9 +836,14 @@
                                          "Dec-26":  32,
                                          "Jan-27":  32
                                      },
+                          "aprilHours":  40,
+                          "aprilCost":  3400,
+                          "mayOnwardHours":  288,
+                          "mayOnwardCost":  24480,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-29",
@@ -675,10 +856,11 @@
                           "rateHr":  65,
                           "rateDiscount":  3.25,
                           "rateNet":  61.75,
-                          "hours":  756,
-                          "amount":  49140,
+                          "hours":  840,
+                          "amount":  54600,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  84,
                                          "May-26":  84,
                                          "Jun-26":  84,
                                          "Jul-26":  84,
@@ -689,9 +871,14 @@
                                          "Dec-26":  84,
                                          "Jan-27":  84
                                      },
+                          "aprilHours":  84,
+                          "aprilCost":  5460,
+                          "mayOnwardHours":  756,
+                          "mayOnwardCost":  49140,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-30",
@@ -704,10 +891,11 @@
                           "rateHr":  50,
                           "rateDiscount":  2.5,
                           "rateNet":  47.5,
-                          "hours":  756,
-                          "amount":  37800,
+                          "hours":  840,
+                          "amount":  42000,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  84,
                                          "May-26":  84,
                                          "Jun-26":  84,
                                          "Jul-26":  84,
@@ -718,9 +906,14 @@
                                          "Dec-26":  84,
                                          "Jan-27":  84
                                      },
+                          "aprilHours":  84,
+                          "aprilCost":  4200,
+                          "mayOnwardHours":  756,
+                          "mayOnwardCost":  37800,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-31",
@@ -733,10 +926,11 @@
                           "rateHr":  50,
                           "rateDiscount":  2.5,
                           "rateNet":  47.5,
-                          "hours":  1512,
-                          "amount":  75600,
+                          "hours":  1680,
+                          "amount":  84000,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -747,9 +941,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  8400,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  75600,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-32",
@@ -762,10 +961,11 @@
                           "rateHr":  65,
                           "rateDiscount":  3.25,
                           "rateNet":  61.75,
-                          "hours":  720,
-                          "amount":  46800,
+                          "hours":  888,
+                          "amount":  57720,
                           "allocationPct":  50,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  80,
                                          "Jun-26":  80,
                                          "Jul-26":  80,
@@ -776,9 +976,14 @@
                                          "Dec-26":  80,
                                          "Jan-27":  80
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  10920,
+                          "mayOnwardHours":  720,
+                          "mayOnwardCost":  46800,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-33",
@@ -791,10 +996,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -805,9 +1011,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-34",
@@ -820,10 +1031,11 @@
                           "rateHr":  40,
                           "rateDiscount":  2,
                           "rateNet":  38,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -834,9 +1046,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-35",
@@ -849,10 +1066,11 @@
                           "rateHr":  40,
                           "rateDiscount":  2,
                           "rateNet":  38,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -863,9 +1081,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-36",
@@ -878,10 +1101,11 @@
                           "rateHr":  35,
                           "rateDiscount":  1.75,
                           "rateNet":  33.25,
-                          "hours":  1512,
-                          "amount":  52920,
+                          "hours":  1680,
+                          "amount":  58800,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -892,9 +1116,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  5880,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  52920,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-37",
@@ -907,10 +1136,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -921,9 +1151,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-38",
@@ -936,10 +1171,11 @@
                           "rateHr":  45,
                           "rateDiscount":  2.25,
                           "rateNet":  42.75,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -950,9 +1186,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-46",
@@ -979,9 +1220,14 @@
                                          "Dec-26":  20,
                                          "Jan-27":  20
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  180,
+                          "mayOnwardCost":  15300,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-47",
@@ -1000,9 +1246,14 @@
                           "months":  {
 
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  0,
+                          "mayOnwardCost":  0,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-48",
@@ -1015,10 +1266,11 @@
                           "rateHr":  45,
                           "rateDiscount":  null,
                           "rateNet":  null,
-                          "hours":  1512,
-                          "amount":  68040,
+                          "hours":  1680,
+                          "amount":  75600,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -1029,9 +1281,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  7560,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  68040,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-49",
@@ -1044,10 +1301,11 @@
                           "rateHr":  40,
                           "rateDiscount":  null,
                           "rateNet":  null,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -1058,9 +1316,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-50",
@@ -1073,10 +1336,11 @@
                           "rateHr":  40,
                           "rateDiscount":  null,
                           "rateNet":  null,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -1087,9 +1351,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-51",
@@ -1102,10 +1371,11 @@
                           "rateHr":  40,
                           "rateDiscount":  null,
                           "rateNet":  null,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -1116,9 +1386,14 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-52",
@@ -1131,10 +1406,11 @@
                           "rateHr":  40,
                           "rateDiscount":  null,
                           "rateNet":  null,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -1145,13 +1421,18 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-53",
-                          "sno":  "30",
+                          "sno":  "31",
                           "area":  "Delivery",
                           "project":  "R\u0026D / Ops (Velocity)",
                           "role":  "Report Developer for Velocity POD",
@@ -1160,10 +1441,11 @@
                           "rateHr":  40,
                           "rateDiscount":  null,
                           "rateNet":  null,
-                          "hours":  1512,
-                          "amount":  60480,
+                          "hours":  1680,
+                          "amount":  67200,
                           "allocationPct":  100,
                           "months":  {
+                                         "Apr-26":  168,
                                          "May-26":  168,
                                          "Jun-26":  168,
                                          "Jul-26":  168,
@@ -1174,13 +1456,18 @@
                                          "Dec-26":  168,
                                          "Jan-27":  168
                                      },
+                          "aprilHours":  168,
+                          "aprilCost":  6720,
+                          "mayOnwardHours":  1512,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  true
                       },
                       {
                           "id":  "fy27-61",
-                          "sno":  "",
+                          "sno":  "32",
                           "area":  "Delivery",
                           "project":  "UA",
                           "role":  "Lead Engineer/ POC - Onsite (VAMSI)",
@@ -1202,13 +1489,18 @@
                                          "Feb-27":  30,
                                          "Mar-27":  30
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  240,
+                          "mayOnwardCost":  36000,
                           "podCode":  "POD4",
                           "podName":  "UA",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-62",
-                          "sno":  "",
+                          "sno":  "33",
                           "area":  "Delivery",
                           "project":  "UA",
                           "role":  "BA",
@@ -1230,13 +1522,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  67200,
                           "podCode":  "POD4",
                           "podName":  "UA",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-63",
-                          "sno":  "",
+                          "sno":  "34",
                           "area":  "Delivery",
                           "project":  "UA",
                           "role":  "Data Engg",
@@ -1258,13 +1555,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  53760,
                           "podCode":  "POD4",
                           "podName":  "UA",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-64",
-                          "sno":  "",
+                          "sno":  "35",
                           "area":  "Delivery",
                           "project":  "UA",
                           "role":  ".NET Engineer",
@@ -1286,9 +1588,14 @@
                                          "Feb-27":  125,
                                          "Mar-27":  125
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1000,
+                          "mayOnwardCost":  40000,
                           "podCode":  "POD4",
                           "podName":  "UA",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-72",
@@ -1314,9 +1621,14 @@
                                          "Feb-27":  32,
                                          "Mar-27":  32
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  256,
+                          "mayOnwardCost":  44800,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-73",
@@ -1342,13 +1654,18 @@
                                          "Feb-27":  60,
                                          "Mar-27":  60
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  480,
+                          "mayOnwardCost":  40800,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-74",
-                          "sno":  "",
+                          "sno":  "36",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Lead Engineer/ Tech Manager  - Onsite (Vinay K)",
@@ -1370,13 +1687,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  235200,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-75",
-                          "sno":  "",
+                          "sno":  "37",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Scrum Master /BA",
@@ -1398,13 +1720,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  67200,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-76",
-                          "sno":  "",
+                          "sno":  "38",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Senior Data Engg  1",
@@ -1426,13 +1753,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-77",
-                          "sno":  "",
+                          "sno":  "39",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Senior Data Engg  2",
@@ -1454,13 +1786,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-78",
-                          "sno":  "",
+                          "sno":  "40",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Sr QA Enggineer",
@@ -1482,13 +1819,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  53760,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-79",
-                          "sno":  "",
+                          "sno":  "41",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Sr Report Developer",
@@ -1510,13 +1852,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-80",
-                          "sno":  "",
+                          "sno":  "42",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Sr Ful Stack Developer",
@@ -1538,13 +1885,18 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       },
                       {
                           "id":  "fy27-81",
-                          "sno":  "",
+                          "sno":  "43",
                           "area":  "Delivery",
                           "project":  "IG",
                           "role":  "Senior DevOps",
@@ -1566,18 +1918,27 @@
                                          "Feb-27":  168,
                                          "Mar-27":  168
                                      },
+                          "aprilHours":  null,
+                          "aprilCost":  null,
+                          "mayOnwardHours":  1344,
+                          "mayOnwardCost":  60480,
                           "podCode":  "POD5",
                           "podName":  "IG",
-                          "isShared":  false
+                          "isShared":  false,
+                          "inAprilSow":  false
                       }
                   ],
     "totals":  {
-                   "estimatedPrice":  3086540,
-                   "mrxPrice":  2951500,
-                   "grandTotal":  3061798,
-                   "hours":  51776,
+                   "estimatedPrice":  3328940,
+                   "mrxPrice":  3183838,
+                   "grandTotal":  3294136,
+                   "hours":  55904,
                    "shiftExpenses":  35298,
                    "travelExpense":  75000,
-                   "roles":  52
+                   "roles":  52,
+                   "aprilSowCost":  242400,
+                   "aprilSowHours":  4464,
+                   "mayOnwardCost":  3086540,
+                   "mayOnwardHours":  54980
                }
 }
