@@ -107,6 +107,16 @@ textarea {
   margin-left: 0.15rem;
 }
 
+.user-chip-label {
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: var(--teal-deep);
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .login-shell {
   min-height: 100vh;
   display: grid;
@@ -119,10 +129,10 @@ textarea {
 }
 
 .login-panel {
-  width: min(440px, 100%);
+  width: min(420px, 100%);
   display: grid;
   gap: 1.1rem;
-  justify-items: center;
+  justify-items: stretch;
 }
 
 .login-brand {
@@ -151,6 +161,57 @@ textarea {
   margin: 0.45rem 0 0;
   color: var(--ink-soft);
   line-height: 1.5;
+}
+
+.login-card {
+  display: grid;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 22px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.login-card label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+
+.login-card input {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+  color: var(--ink);
+  background: #fbfefe;
+}
+
+.password-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.password-toggle {
+  padding: 0.55rem 0.75rem;
+}
+
+.login-error {
+  color: #a83228;
+  background: #fdeceb;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.login-submit {
+  width: 100%;
+  margin-top: 0.2rem;
 }
 
 .setup-panel {

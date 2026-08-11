@@ -1,24 +1,23 @@
-import { SignIn } from '@clerk/clerk-react'
-
-const clerkAppearance = {
-  variables: {
-    colorPrimary: '#007a93',
-    colorText: '#0b2f38',
-    borderRadius: '12px',
-    fontFamily: 'Manrope, system-ui, sans-serif',
-  },
-  elements: {
-    card: {
-      boxShadow: '0 18px 50px rgba(4, 85, 102, 0.16)',
-      border: '1px solid rgba(11, 47, 56, 0.08)',
-    },
-    headerTitle: {
-      fontFamily: 'Sora, system-ui, sans-serif',
-    },
-  },
-}
+import { useState } from 'react'
+import { useAuth } from '../auth/AuthContext'
 
 export default function LoginPage() {
+  const { login } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+
+  function onSubmit(e) {
+    e.preventDefault()
+    const result = login(email, password)
+    if (!result.ok) {
+      setError(result.error)
+      return
+    }
+    setError('')
+  }
+
   return (
     <div className="login-shell">
       <div className="login-panel">
@@ -28,13 +27,48 @@ export default function LoginPage() {
             alt="Winfo Solutions"
           />
           <h1>Data Team & Open Demand</h1>
-          <p>Sign in with your email to view account team size and open demand.</p>
+          <p>Sign in with your Winfo email to continue.</p>
         </div>
-        <SignIn
-          routing="hash"
-          appearance={clerkAppearance}
-          fallbackRedirectUrl={`${import.meta.env.BASE_URL}`}
-        />
+
+        <form className="login-card" onSubmit={onSubmit}>
+          <label>
+            Email
+            <input
+              type="email"
+              autoComplete="username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@winfosolutions.com"
+              required
+            />
+          </label>
+          <label>
+            Password
+            <div className="password-row">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                required
+              />
+              <button
+                type="button"
+                className="btn btn-ghost password-toggle"
+                onClick={() => setShowPassword((v) => !v)}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
+          </label>
+
+          {error ? <div className="login-error">{error}</div> : null}
+
+          <button className="btn btn-primary login-submit" type="submit">
+            Sign in
+          </button>
+        </form>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { UserButton } from '@clerk/clerk-react'
+import { useAuth } from './auth/AuthContext'
 import { DemandForm, Modal, TeamForm } from './components/Forms'
 import { DemandTable, TeamTable } from './components/Tables'
 import { exportWorkbook, importWorkbook } from './utils/excel'
@@ -42,6 +42,7 @@ const emptyDemand = {
 }
 
 export default function App() {
+  const { session, logout } = useAuth()
   const [state, setState] = useState(() => loadState())
   const [tab, setTab] = useState('team')
   const [query, setQuery] = useState('')
@@ -309,6 +310,9 @@ export default function App() {
           </div>
         </div>
         <div className="top-actions">
+          <span className="user-chip-label" title={session?.email}>
+            {session?.name || session?.email}
+          </span>
           <button className="btn btn-ghost" type="button" onClick={onReset}>
             Reset
           </button>
@@ -322,9 +326,9 @@ export default function App() {
           <button className="btn btn-primary" type="button" onClick={onExport}>
             Export Excel
           </button>
-          <div className="user-chip">
-            <UserButton afterSignOutUrl={`${import.meta.env.BASE_URL}`} />
-          </div>
+          <button className="btn btn-ghost" type="button" onClick={logout}>
+            Sign out
+          </button>
           <input
             ref={fileRef}
             className="hidden-file"

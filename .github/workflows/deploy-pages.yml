@@ -32,7 +32,10 @@ jobs:
 
       - name: Build
         env:
-          VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+          VITE_AUTH_EMAIL: ${{ secrets.VITE_AUTH_EMAIL }}
+          VITE_AUTH_PASSWORD: ${{ secrets.VITE_AUTH_PASSWORD }}
+          VITE_AUTH_NAME: ${{ secrets.VITE_AUTH_NAME }}
+          VITE_AUTH_USERS: ${{ secrets.VITE_AUTH_USERS }}
         run: npm run build
 
       - name: Upload Pages artifact
