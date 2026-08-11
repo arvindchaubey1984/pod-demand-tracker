@@ -243,6 +243,73 @@ textarea {
   font-weight: 650;
 }
 
+.commercial {
+  margin-top: 0.35rem;
+}
+
+.commercial-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.commercial-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.2rem;
+}
+
+.commercial-head p {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow);
+}
+
+.commercial-stats .stat-card.dark {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.commercial-stats .stat-card.dark span {
+  color: var(--ink-soft);
+  opacity: 1;
+}
+
+.commercial-stats .stat-card.dark strong {
+  color: var(--teal-deep);
+}
+
+.table-wrap.compact table {
+  min-width: 920px;
+}
+
+.commercial .table-wrap table {
+  min-width: 1400px;
+}
+
+.commercial .bar-row {
+  grid-template-columns: 150px 1fr 90px;
+}
+
+.commercial .bar-row strong {
+  font-size: 0.78rem;
+}
+
 .btn {
   border: 1px solid transparent;
   border-radius: 999px;

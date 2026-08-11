@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from './auth/AuthContext'
+import CommercialPanel from './components/CommercialPanel'
 import { DemandForm, Modal, TeamForm } from './components/Forms'
 import { DemandTable, TeamTable } from './components/Tables'
 import { exportWorkbook, importWorkbook } from './utils/excel'
@@ -449,9 +450,18 @@ export default function App() {
         >
           Open Demands ({filteredDemands.length})
         </button>
+        <button
+          type="button"
+          className={`tab ${tab === 'commercial' ? 'active' : ''}`}
+          onClick={() => setTab('commercial')}
+        >
+          Commercial FY27
+        </button>
       </div>
 
-      {tab === 'team' ? (
+      {tab === 'commercial' ? (
+        <CommercialPanel />
+      ) : tab === 'team' ? (
         <>
           <div className="toolbar">
             <div className="filters">
