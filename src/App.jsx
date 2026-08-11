@@ -45,6 +45,7 @@ const emptyDemand = {
 export default function App() {
   const { session, logout } = useAuth()
   const [state, setState] = useState(() => loadState())
+  const [section, setSection] = useState('staffing') // staffing | commercial
   const [tab, setTab] = useState('team')
   const [query, setQuery] = useState('')
   const [accountFilter, setAccountFilter] = useState('All')
@@ -307,26 +308,53 @@ export default function App() {
           />
           <div className="brand-copy">
             <strong>Data Team & Open Demand</strong>
-            <span>Account staffing · open positions</span>
+            <span>
+              {section === 'commercial'
+                ? 'FY27 commercial · Account → POD'
+                : 'Account staffing · open positions'}
+            </span>
           </div>
         </div>
         <div className="top-actions">
+          <div className="section-toggle" role="tablist" aria-label="App sections">
+            <button
+              type="button"
+              className={`section-btn ${section === 'staffing' ? 'active' : ''}`}
+              onClick={() => {
+                setSection('staffing')
+                if (tab === 'commercial') setTab('team')
+              }}
+            >
+              Team & Demand
+            </button>
+            <button
+              type="button"
+              className={`section-btn ${section === 'commercial' ? 'active' : ''}`}
+              onClick={() => setSection('commercial')}
+            >
+              Commercial FY27
+            </button>
+          </div>
           <span className="user-chip-label" title={session?.email}>
             {session?.name || session?.email}
           </span>
-          <button className="btn btn-ghost" type="button" onClick={onReset}>
-            Reset
-          </button>
-          <button
-            className="btn btn-secondary"
-            type="button"
-            onClick={() => fileRef.current?.click()}
-          >
-            Import Excel
-          </button>
-          <button className="btn btn-primary" type="button" onClick={onExport}>
-            Export Excel
-          </button>
+          {section === 'staffing' ? (
+            <>
+              <button className="btn btn-ghost" type="button" onClick={onReset}>
+                Reset
+              </button>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={() => fileRef.current?.click()}
+              >
+                Import Excel
+              </button>
+              <button className="btn btn-primary" type="button" onClick={onExport}>
+                Export Excel
+              </button>
+            </>
+          ) : null}
           <button className="btn btn-ghost" type="button" onClick={logout}>
             Sign out
           </button>
@@ -340,6 +368,10 @@ export default function App() {
         </div>
       </header>
 
+      {section === 'commercial' ? (
+        <CommercialPanel />
+      ) : (
+        <>
       <section className="hero">
         <h1>Account team size & open demand tracker</h1>
         <div className="stats">
@@ -450,18 +482,9 @@ export default function App() {
         >
           Open Demands ({filteredDemands.length})
         </button>
-        <button
-          type="button"
-          className={`tab ${tab === 'commercial' ? 'active' : ''}`}
-          onClick={() => setTab('commercial')}
-        >
-          Commercial FY27
-        </button>
       </div>
 
-      {tab === 'commercial' ? (
-        <CommercialPanel />
-      ) : tab === 'team' ? (
+      {tab === 'team' ? (
         <>
           <div className="toolbar">
             <div className="filters">
@@ -567,6 +590,8 @@ export default function App() {
             onEdit={openEditDemand}
             onDelete={deleteDemand}
           />
+        </>
+      )}
         </>
       )}
 
