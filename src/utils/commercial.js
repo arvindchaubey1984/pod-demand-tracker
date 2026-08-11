@@ -76,71 +76,93 @@ export function filterCommercialBySow(sowId, dataset = data) {
 
   if (sowId === 'mayOnward') {
     const items = lineItems
-      .filter((i) => (Number(i.mayOnwardHours) || 0) > 0 || (Number(i.mayOnwardCost) || 0) > 0)
-      .map((i) => {
-        const viewMonths = {}
-        for (const m of mayMonths) {
-          if (i.months?.[m] != null) viewMonths[m] = i.months[m]
-        }
-        return {
-          ...i,
-          viewHours: i.mayOnwardHours,
-          viewAmount: i.mayOnwardCost,
-          viewMonths,
-        }
-      })
+      .filter((i) => (Number(i.mayOnwardHours) || Number(i.hours) || 0) > 0 || (Number(i.mayOnwardCost) || Number(i.amount) || 0) > 0)
+      .map((i) => ({
+        ...i,
+        viewHours: i.mayOnwardHours ?? i.hours,
+        viewAmount: i.mayOnwardCost ?? i.amount,
+        viewMonths: i.months || {},
+      }))
     const podRows = pods.map((p) => {
       const podItems = items.filter((i) => i.podCode === p.code)
       return {
         ...p,
-        viewHours: sumBy(podItems, 'viewHours'),
-        viewAmount: sumBy(podItems, 'viewAmount'),
+        viewHours: p.hours ?? sumBy(podItems, 'viewHours'),
+        viewAmount: p.grandTotal ?? p.mrxPrice ?? sumBy(podItems, 'viewAmount'),
         roles: podItems.length,
       }
-    }).filter((p) => p.roles > 0)
+    }).filter((p) => p.roles > 0 || p.viewAmount)
     return {
       sowId,
       months: mayMonths,
       lineItems: items,
       pods: podRows,
       totals: {
-        amount: sumBy(items, 'viewAmount'),
-        hours: sumBy(items, 'viewHours'),
+        amount: dataset.totals?.mayOnwardCost ?? dataset.totals?.grandTotal ?? sumBy(items, 'viewAmount'),
+        mrxPrice: dataset.totals?.mrxPrice,
+        estimatedPrice: dataset.totals?.estimatedPrice,
+        hours: dataset.totals?.mayOnwardHours ?? dataset.totals?.hours ?? sumBy(items, 'viewHours'),
+        shiftExpenses: dataset.totals?.shiftExpenses,
+        travelExpense: dataset.totals?.travelExpense,
         roles: items.length,
         pods: podRows.length,
       },
     }
   }
 
-  // combined
-  const items = lineItems.map((i) => ({
+  // combined = preserved April SOW + May onwards Excel commercial
+  const aprilItems = lineItems
+    .filter((i) => i.inAprilSow && (i.aprilHours || i.aprilCost))
+    .map((i) => ({
+      ...i,
+      viewHours: i.aprilHours,
+      viewAmount: i.aprilCost,
+      viewMonths: { 'Apr-26': i.aprilHours },
+      sowTag: 'April',
+    }))
+  const mayItems = lineItems.map((i) => ({
     ...i,
-    viewHours: i.hours,
-    viewAmount: i.amount,
+    viewHours: i.mayOnwardHours ?? i.hours,
+    viewAmount: i.mayOnwardCost ?? i.amount,
     viewMonths: i.months || {},
+    sowTag: 'May+',
   }))
-  const podRows = pods.map((p) => ({
-    ...p,
-    viewHours: p.hours,
-    viewAmount: p.grandTotal ?? p.mrxPrice ?? p.estimatedPrice,
-    roles: items.filter((i) => i.podCode === p.code).length,
-  }))
+  const items = [...aprilItems, ...mayItems]
+  const podRows = pods.map((p) => {
+    const mayPodItems = mayItems.filter((i) => i.podCode === p.code)
+    const aprilPodItems = aprilItems.filter((i) => i.podCode === p.code)
+    return {
+      ...p,
+      viewHours:
+        (Number(p.hours) || 0) + sumBy(aprilPodItems, 'viewHours'),
+      viewAmount:
+        (Number(p.grandTotal) || Number(p.mrxPrice) || 0) +
+        sumBy(aprilPodItems, 'viewAmount'),
+      roles: mayPodItems.length,
+      aprilAmount: sumBy(aprilPodItems, 'viewAmount'),
+      mayAmount: Number(p.grandTotal) || Number(p.mrxPrice) || sumBy(mayPodItems, 'viewAmount'),
+    }
+  })
   return {
     sowId: 'combined',
-    months: dataset.months || [],
+    months: ['Apr-26', ...(dataset.months || [])],
     lineItems: items,
     pods: podRows,
     totals: {
-      amount: dataset.totals?.grandTotal ?? sumBy(items, 'viewAmount'),
+      amount: dataset.totals?.combinedTotal ??
+        ((Number(dataset.totals?.aprilSowCost) || 0) +
+          (Number(dataset.totals?.mayOnwardCost) || Number(dataset.totals?.grandTotal) || 0)),
       mrxPrice: dataset.totals?.mrxPrice,
       estimatedPrice: dataset.totals?.estimatedPrice,
-      hours: dataset.totals?.hours ?? sumBy(items, 'viewHours'),
+      hours: dataset.totals?.combinedHours ??
+        ((Number(dataset.totals?.aprilSowHours) || 0) +
+          (Number(dataset.totals?.mayOnwardHours) || Number(dataset.totals?.hours) || 0)),
       shiftExpenses: dataset.totals?.shiftExpenses,
       travelExpense: dataset.totals?.travelExpense,
-      roles: items.length,
+      roles: mayItems.length,
       pods: podRows.length,
       aprilSowCost: dataset.totals?.aprilSowCost,
-      mayOnwardCost: dataset.totals?.mayOnwardCost,
+      mayOnwardCost: dataset.totals?.mayOnwardCost ?? dataset.totals?.grandTotal,
     },
   }
 }

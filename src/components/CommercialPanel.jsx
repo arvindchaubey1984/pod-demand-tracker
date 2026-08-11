@@ -11,7 +11,7 @@ import {
 export default function CommercialPanel() {
   const data = useMemo(() => getCommercialData(), [])
   const sowOptions = useMemo(() => getSowOptions(data), [data])
-  const [sowId, setSowId] = useState('combined')
+  const [sowId, setSowId] = useState('mayOnward')
   const [view, setView] = useState('executive')
   const [podFilter, setPodFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
@@ -51,6 +51,7 @@ export default function CommercialPanel() {
           <h2>FY27 Commercial</h2>
           <p>
             McKesson · {activeSow?.label} — {activeSow?.description || data.source}
+            {data.notes ? ` · ${data.notes}` : ''}
           </p>
         </div>
         <div className="view-toggle" role="tablist">
@@ -135,23 +136,32 @@ export default function CommercialPanel() {
                   <thead>
                     <tr>
                       <th>POD</th>
-                      {sowId === 'combined' ? (
-                        <>
-                          <th>Est. Price</th>
-                          <th>Winfo Inv.</th>
-                          <th>MRx Price</th>
-                          <th>Blended $/hr</th>
-                          <th>Shift</th>
-                          <th>Travel</th>
-                          <th>Grand Total</th>
-                        </>
-                      ) : (
-                        <>
-                          <th>Roles</th>
-                          <th>Hours</th>
-                          <th>Amount</th>
-                        </>
-                      )}
+        {sowId === 'combined' ? (
+          <>
+            <th>Est. Price</th>
+            <th>Winfo Inv.</th>
+            <th>MRx Price (May+)</th>
+            <th>April SOW</th>
+            <th>May+ Grand</th>
+            <th>Combined</th>
+          </>
+        ) : sowId === 'mayOnward' ? (
+          <>
+            <th>Est. Price</th>
+            <th>Winfo Inv.</th>
+            <th>MRx Price</th>
+            <th>Blended $/hr</th>
+            <th>Shift</th>
+            <th>Travel</th>
+            <th>Grand Total</th>
+          </>
+        ) : (
+          <>
+            <th>Roles</th>
+            <th>Hours</th>
+            <th>Amount</th>
+          </>
+        )}
                     </tr>
                   </thead>
                   <tbody>
@@ -163,6 +173,17 @@ export default function CommercialPanel() {
                           </strong>
                         </td>
                         {sowId === 'combined' ? (
+                          <>
+                            <td>{formatUsd(pod.estimatedPrice)}</td>
+                            <td>{formatUsd(pod.winfoInvestment)}</td>
+                            <td>{formatUsd(pod.mrxPrice)}</td>
+                            <td>{formatUsd(pod.aprilAmount)}</td>
+                            <td>{formatUsd(pod.mayAmount)}</td>
+                            <td>
+                              <strong>{formatUsd(pod.viewAmount)}</strong>
+                            </td>
+                          </>
+                        ) : sowId === 'mayOnward' ? (
                           <>
                             <td>{formatUsd(pod.estimatedPrice)}</td>
                             <td>{formatUsd(pod.winfoInvestment)}</td>
@@ -300,6 +321,11 @@ export default function CommercialPanel() {
                       <span className="badge badge-info">
                         {item.podCode} · {item.podName}
                       </span>
+                      {item.sowTag ? (
+                        <div>
+                          <span className="badge badge-muted">{item.sowTag}</span>
+                        </div>
+                      ) : null}
                     </td>
                     <td>{item.project || '—'}</td>
                     <td>{item.role}</td>
