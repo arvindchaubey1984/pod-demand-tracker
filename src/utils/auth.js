@@ -31,14 +31,8 @@ function parseUsers() {
     return [{ email, password, name }]
   }
 
-  // Dev-friendly defaults until env is configured
-  return [
-    {
-      email: 'admin@winfosolutions.com',
-      password: 'Winfo@123',
-      name: 'Admin',
-    },
-  ]
+  // No hardcoded credentials — set VITE_AUTH_* env vars or secrets
+  return []
 }
 
 export function getConfiguredUsers() {
@@ -70,7 +64,14 @@ export function authenticate(email, password) {
     .trim()
     .toLowerCase()
   const pass = String(password || '')
-  const user = parseUsers().find(
+  const users = parseUsers()
+  if (!users.length) {
+    return {
+      ok: false,
+      error: 'Login is not configured. Set VITE_AUTH_EMAIL and VITE_AUTH_PASSWORD.',
+    }
+  }
+  const user = users.find(
     (u) => u.email === normalized && u.password === pass,
   )
   if (!user) {

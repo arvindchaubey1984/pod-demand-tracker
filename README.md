@@ -4,21 +4,18 @@ React UI to capture **account team size** and **open demand**, with simple built
 
 ## Login (built-in)
 
-Default credentials (until you override via env):
+Credentials are **not** stored in this repo. Configure them via environment variables / GitHub Actions secrets.
 
-- Email: `admin@winfosolutions.com`
-- Password: `Winfo@123`
-
-### Local override
+### Local setup
 
 ```bash
 cp .env.example .env.local
-# edit email/password
+# set VITE_AUTH_EMAIL and VITE_AUTH_PASSWORD
 npm install
 npm run dev
 ```
 
-### GitHub Pages secrets (recommended)
+### GitHub Pages secrets (required for the live site)
 
 Repo → **Settings → Secrets and variables → Actions**:
 
@@ -28,7 +25,7 @@ Repo → **Settings → Secrets and variables → Actions**:
 
 Or multi-user JSON in `VITE_AUTH_USERS`.
 
-> Note: this is a lightweight UI gate for an internal tool on static hosting. Passwords are baked into the frontend build, so change defaults before wide sharing.
+> Note: this is a lightweight UI gate for an internal tool on static hosting. Auth values are baked into the frontend build at deploy time — keep secrets out of source control.
 
 ## Features
 
