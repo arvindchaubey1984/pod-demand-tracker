@@ -13,6 +13,7 @@ export default function CommercialPanel() {
   const sowOptions = useMemo(() => getSowOptions(data), [data])
   const [sowId, setSowId] = useState('mayOnward')
   const [view, setView] = useState('executive')
+  const [accountFilter, setAccountFilter] = useState('All')
   const [podFilter, setPodFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
   const [query, setQuery] = useState('')
@@ -23,26 +24,103 @@ export default function CommercialPanel() {
   )
   const activeSow = sowOptions.find((s) => s.id === sowId) || sowOptions[0]
 
-  const projects = useMemo(
-    () => [...new Set(sowView.lineItems.map((i) => i.project).filter(Boolean))].sort(),
-    [sowView.lineItems],
-  )
+  const accounts = useMemo(() => {
+    const fromItems = sowView.lineItems.map((i) => i.account).filter(Boolean)
+    const fromMeta = data.accounts || []
+    return [...new Set([...fromMeta, ...fromItems])].sort()
+  }, [sowView.lineItems, data.accounts])
+
+  const podsForFilter = useMemo(() => {
+    if (accountFilter === 'All') return sowView.pods
+    return sowView.pods.filter((p) => p.account === accountFilter)
+  }, [sowView.pods, accountFilter])
+
+  const projects = useMemo(() => {
+    const source =
+      accountFilter === 'All'
+        ? sowView.lineItems
+        : sowView.lineItems.filter((i) => i.account === accountFilter)
+    return [...new Set(source.map((i) => i.project).filter(Boolean))].sort()
+  }, [sowView.lineItems, accountFilter])
 
   const filteredItems = useMemo(() => {
     const q = query.trim().toLowerCase()
     return sowView.lineItems.filter((item) => {
+      if (accountFilter !== 'All' && item.account !== accountFilter) return false
       if (podFilter !== 'All' && item.podCode !== podFilter) return false
       if (projectFilter !== 'All' && item.project !== projectFilter) return false
       if (!q) return true
-      return [item.role, item.project, item.area, item.location, item.podName, item.teamPod]
+      return [
+        item.account,
+        item.role,
+        item.project,
+        item.area,
+        item.location,
+        item.podName,
+        item.teamPod,
+      ]
         .join(' ')
         .toLowerCase()
         .includes(q)
     })
-  }, [sowView.lineItems, podFilter, projectFilter, query])
+  }, [sowView.lineItems, accountFilter, podFilter, projectFilter, query])
 
-  const maxPodTotal = Math.max(...sowView.pods.map((p) => Number(p.viewAmount) || 0), 1)
-  const maxProject = Math.max(...Object.values(sowView.byProject).map((p) => p.amount), 1)
+  const filteredPods = useMemo(() => {
+    if (accountFilter === 'All') return sowView.pods
+    return sowView.pods.filter((p) => p.account === accountFilter)
+  }, [sowView.pods, accountFilter])
+
+  const accountPodRows = useMemo(() => {
+    const rows = []
+    const byAccount = {}
+    for (const pod of filteredPods) {
+      const account = pod.account || 'Unassigned'
+      if (!byAccount[account]) byAccount[account] = []
+      byAccount[account].push(pod)
+    }
+    for (const [account, pods] of Object.entries(byAccount)) {
+      const accountTotal = pods.reduce((s, p) => s + (Number(p.viewAmount) || 0), 0)
+      rows.push({ type: 'account', account, count: accountTotal })
+      for (const pod of pods.sort((a, b) => (b.viewAmount || 0) - (a.viewAmount || 0))) {
+        rows.push({
+          type: 'pod',
+          account,
+          pod: `${pod.code} · ${pod.name}`,
+          count: Number(pod.viewAmount) || 0,
+        })
+      }
+    }
+    return rows
+  }, [filteredPods])
+
+  const maxPodTotal = Math.max(...filteredPods.map((p) => Number(p.viewAmount) || 0), 1)
+  const maxProject = Math.max(
+    ...Object.entries(sowView.byProject)
+      .filter(([project]) =>
+        accountFilter === 'All'
+          ? true
+          : sowView.lineItems.some(
+              (i) => i.project === project && i.account === accountFilter,
+            ),
+      )
+      .map(([, info]) => info.amount),
+    1,
+  )
+  const maxAccountPod = Math.max(...accountPodRows.map((r) => r.count), 1)
+
+  const filteredProjects = useMemo(() => {
+    if (accountFilter === 'All') return Object.entries(sowView.byProject)
+    const map = {}
+    for (const item of filteredItems) {
+      const key = item.project || 'Unassigned'
+      if (!map[key]) map[key] = { amount: 0, hours: 0, roles: 0 }
+      map[key].amount += Number(item.viewAmount) || 0
+      map[key].hours += Number(item.viewHours) || 0
+      map[key].roles += 1
+    }
+    return Object.entries(map)
+  }, [accountFilter, sowView.byProject, filteredItems])
+
 
   return (
     <div className="commercial">
@@ -50,7 +128,7 @@ export default function CommercialPanel() {
         <div>
           <h2>FY27 Commercial</h2>
           <p>
-            McKesson · {activeSow?.label} — {activeSow?.description || data.source}
+            Account → POD commercial · {activeSow?.label}
             {data.notes ? ` · ${data.notes}` : ''}
           </p>
         </div>
@@ -80,6 +158,7 @@ export default function CommercialPanel() {
             className={`sow-btn ${sowId === sow.id ? 'active' : ''}`}
             onClick={() => {
               setSowId(sow.id)
+              setAccountFilter('All')
               setPodFilter('All')
               setProjectFilter('All')
             }}
@@ -87,6 +166,42 @@ export default function CommercialPanel() {
             {sow.label}
           </button>
         ))}
+      </div>
+
+      <div className="toolbar" style={{ marginBottom: '0.85rem' }}>
+        <div className="filters">
+          <select
+            className="field"
+            value={accountFilter}
+            onChange={(e) => {
+              setAccountFilter(e.target.value)
+              setPodFilter('All')
+              setProjectFilter('All')
+            }}
+          >
+            <option value="All">All Accounts</option>
+            {accounts.map((a) => (
+              <option key={a} value={a}>
+                {a}
+              </option>
+            ))}
+          </select>
+          <select
+            className="field"
+            value={podFilter}
+            onChange={(e) => setPodFilter(e.target.value)}
+          >
+            <option value="All">All PODs</option>
+            {podsForFilter.map((p) => (
+              <option key={p.code} value={p.code}>
+                {p.code} · {p.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="chip">
+          Account → POD · <b>{accountFilter === 'All' ? 'All' : accountFilter}</b>
+        </div>
       </div>
 
       <div className="stats commercial-stats">
@@ -128,45 +243,49 @@ export default function CommercialPanel() {
             <div className="panel">
               <h2>
                 {sowId === 'combined'
-                  ? 'POD commercial summary (full FY27)'
-                  : 'POD summary for selected SOW'}
+                  ? 'Account → POD commercial summary'
+                  : 'Account → POD summary for selected SOW'}
               </h2>
               <div className="table-wrap compact">
                 <table>
                   <thead>
                     <tr>
+                      <th>Account</th>
                       <th>POD</th>
-        {sowId === 'combined' ? (
-          <>
-            <th>Est. Price</th>
-            <th>Winfo Inv.</th>
-            <th>MRx Price (May+)</th>
-            <th>April SOW</th>
-            <th>May+ Grand</th>
-            <th>Combined</th>
-          </>
-        ) : sowId === 'mayOnward' ? (
-          <>
-            <th>Est. Price</th>
-            <th>Winfo Inv.</th>
-            <th>MRx Price</th>
-            <th>Blended $/hr</th>
-            <th>Shift</th>
-            <th>Travel</th>
-            <th>Grand Total</th>
-          </>
-        ) : (
-          <>
-            <th>Roles</th>
-            <th>Hours</th>
-            <th>Amount</th>
-          </>
-        )}
+                      {sowId === 'combined' ? (
+                        <>
+                          <th>Est. Price</th>
+                          <th>Winfo Inv.</th>
+                          <th>MRx Price (May+)</th>
+                          <th>April SOW</th>
+                          <th>May+ Grand</th>
+                          <th>Combined</th>
+                        </>
+                      ) : sowId === 'mayOnward' ? (
+                        <>
+                          <th>Est. Price</th>
+                          <th>Winfo Inv.</th>
+                          <th>MRx Price</th>
+                          <th>Blended $/hr</th>
+                          <th>Shift</th>
+                          <th>Travel</th>
+                          <th>Grand Total</th>
+                        </>
+                      ) : (
+                        <>
+                          <th>Roles</th>
+                          <th>Hours</th>
+                          <th>Amount</th>
+                        </>
+                      )}
                     </tr>
                   </thead>
                   <tbody>
-                    {sowView.pods.map((pod) => (
-                      <tr key={pod.code}>
+                    {filteredPods
+                      .filter((pod) => podFilter === 'All' || pod.code === podFilter)
+                      .map((pod) => (
+                      <tr key={`${pod.account}-${pod.code}`}>
+                        <td>{pod.account || '—'}</td>
                         <td>
                           <strong>
                             {pod.code} · {pod.name}
@@ -214,33 +333,39 @@ export default function CommercialPanel() {
 
           <div className="panels">
             <div className="panel">
-              <h2>Amount by POD</h2>
+              <h2>Amount by Account → POD</h2>
               <div className="bar-list">
-                {sowView.pods
-                  .slice()
-                  .sort((a, b) => (b.viewAmount || 0) - (a.viewAmount || 0))
-                  .map((pod) => (
-                    <div className="bar-row" key={pod.code}>
-                      <span title={`${pod.code} ${pod.name}`}>
-                        {pod.code} {pod.name}
-                      </span>
+                {accountPodRows.map((row) =>
+                  row.type === 'account' ? (
+                    <div className="bar-row account-row" key={`acct-${row.account}`}>
+                      <span title={row.account}>{row.account}</span>
+                      <div className="bar-track">
+                        <div
+                          className="bar-fill account-fill"
+                          style={{ width: `${(row.count / maxAccountPod) * 100}%` }}
+                        />
+                      </div>
+                      <strong>{formatUsd(row.count)}</strong>
+                    </div>
+                  ) : (
+                    <div className="bar-row pod-row" key={`${row.account}-${row.pod}`}>
+                      <span title={row.pod}>↳ {row.pod}</span>
                       <div className="bar-track">
                         <div
                           className="bar-fill"
-                          style={{
-                            width: `${((pod.viewAmount || 0) / maxPodTotal) * 100}%`,
-                          }}
+                          style={{ width: `${(row.count / maxAccountPod) * 100}%` }}
                         />
                       </div>
-                      <strong>{formatUsd(pod.viewAmount)}</strong>
+                      <strong>{formatUsd(row.count)}</strong>
                     </div>
-                  ))}
+                  ),
+                )}
               </div>
             </div>
             <div className="panel">
               <h2>Spend by project</h2>
               <div className="bar-list">
-                {Object.entries(sowView.byProject)
+                {filteredProjects
                   .sort((a, b) => b[1].amount - a[1].amount)
                   .map(([project, info]) => (
                     <div className="bar-row" key={project}>
@@ -248,7 +373,9 @@ export default function CommercialPanel() {
                       <div className="bar-track">
                         <div
                           className="bar-fill"
-                          style={{ width: `${(info.amount / maxProject) * 100}%` }}
+                          style={{
+                            width: `${(info.amount / Math.max(maxProject, 1)) * 100}%`,
+                          }}
                         />
                       </div>
                       <strong>{formatUsd(info.amount)}</strong>
@@ -264,17 +391,33 @@ export default function CommercialPanel() {
             <div className="filters">
               <input
                 className="search"
-                placeholder="Search role, project, location..."
+                placeholder="Search account, POD, role, project..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
+              <select
+                className="field"
+                value={accountFilter}
+                onChange={(e) => {
+                  setAccountFilter(e.target.value)
+                  setPodFilter('All')
+                  setProjectFilter('All')
+                }}
+              >
+                <option value="All">All Accounts</option>
+                {accounts.map((a) => (
+                  <option key={a} value={a}>
+                    {a}
+                  </option>
+                ))}
+              </select>
               <select
                 className="field"
                 value={podFilter}
                 onChange={(e) => setPodFilter(e.target.value)}
               >
                 <option value="All">All PODs</option>
-                {sowView.pods.map((p) => (
+                {podsForFilter.map((p) => (
                   <option key={p.code} value={p.code}>
                     {p.code} · {p.name}
                   </option>
@@ -302,6 +445,7 @@ export default function CommercialPanel() {
             <table>
               <thead>
                 <tr>
+                  <th>Account</th>
                   <th>POD</th>
                   <th>Project</th>
                   <th>Role</th>
@@ -317,6 +461,7 @@ export default function CommercialPanel() {
               <tbody>
                 {filteredItems.map((item) => (
                   <tr key={item.id}>
+                    <td>{item.account || '—'}</td>
                     <td>
                       <span className="badge badge-info">
                         {item.podCode} · {item.podName}

@@ -19,7 +19,20 @@ export function formatNumber(value, digits = 0) {
 }
 
 export function getCommercialData() {
-  return data
+  const account = data.account || 'McKesson'
+  return {
+    ...data,
+    account,
+    accounts: data.accounts?.length ? data.accounts : [account],
+    lineItems: (data.lineItems || []).map((i) => ({
+      ...i,
+      account: i.account || account,
+    })),
+    pods: (data.pods || []).map((p) => ({
+      ...p,
+      account: p.account || account,
+    })),
+  }
 }
 
 function sumBy(items, key) {
@@ -185,9 +198,27 @@ export function computeCommercialStats(sowView) {
     byLocation[key].roles += 1
   }
 
+  const byAccount = {}
+  for (const item of sowView.lineItems) {
+    const key = item.account || 'Unassigned'
+    if (!byAccount[key]) byAccount[key] = { amount: 0, hours: 0, roles: 0 }
+    byAccount[key].amount += Number(item.viewAmount) || 0
+    byAccount[key].hours += Number(item.viewHours) || 0
+    byAccount[key].roles += 1
+  }
+
+  const byAccountPod = {}
+  for (const pod of sowView.pods || []) {
+    const account = pod.account || 'Unassigned'
+    if (!byAccountPod[account]) byAccountPod[account] = []
+    byAccountPod[account].push(pod)
+  }
+
   return {
     ...sowView,
     byProject,
     byLocation,
+    byAccount,
+    byAccountPod,
   }
 }

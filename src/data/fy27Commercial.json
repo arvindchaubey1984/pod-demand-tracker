@@ -1,7 +1,6 @@
 ﻿{
     "source":  "FY27 Cost.xlsx",
     "fiscalYear":  "FY27",
-    "account":  "McKesson",
     "currency":  "USD",
     "months":  [
                    "May-26",
@@ -85,7 +84,8 @@
                      "travelExpense":  25000,
                      "grandTotal":  885778,
                      "inAprilSow":  true,
-                     "excelLabel":  "POD 1"
+                     "excelLabel":  "POD 1",
+                     "account":  "McKesson"
                  },
                  {
                      "code":  "POD2",
@@ -99,7 +99,8 @@
                      "travelExpense":  25000,
                      "grandTotal":  858418,
                      "inAprilSow":  true,
-                     "excelLabel":  "POD 2"
+                     "excelLabel":  "POD 2",
+                     "account":  "McKesson"
                  },
                  {
                      "code":  "POD3",
@@ -113,7 +114,8 @@
                      "travelExpense":  null,
                      "grandTotal":  389490,
                      "inAprilSow":  true,
-                     "excelLabel":  "POD 3"
+                     "excelLabel":  "POD 3",
+                     "account":  "McKesson"
                  },
                  {
                      "code":  "POD4",
@@ -127,7 +129,8 @@
                      "travelExpense":  null,
                      "grandTotal":  187112,
                      "inAprilSow":  false,
-                     "excelLabel":  "POD 4"
+                     "excelLabel":  "POD 4",
+                     "account":  "McKesson"
                  },
                  {
                      "code":  "POD5",
@@ -141,7 +144,8 @@
                      "travelExpense":  25000,
                      "grandTotal":  741000,
                      "inAprilSow":  false,
-                     "excelLabel":  "POD 5"
+                     "excelLabel":  "POD 5",
+                     "account":  "McKesson"
                  }
              ],
     "lineItems":  [
@@ -177,7 +181,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  true,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-4",
@@ -211,7 +216,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  true,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-5",
@@ -245,7 +251,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  true,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-6",
@@ -279,7 +286,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-7",
@@ -313,7 +321,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-8",
@@ -347,7 +356,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-9",
@@ -381,7 +391,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-10",
@@ -415,7 +426,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-11",
@@ -449,7 +461,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-12",
@@ -483,7 +496,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-13",
@@ -517,7 +531,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-14",
@@ -551,7 +566,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-15",
@@ -585,7 +601,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-16",
@@ -619,7 +636,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-17",
@@ -653,7 +671,8 @@
                           "podCode":  "POD1",
                           "podName":  "Velocity",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-24",
@@ -687,7 +706,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  true,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-25",
@@ -721,7 +741,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  true,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-26",
@@ -755,7 +776,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  true,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-27",
@@ -789,7 +811,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-28",
@@ -823,7 +846,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-29",
@@ -857,7 +881,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-30",
@@ -891,7 +916,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-31",
@@ -925,7 +951,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-32",
@@ -959,7 +986,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-33",
@@ -993,7 +1021,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-34",
@@ -1027,7 +1056,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-35",
@@ -1061,7 +1091,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-36",
@@ -1095,7 +1126,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-37",
@@ -1129,7 +1161,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-38",
@@ -1163,7 +1196,8 @@
                           "podCode":  "POD2",
                           "podName":  "VRR / LoopRx",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-46",
@@ -1197,7 +1231,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-47",
@@ -1223,7 +1258,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-48",
@@ -1257,7 +1293,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-49",
@@ -1291,7 +1328,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-50",
@@ -1325,7 +1363,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-51",
@@ -1359,7 +1398,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-52",
@@ -1393,7 +1433,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-53",
@@ -1427,7 +1468,8 @@
                           "podCode":  "POD3",
                           "podName":  "R\u0026D / Ops",
                           "isShared":  false,
-                          "inAprilSow":  true
+                          "inAprilSow":  true,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-61",
@@ -1460,7 +1502,8 @@
                           "podCode":  "POD4",
                           "podName":  "UA",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-62",
@@ -1493,7 +1536,8 @@
                           "podCode":  "POD4",
                           "podName":  "UA",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-63",
@@ -1526,7 +1570,8 @@
                           "podCode":  "POD4",
                           "podName":  "UA",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-64",
@@ -1559,7 +1604,8 @@
                           "podCode":  "POD4",
                           "podName":  "UA",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-72",
@@ -1592,7 +1638,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-73",
@@ -1625,7 +1672,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-74",
@@ -1658,7 +1706,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-75",
@@ -1691,7 +1740,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-76",
@@ -1724,7 +1774,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-77",
@@ -1757,7 +1808,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-78",
@@ -1790,7 +1842,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-79",
@@ -1823,7 +1876,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-80",
@@ -1856,7 +1910,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       },
                       {
                           "id":  "fy27-81",
@@ -1889,7 +1944,8 @@
                           "podCode":  "POD5",
                           "podName":  "IG",
                           "isShared":  false,
-                          "inAprilSow":  false
+                          "inAprilSow":  false,
+                          "account":  "McKesson"
                       }
                   ],
     "totals":  {
@@ -1906,5 +1962,9 @@
                    "mayOnwardHours":  51776,
                    "combinedTotal":  3304198,
                    "combinedHours":  56240
-               }
+               },
+    "account":  "McKesson",
+    "accounts":  [
+                     "McKesson"
+                 ]
 }
