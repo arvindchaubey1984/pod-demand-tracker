@@ -300,26 +300,37 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <header className="topbar">
-        <div className="brand">
-          <img
-            src={`${import.meta.env.BASE_URL}winfo-logo.png`}
-            alt="Winfo Solutions"
-          />
-          <div className="brand-copy">
-            <strong>Data Team & Open Demand</strong>
-            <span>
-              {section === 'commercial'
-                ? 'FY27 commercial · Account → POD'
-                : 'Account staffing · open positions'}
+      <header className="app-header">
+        <div className="topbar">
+          <div className="brand">
+            <img
+              src={`${import.meta.env.BASE_URL}winfo-logo.png`}
+              alt="Winfo Solutions"
+            />
+            <div className="brand-copy">
+              <strong>Data Team & Open Demand</strong>
+              <span>
+                {section === 'commercial'
+                  ? 'FY27 commercial · Account → POD'
+                  : 'Account staffing · open positions'}
+              </span>
+            </div>
+          </div>
+          <div className="top-actions">
+            <span className="user-chip-label" title={session?.email}>
+              {session?.name || session?.email}
             </span>
+            <button className="btn btn-ghost" type="button" onClick={logout}>
+              Sign out
+            </button>
           </div>
         </div>
-        <div className="top-actions">
-          <div className="section-toggle" role="tablist" aria-label="App sections">
+
+        <nav className="app-nav" aria-label="App sections">
+          <div className="app-nav-tabs" role="tablist">
             <button
               type="button"
-              className={`section-btn ${section === 'staffing' ? 'active' : ''}`}
+              className={`app-nav-link ${section === 'staffing' ? 'active' : ''}`}
               onClick={() => {
                 setSection('staffing')
                 if (tab === 'commercial') setTab('team')
@@ -329,17 +340,14 @@ export default function App() {
             </button>
             <button
               type="button"
-              className={`section-btn ${section === 'commercial' ? 'active' : ''}`}
+              className={`app-nav-link ${section === 'commercial' ? 'active' : ''}`}
               onClick={() => setSection('commercial')}
             >
               Commercial FY27
             </button>
           </div>
-          <span className="user-chip-label" title={session?.email}>
-            {session?.name || session?.email}
-          </span>
           {section === 'staffing' ? (
-            <>
+            <div className="app-nav-actions">
               <button className="btn btn-ghost" type="button" onClick={onReset}>
                 Reset
               </button>
@@ -353,11 +361,8 @@ export default function App() {
               <button className="btn btn-primary" type="button" onClick={onExport}>
                 Export Excel
               </button>
-            </>
+            </div>
           ) : null}
-          <button className="btn btn-ghost" type="button" onClick={logout}>
-            Sign out
-          </button>
           <input
             ref={fileRef}
             className="hidden-file"
@@ -365,7 +370,7 @@ export default function App() {
             accept=".xlsx,.xls"
             onChange={onImport}
           />
-        </div>
+        </nav>
       </header>
 
       {section === 'commercial' ? (
