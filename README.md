@@ -33,4 +33,4 @@ Or multi-user JSON in `VITE_AUTH_USERS`.
 - Dashboard KPIs and Account → POD chart
 - Team Members / Open Demands CRUD + Excel import/export
 
-Live URL: https://arvindchaubey1984.github.io/pod-demand-tracker/
+Live URL (after Pages is enabled): https://winfosolutions.github.io/Account-Demand-Tracker/
