@@ -86,6 +86,34 @@ export function uniqueSorted(items, key) {
   )
 }
 
+export function personKey(member) {
+  return String(member?.assignee || '')
+    .trim()
+    .toLowerCase()
+}
+
+/** Unique people (multi-POD rows collapse to one person). */
+export function uniquePeopleCount(members) {
+  const keys = new Set()
+  for (const m of members) {
+    const key = personKey(m)
+    if (key) keys.add(key)
+  }
+  return keys.size
+}
+
+/** Still recruiting — exclude Filled / On Hold from open counts. */
+export function isActiveOpenDemand(demand) {
+  const s = String(demand?.status || 'Open')
+    .trim()
+    .toLowerCase()
+  if (!s) return true
+  if (s === 'filled' || s === 'on hold' || s === 'onhold' || s === 'closed') {
+    return false
+  }
+  return true
+}
+
 export function isBillableStatus(status) {
   const s = String(status || '')
     .trim()
@@ -98,27 +126,39 @@ export function isBillableStatus(status) {
 export function computeStats(teamMembers, openDemands) {
   const activeTeam = teamMembers.filter((m) => m.role || m.assignee)
   const fte = activeTeam.reduce((sum, m) => sum + parseAllocation(m.allocation), 0)
-  const billable = activeTeam.filter((m) => isBillableStatus(m.billingStatus)).length
-  const nonBillable = activeTeam.filter((m) => {
-    const s = String(m.billingStatus || '').toLowerCase()
-    return s.includes('non')
-  }).length
-  const yetToStart = activeTeam.filter((m) =>
-    String(m.billingStatus || '').toLowerCase().includes('yet'),
-  ).length
-  const openPositions = openDemands.reduce(
+  const billable = uniquePeopleCount(
+    activeTeam.filter((m) => isBillableStatus(m.billingStatus)),
+  )
+  const nonBillable = uniquePeopleCount(
+    activeTeam.filter((m) => {
+      const s = String(m.billingStatus || '').toLowerCase()
+      return s.includes('non')
+    }),
+  )
+  const yetToStart = uniquePeopleCount(
+    activeTeam.filter((m) =>
+      String(m.billingStatus || '').toLowerCase().includes('yet'),
+    ),
+  )
+
+  const activeDemands = openDemands.filter(isActiveOpenDemand)
+  const openPositions = activeDemands.reduce(
     (sum, d) => sum + (Number(d.positions) || 0),
     0,
   )
 
   const byAccountPod = {}
+  const accountPeople = {}
   for (const m of activeTeam) {
     const account = m.account || 'Unassigned'
     const pod = m.pod || 'Unassigned'
+    const key = personKey(m)
     if (!byAccountPod[account]) byAccountPod[account] = {}
     if (!byAccountPod[account][pod]) byAccountPod[account][pod] = { count: 0, fte: 0 }
     byAccountPod[account][pod].count += 1
     byAccountPod[account][pod].fte += parseAllocation(m.allocation)
+    if (!accountPeople[account]) accountPeople[account] = new Set()
+    if (key) accountPeople[account].add(key)
   }
 
   const byPod = {}
@@ -129,26 +169,31 @@ export function computeStats(teamMembers, openDemands) {
     byPod[pod].fte += parseAllocation(m.allocation)
   }
   const byProject = {}
-  for (const d of openDemands) {
+  for (const d of activeDemands) {
     const p = d.projectName || 'Unassigned'
     if (!byProject[p]) byProject[p] = 0
     byProject[p] += Number(d.positions) || 0
   }
   const byLocation = {}
-  for (const d of openDemands) {
+  for (const d of activeDemands) {
     const loc = d.location || 'TBD'
     if (!byLocation[loc]) byLocation[loc] = 0
     byLocation[loc] += Number(d.positions) || 0
   }
   return {
-    headcount: activeTeam.length,
+    headcount: uniquePeopleCount(activeTeam),
+    allocationRows: activeTeam.length,
     fte,
     billable,
     nonBillable,
     yetToStart,
     openPositions,
-    openRoles: openDemands.length,
+    openRoles: activeDemands.length,
+    filledRoles: openDemands.length - activeDemands.length,
     byAccountPod,
+    accountPeopleCount: Object.fromEntries(
+      Object.entries(accountPeople).map(([account, set]) => [account, set.size]),
+    ),
     byPod,
     byProject,
     byLocation,

@@ -7,10 +7,12 @@ import { exportWorkbook, importWorkbook } from './utils/excel'
 import {
   computeStats,
   formatFte,
+  isActiveOpenDemand,
   loadState,
   resetState,
   saveState,
   uid,
+  uniquePeopleCount,
   uniqueSorted,
   DEFAULT_DEMAND_OPEN_DATE,
   DEFAULT_TEAM_END_DATE,
@@ -53,6 +55,7 @@ export default function App() {
   const [roleFilter, setRoleFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
+  const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
   const [modal, setModal] = useState(null)
   const [draft, setDraft] = useState(null)
   const [toast, setToast] = useState('')
@@ -122,11 +125,24 @@ export default function App() {
     })
   }, [state.teamMembers, accountFilter, podFilter, roleFilter, query])
 
+  const filteredTeamPeople = useMemo(
+    () => uniquePeopleCount(filteredTeam),
+    [filteredTeam],
+  )
+
   const filteredDemands = useMemo(() => {
     const q = query.trim().toLowerCase()
     return state.openDemands.filter((d) => {
       if (projectFilter !== 'All' && d.projectName !== projectFilter) return false
       if (locationFilter !== 'All' && d.location !== locationFilter) return false
+      if (demandStatusFilter === 'Active' && !isActiveOpenDemand(d)) return false
+      if (
+        demandStatusFilter !== 'All' &&
+        demandStatusFilter !== 'Active' &&
+        String(d.status || 'Open') !== demandStatusFilter
+      ) {
+        return false
+      }
       if (!q) return true
       return [
         d.projectName,
@@ -140,13 +156,21 @@ export default function App() {
         .toLowerCase()
         .includes(q)
     })
-  }, [state.openDemands, projectFilter, locationFilter, query])
+  }, [
+    state.openDemands,
+    projectFilter,
+    locationFilter,
+    demandStatusFilter,
+    query,
+  ])
 
   const accountPodRows = useMemo(() => {
     const rows = []
     for (const [account, podsMap] of Object.entries(stats.byAccountPod || {})) {
       const podsSorted = Object.entries(podsMap).sort((a, b) => b[1].count - a[1].count)
-      const accountTotal = podsSorted.reduce((sum, [, info]) => sum + info.count, 0)
+      const accountTotal =
+        stats.accountPeopleCount?.[account] ??
+        podsSorted.reduce((sum, [, info]) => sum + info.count, 0)
       rows.push({ type: 'account', account, count: accountTotal })
       for (const [pod, info] of podsSorted) {
         rows.push({ type: 'pod', account, pod, count: info.count })
@@ -154,20 +178,14 @@ export default function App() {
     }
     return rows.sort((a, b) => {
       if (a.account !== b.account) {
-        const aTotal = Object.values(stats.byAccountPod[a.account] || {}).reduce(
-          (s, i) => s + i.count,
-          0,
-        )
-        const bTotal = Object.values(stats.byAccountPod[b.account] || {}).reduce(
-          (s, i) => s + i.count,
-          0,
-        )
+        const aTotal = stats.accountPeopleCount?.[a.account] ?? 0
+        const bTotal = stats.accountPeopleCount?.[b.account] ?? 0
         return bTotal - aTotal
       }
       if (a.type !== b.type) return a.type === 'account' ? -1 : 1
       return b.count - a.count
     })
-  }, [stats.byAccountPod])
+  }, [stats.byAccountPod, stats.accountPeopleCount])
 
   const maxAccountPod = Math.max(...accountPodRows.map((r) => r.count), 1)
   const maxProject = Math.max(...Object.values(stats.byProject), 1)
@@ -381,8 +399,12 @@ export default function App() {
         <h1>Account team size & open demand tracker</h1>
         <div className="stats">
           <div className="stat-card">
-            <span>Team headcount</span>
+            <span>Unique team members</span>
             <strong>{stats.headcount}</strong>
+          </div>
+          <div className="stat-card">
+            <span>POD allocations</span>
+            <strong>{stats.allocationRows}</strong>
           </div>
           <div className="stat-card">
             <span>Allocated capacity</span>
@@ -416,6 +438,9 @@ export default function App() {
       <div className="panels">
         <div className="panel">
           <h2>Team size by Account → POD</h2>
+          <p className="panel-note">
+            Account total = unique people. POD rows = allocations (multi-POD people appear in each POD).
+          </p>
           <div className="bar-list">
             {accountPodRows.map((row) =>
               row.type === 'account' ? (
@@ -478,14 +503,18 @@ export default function App() {
           className={`tab ${tab === 'team' ? 'active' : ''}`}
           onClick={() => setTab('team')}
         >
-          Team Members ({filteredTeam.length})
+          Team Members ({filteredTeamPeople}
+          {filteredTeam.length !== filteredTeamPeople
+            ? ` · ${filteredTeam.length} allocations`
+            : ''}
+          )
         </button>
         <button
           type="button"
           className={`tab ${tab === 'demand' ? 'active' : ''}`}
           onClick={() => setTab('demand')}
         >
-          Open Demands ({filteredDemands.length})
+          Open Demands ({stats.openPositions})
         </button>
       </div>
 
@@ -584,6 +613,18 @@ export default function App() {
                 <option value="India">India</option>
                 <option value="USA">USA</option>
                 <option value="UK">UK</option>
+              </select>
+              <select
+                className="field"
+                value={demandStatusFilter}
+                onChange={(e) => setDemandStatusFilter(e.target.value)}
+              >
+                <option value="Active">Active (Open + In Progress)</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Filled">Filled</option>
+                <option value="On Hold">On Hold</option>
+                <option value="All">All statuses</option>
               </select>
             </div>
             <button className="btn btn-primary" type="button" onClick={openAddDemand}>
