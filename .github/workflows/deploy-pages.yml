@@ -32,6 +32,7 @@ jobs:
 
       - name: Build
         env:
+          VITE_BASE: ${{ github.repository == 'WinfoSolutions/Account-Demand-Tracker' && '/Account-Demand-Tracker/' || '/pod-demand-tracker/' }}
           VITE_AUTH_EMAIL: ${{ secrets.VITE_AUTH_EMAIL }}
           VITE_AUTH_PASSWORD: ${{ secrets.VITE_AUTH_PASSWORD }}
           VITE_AUTH_NAME: ${{ secrets.VITE_AUTH_NAME }}
