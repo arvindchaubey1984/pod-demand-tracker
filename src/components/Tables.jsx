@@ -1,8 +1,8 @@
 function billingBadge(status) {
   const s = String(status || '').toLowerCase()
   if (s.includes('non')) return 'badge-muted'
-  if (s.includes('billable')) return 'badge-ok'
   if (s.includes('yet')) return 'badge-warn'
+  if (s.includes('billable')) return 'badge-ok'
   return 'badge-muted'
 }
 

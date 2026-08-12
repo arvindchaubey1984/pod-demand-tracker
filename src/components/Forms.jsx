@@ -1,3 +1,5 @@
+import { normalizeBillingStatus } from '../utils/storage'
+
 export function Modal({ title, onClose, children, actions }) {
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
@@ -68,11 +70,11 @@ export function TeamForm({ value, onChange, pods }) {
       <label>
         Billing Status
         <select
-          value={value.billingStatus}
+          value={normalizeBillingStatus(value.billingStatus)}
           onChange={(e) => set('billingStatus', e.target.value)}
         >
           <option value="Billable">Billable</option>
-          <option value="Yet to Start">Yet to be Billed</option>
+          <option value="Yet to be Billed">Yet to be Billed</option>
           <option value="Non-Billable">Non-Billable</option>
           <option value="">Unspecified</option>
         </select>

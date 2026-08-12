@@ -14,13 +14,23 @@ function normalizeDemand(d) {
   }
 }
 
+/** Canonical billing labels used in UI + stats. */
+export function normalizeBillingStatus(status) {
+  const s = String(status || '').trim().toLowerCase()
+  if (!s) return ''
+  if (s.includes('non')) return 'Non-Billable'
+  if (s.includes('yet')) return 'Yet to be Billed'
+  if (s === 'billable' || s.startsWith('billable')) return 'Billable'
+  return String(status).trim()
+}
+
 function normalizeTeamMember(m) {
   const wasNa = m.pod === 'NA'
   const pod = wasNa ? 'Shadow' : m.pod
-  const billingStatus =
-    wasNa || (pod === 'Shadow' && !m.billingStatus)
-      ? 'Non-Billable'
-      : m.billingStatus
+  let billingStatus = normalizeBillingStatus(m.billingStatus)
+  if (wasNa || (pod === 'Shadow' && !billingStatus)) {
+    billingStatus = 'Non-Billable'
+  }
 
   return {
     ...m,
@@ -115,31 +125,31 @@ export function isActiveOpenDemand(demand) {
 }
 
 export function isBillableStatus(status) {
-  const s = String(status || '')
-    .trim()
-    .toLowerCase()
-  if (!s) return false
-  if (s.includes('non')) return false
-  return s === 'billable' || s.startsWith('billable')
+  return normalizeBillingStatus(status) === 'Billable'
+}
+
+export function isYetToBeBilledStatus(status) {
+  return normalizeBillingStatus(status) === 'Yet to be Billed'
+}
+
+export function isNonBillableStatus(status) {
+  return normalizeBillingStatus(status) === 'Non-Billable'
 }
 
 export function computeStats(teamMembers, openDemands) {
-  const activeTeam = teamMembers.filter((m) => m.role || m.assignee)
+  const activeTeam = teamMembers
+    .map(normalizeTeamMember)
+    .filter((m) => m.role || m.assignee)
   const fte = activeTeam.reduce((sum, m) => sum + parseAllocation(m.allocation), 0)
-  const billable = uniquePeopleCount(
-    activeTeam.filter((m) => isBillableStatus(m.billingStatus)),
-  )
-  const nonBillable = uniquePeopleCount(
-    activeTeam.filter((m) => {
-      const s = String(m.billingStatus || '').toLowerCase()
-      return s.includes('non')
-    }),
-  )
-  const yetToStart = uniquePeopleCount(
-    activeTeam.filter((m) =>
-      String(m.billingStatus || '').toLowerCase().includes('yet'),
-    ),
-  )
+
+  // Billing KPIs count allocation rows (what you edit), not unique people
+  const billable = activeTeam.filter((m) => isBillableStatus(m.billingStatus)).length
+  const nonBillable = activeTeam.filter((m) =>
+    isNonBillableStatus(m.billingStatus),
+  ).length
+  const yetToStart = activeTeam.filter((m) =>
+    isYetToBeBilledStatus(m.billingStatus),
+  ).length
 
   const activeDemands = openDemands.filter(isActiveOpenDemand)
   const openPositions = activeDemands.reduce(

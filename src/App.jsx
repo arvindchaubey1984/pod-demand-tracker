@@ -9,6 +9,7 @@ import {
   formatFte,
   isActiveOpenDemand,
   loadState,
+  normalizeBillingStatus,
   resetState,
   saveState,
   uid,
@@ -222,19 +223,23 @@ export default function App() {
         return
       }
       setState((prev) => {
+        const row = {
+          ...draft,
+          billingStatus: normalizeBillingStatus(draft.billingStatus),
+        }
         if (modal.mode === 'add') {
           return {
             ...prev,
             teamMembers: [
               ...prev.teamMembers,
-              { ...draft, id: uid('tm'), sno: String(prev.teamMembers.length + 1) },
+              { ...row, id: uid('tm'), sno: String(prev.teamMembers.length + 1) },
             ],
           }
         }
         return {
           ...prev,
           teamMembers: prev.teamMembers.map((m) =>
-            m.id === modal.id ? { ...m, ...draft } : m,
+            m.id === modal.id ? { ...m, ...row } : m,
           ),
         }
       })
@@ -409,6 +414,10 @@ export default function App() {
           <div className="stat-card">
             <span>Allocated capacity</span>
             <strong>{formatFte(stats.fte)}</strong>
+          </div>
+          <div className="stat-card">
+            <span>Billable</span>
+            <strong>{stats.billable}</strong>
           </div>
           <div className="stat-card">
             <span>Yet to be Billed</span>
