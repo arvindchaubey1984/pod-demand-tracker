@@ -49,6 +49,29 @@ export function TeamForm({ value, onChange, pods }) {
         <input value={value.role} onChange={(e) => set('role', e.target.value)} />
       </label>
       <label>
+        Skill
+        <input
+          value={value.skill || ''}
+          onChange={(e) => set('skill', e.target.value)}
+          placeholder="e.g. Data Engineering, Databricks, BA/DA"
+          list="skill-options"
+        />
+        <datalist id="skill-options">
+          <option value="Data Engineering" />
+          <option value="Architecture" />
+          <option value="DevOps" />
+          <option value="BA / DA" />
+          <option value="QA" />
+          <option value="AI / ML" />
+          <option value="Engineering" />
+          <option value="BI / Reporting" />
+          <option value="Agile / SM" />
+          <option value="Delivery / TPM" />
+          <option value="UX / Design" />
+          <option value="Leadership" />
+        </datalist>
+      </label>
+      <label>
         Assignee
         <input
           value={value.assignee}

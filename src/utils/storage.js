@@ -1,4 +1,5 @@
 import seed from '../data/seed.json'
+import { inferSkillFromRole } from './skills'
 
 const STORAGE_KEY = 'winfo-pod-demand-v1'
 export const DEFAULT_DEMAND_OPEN_DATE = '2026-08-01'
@@ -36,6 +37,7 @@ function normalizeTeamMember(m) {
     ...m,
     pod,
     billingStatus,
+    skill: String(m.skill || '').trim() || inferSkillFromRole(m.role),
     endDate: m.endDate || DEFAULT_TEAM_END_DATE,
     account: m.account || DEFAULT_TEAM_ACCOUNT,
     location: m.location || DEFAULT_TEAM_LOCATION,

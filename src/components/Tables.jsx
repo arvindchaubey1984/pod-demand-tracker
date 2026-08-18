@@ -19,6 +19,7 @@ export function TeamTable({ rows, onEdit, onDelete }) {
             <th>Account</th>
             <th>POD</th>
             <th>Role</th>
+            <th>Skill</th>
             <th>Assignee</th>
             <th>Location</th>
             <th>Billing</th>
@@ -38,6 +39,7 @@ export function TeamTable({ rows, onEdit, onDelete }) {
                 <span className="badge badge-info">{m.pod || '—'}</span>
               </td>
               <td>{m.role || '—'}</td>
+              <td>{m.skill || '—'}</td>
               <td>{m.assignee || '—'}</td>
               <td>{m.location || '—'}</td>
               <td>

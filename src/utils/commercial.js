@@ -18,6 +18,8 @@ export function formatNumber(value, digits = 0) {
   }).format(Number(value))
 }
 
+export { inferSkillFromRole, resolveSkill } from './skills'
+
 export function getCommercialData() {
   const account = data.account || 'McKesson'
   return {

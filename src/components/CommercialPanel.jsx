@@ -6,6 +6,7 @@ import {
   formatUsd,
   getCommercialData,
   getSowOptions,
+  resolveSkill,
 } from '../utils/commercial'
 
 export default function CommercialPanel() {
@@ -53,6 +54,7 @@ export default function CommercialPanel() {
       return [
         item.account,
         item.role,
+        resolveSkill(item),
         item.project,
         item.area,
         item.location,
@@ -391,7 +393,7 @@ export default function CommercialPanel() {
             <div className="filters">
               <input
                 className="search"
-                placeholder="Search account, POD, role, project..."
+                placeholder="Search account, POD, role, skill, project..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -449,6 +451,7 @@ export default function CommercialPanel() {
                   <th>POD</th>
                   <th>Project</th>
                   <th>Role</th>
+                  <th>Skill</th>
                   <th>Location</th>
                   <th>Rate/hr</th>
                   <th>Hours</th>
@@ -474,6 +477,7 @@ export default function CommercialPanel() {
                     </td>
                     <td>{item.project || '—'}</td>
                     <td>{item.role}</td>
+                    <td>{resolveSkill(item) || '—'}</td>
                     <td>{item.location || '—'}</td>
                     <td>{formatUsd(item.rateHr, 0)}</td>
                     <td>{formatNumber(item.viewHours)}</td>

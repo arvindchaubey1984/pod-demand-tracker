@@ -26,6 +26,7 @@ const emptyTeam = {
   account: DEFAULT_TEAM_ACCOUNT,
   location: DEFAULT_TEAM_LOCATION,
   role: '',
+  skill: '',
   assignee: '',
   billingStatus: 'Billable',
   allocation: '100%',
@@ -112,6 +113,7 @@ export default function App() {
         m.account,
         m.pod,
         m.role,
+        m.skill,
         m.assignee,
         m.location,
         m.billingStatus,
@@ -529,7 +531,7 @@ export default function App() {
             <div className="filters">
               <input
                 className="search"
-                placeholder="Search account, POD, role, assignee..."
+                placeholder="Search account, POD, role, skill, assignee..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
