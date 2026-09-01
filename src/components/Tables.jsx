@@ -19,7 +19,7 @@ export function TeamTable({ rows, onEdit, onDelete }) {
     return <div className="empty">No team members match the current filters.</div>
   }
   return (
-    <div className="table-wrap">
+    <div className="table-wrap team-table">
       <table>
         <thead>
           <tr>
@@ -30,13 +30,13 @@ export function TeamTable({ rows, onEdit, onDelete }) {
             <th>Skill</th>
             <th>Assignee</th>
             <th>Status</th>
-            <th>Location</th>
+            <th>Loc</th>
             <th>Billing</th>
-            <th>Allocation</th>
+            <th>Alloc</th>
             <th>Onboard</th>
-            <th>End Date</th>
+            <th>End</th>
             <th>Remarks</th>
-            <th />
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

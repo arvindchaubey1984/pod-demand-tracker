@@ -45,7 +45,7 @@ textarea {
 }
 
 .app-shell {
-  width: min(1280px, calc(100% - 2rem));
+  width: min(1440px, calc(100% - 1.5rem));
   margin: 0 auto;
   padding: 1.25rem 0 3rem;
 }
@@ -685,17 +685,31 @@ textarea {
 }
 
 .table-wrap {
-  overflow: auto;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.75);
   box-shadow: var(--shadow);
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap.team-table {
+  /* Keep actions reachable; allow horizontal scroll inside the panel */
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 1180px;
+  min-width: 0;
+}
+
+.table-wrap.team-table table {
+  min-width: 1080px;
+  table-layout: auto;
 }
 
 th,
@@ -705,6 +719,57 @@ td {
   border-bottom: 1px solid var(--line);
   vertical-align: top;
   font-size: 0.9rem;
+}
+
+.table-wrap.team-table th,
+.table-wrap.team-table td {
+  padding: 0.55rem 0.5rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.table-wrap.team-table th {
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+}
+
+.table-wrap.team-table td:nth-child(4),
+.table-wrap.team-table td:nth-child(5),
+.table-wrap.team-table td:nth-child(13) {
+  /* Role, Skill, Remarks — allow wrap so the row stays denser */
+  white-space: normal;
+  max-width: 9.5rem;
+  line-height: 1.25;
+}
+
+.table-wrap.team-table th:last-child,
+.table-wrap.team-table td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: #f7fcfd;
+  box-shadow: -8px 0 12px rgba(4, 85, 102, 0.06);
+  white-space: nowrap;
+  min-width: 7.5rem;
+}
+
+.table-wrap.team-table thead th:last-child {
+  background: #e9f5f7;
+  z-index: 3;
+}
+
+.table-wrap.team-table tbody tr:hover td:last-child {
+  background: #eef8fa;
+}
+
+.table-wrap.team-table .badge {
+  padding: 0.15rem 0.45rem;
+  font-size: 0.7rem;
+}
+
+.table-wrap.team-table .icon-btn {
+  padding: 0.28rem 0.45rem;
+  font-size: 0.75rem;
 }
 
 th {
