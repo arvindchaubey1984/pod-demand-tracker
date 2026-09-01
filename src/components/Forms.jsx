@@ -1,4 +1,4 @@
-import { normalizeBillingStatus } from '../utils/storage'
+import { normalizeBillingStatus, normalizeMemberStatus } from '../utils/storage'
 
 export function Modal({ title, onClose, children, actions }) {
   return (
@@ -88,6 +88,17 @@ export function TeamForm({ value, onChange, pods }) {
           <option value="USA">USA</option>
           <option value="UK">UK</option>
           <option value="">TBD</option>
+        </select>
+      </label>
+      <label>
+        Status
+        <select
+          value={normalizeMemberStatus(value.status)}
+          onChange={(e) => set('status', e.target.value)}
+        >
+          <option value="Active">Active</option>
+          <option value="Released">Released</option>
+          <option value="Resigned">Resigned</option>
         </select>
       </label>
       <label>

@@ -4,6 +4,7 @@ import {
   DEFAULT_TEAM_ACCOUNT,
   DEFAULT_TEAM_END_DATE,
   DEFAULT_TEAM_LOCATION,
+  normalizeMemberStatus,
   uid,
 } from './storage'
 
@@ -21,6 +22,7 @@ export function exportWorkbook({ teamMembers, openDemands, leadership }) {
     Role: m.role,
     Skill: m.skill || '',
     Assignee: m.assignee,
+    Status: m.status || 'Active',
     Location: m.location || DEFAULT_TEAM_LOCATION,
     'Billing Status': m.billingStatus,
     Allocation: m.allocation,
@@ -84,6 +86,9 @@ export async function importWorkbook(file) {
       role: clean(row.Role ?? row['Role?'] ?? ''),
       skill: clean(row.Skill ?? row.Skills ?? row['Skill Set'] ?? ''),
       assignee: clean(row.Assignee ?? row['Assignee?'] ?? ''),
+      status: normalizeMemberStatus(
+        clean(row.Status ?? row['Member Status'] ?? row['Employment Status'] ?? ''),
+      ),
       location: clean(row.Location ?? '') || DEFAULT_TEAM_LOCATION,
       billingStatus: clean(row['Billing Status'] ?? ''),
       allocation: clean(row.Allocation ?? row['Allocation?'] ?? ''),

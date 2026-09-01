@@ -25,6 +25,23 @@ export function normalizeBillingStatus(status) {
   return String(status).trim()
 }
 
+export const MEMBER_STATUSES = ['Active', 'Released', 'Resigned']
+
+/** Canonical employment status for team members. Defaults to Active. */
+export function normalizeMemberStatus(status) {
+  const s = String(status || '').trim().toLowerCase()
+  if (!s) return 'Active'
+  if (s.startsWith('release')) return 'Released'
+  if (s.startsWith('resign')) return 'Resigned'
+  if (s.startsWith('active') || s === 'current' || s === 'onboarded') return 'Active'
+  if (MEMBER_STATUSES.includes(String(status).trim())) return String(status).trim()
+  return 'Active'
+}
+
+export function isActiveMember(member) {
+  return normalizeMemberStatus(member?.status) === 'Active'
+}
+
 function normalizeTeamMember(m) {
   const wasNa = m.pod === 'NA'
   const pod = wasNa ? 'Shadow' : m.pod
@@ -37,6 +54,7 @@ function normalizeTeamMember(m) {
     ...m,
     pod,
     billingStatus,
+    status: normalizeMemberStatus(m.status),
     skill: String(m.skill || '').trim() || inferSkillFromRole(m.role),
     endDate: m.endDate || DEFAULT_TEAM_END_DATE,
     account: m.account || DEFAULT_TEAM_ACCOUNT,
@@ -139,9 +157,10 @@ export function isNonBillableStatus(status) {
 }
 
 export function computeStats(teamMembers, openDemands) {
+  // KPIs / charts count Active members only (exclude Released & Resigned)
   const activeTeam = teamMembers
     .map(normalizeTeamMember)
-    .filter((m) => m.role || m.assignee)
+    .filter((m) => (m.role || m.assignee) && isActiveMember(m))
   const fte = activeTeam.reduce((sum, m) => sum + parseAllocation(m.allocation), 0)
 
   // Billing KPIs count allocation rows (what you edit), not unique people

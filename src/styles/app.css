@@ -470,7 +470,7 @@ textarea {
 }
 
 .hero h1 {
-  margin: 0 0 1rem;
+  margin: 0 0 0.35rem;
   font-family: var(--display);
   font-size: clamp(1.25rem, 2.1vw, 1.85rem);
   letter-spacing: -0.03em;
@@ -480,6 +480,14 @@ textarea {
 
 .hero p {
   display: none;
+}
+
+.hero .hero-note {
+  display: block;
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
 }
 
 .stats {

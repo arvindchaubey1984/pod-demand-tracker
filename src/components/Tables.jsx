@@ -6,6 +6,14 @@ function billingBadge(status) {
   return 'badge-muted'
 }
 
+function memberStatusBadge(status) {
+  const s = String(status || 'Active').toLowerCase()
+  if (s === 'active') return 'badge-ok'
+  if (s === 'released') return 'badge-warn'
+  if (s === 'resigned') return 'badge-muted'
+  return 'badge-muted'
+}
+
 export function TeamTable({ rows, onEdit, onDelete }) {
   if (!rows.length) {
     return <div className="empty">No team members match the current filters.</div>
@@ -21,6 +29,7 @@ export function TeamTable({ rows, onEdit, onDelete }) {
             <th>Role</th>
             <th>Skill</th>
             <th>Assignee</th>
+            <th>Status</th>
             <th>Location</th>
             <th>Billing</th>
             <th>Allocation</th>
@@ -41,6 +50,11 @@ export function TeamTable({ rows, onEdit, onDelete }) {
               <td>{m.role || '—'}</td>
               <td>{m.skill || '—'}</td>
               <td>{m.assignee || '—'}</td>
+              <td>
+                <span className={`badge ${memberStatusBadge(m.status)}`}>
+                  {m.status || 'Active'}
+                </span>
+              </td>
               <td>{m.location || '—'}</td>
               <td>
                 {m.billingStatus ? (

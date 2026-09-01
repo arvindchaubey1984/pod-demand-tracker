@@ -10,6 +10,7 @@ import {
   isActiveOpenDemand,
   loadState,
   normalizeBillingStatus,
+  normalizeMemberStatus,
   resetState,
   saveState,
   uid,
@@ -28,6 +29,7 @@ const emptyTeam = {
   role: '',
   skill: '',
   assignee: '',
+  status: 'Active',
   billingStatus: 'Billable',
   allocation: '100%',
   onboardMonth: '',
@@ -55,6 +57,7 @@ export default function App() {
   const [accountFilter, setAccountFilter] = useState('All')
   const [podFilter, setPodFilter] = useState('All')
   const [roleFilter, setRoleFilter] = useState('All')
+  const [memberStatusFilter, setMemberStatusFilter] = useState('Active')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
@@ -108,6 +111,12 @@ export default function App() {
       if (accountFilter !== 'All' && m.account !== accountFilter) return false
       if (podFilter !== 'All' && m.pod !== podFilter) return false
       if (roleFilter !== 'All' && m.role !== roleFilter) return false
+      if (
+        memberStatusFilter !== 'All' &&
+        normalizeMemberStatus(m.status) !== memberStatusFilter
+      ) {
+        return false
+      }
       if (!q) return true
       return [
         m.account,
@@ -115,6 +124,7 @@ export default function App() {
         m.role,
         m.skill,
         m.assignee,
+        m.status,
         m.location,
         m.billingStatus,
         m.allocation,
@@ -126,7 +136,14 @@ export default function App() {
         .toLowerCase()
         .includes(q)
     })
-  }, [state.teamMembers, accountFilter, podFilter, roleFilter, query])
+  }, [
+    state.teamMembers,
+    accountFilter,
+    podFilter,
+    roleFilter,
+    memberStatusFilter,
+    query,
+  ])
 
   const filteredTeamPeople = useMemo(
     () => uniquePeopleCount(filteredTeam),
@@ -227,6 +244,7 @@ export default function App() {
       setState((prev) => {
         const row = {
           ...draft,
+          status: normalizeMemberStatus(draft.status),
           billingStatus: normalizeBillingStatus(draft.billingStatus),
         }
         if (modal.mode === 'add') {
@@ -404,6 +422,7 @@ export default function App() {
         <>
       <section className="hero">
         <h1>Account team size & open demand tracker</h1>
+        <p className="hero-note">KPIs and charts count Active team members only</p>
         <div className="stats">
           <div className="stat-card">
             <span>Unique team members</span>
@@ -531,7 +550,7 @@ export default function App() {
             <div className="filters">
               <input
                 className="search"
-                placeholder="Search account, POD, role, skill, assignee..."
+                placeholder="Search account, POD, role, skill, assignee, status..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -577,6 +596,16 @@ export default function App() {
                     {r}
                   </option>
                 ))}
+              </select>
+              <select
+                className="field"
+                value={memberStatusFilter}
+                onChange={(e) => setMemberStatusFilter(e.target.value)}
+              >
+                <option value="Active">Active</option>
+                <option value="Released">Released</option>
+                <option value="Resigned">Resigned</option>
+                <option value="All">All statuses</option>
               </select>
             </div>
             <button className="btn btn-primary" type="button" onClick={openAddTeam}>
