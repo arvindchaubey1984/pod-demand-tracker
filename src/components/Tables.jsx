@@ -14,7 +14,13 @@ function memberStatusBadge(status) {
   return 'badge-muted'
 }
 
-export function TeamTable({ rows, onEdit, onDelete }) {
+function phaseBadge(phase) {
+  if (phase === 'Current') return 'badge-ok'
+  if (phase === 'Scheduled') return 'badge-info'
+  return 'badge-muted'
+}
+
+export function TeamTable({ rows, onEdit, onDelete, getPhase }) {
   if (!rows.length) {
     return <div className="empty">No team members match the current filters.</div>
   }
@@ -33,15 +39,16 @@ export function TeamTable({ rows, onEdit, onDelete }) {
             <th>Loc</th>
             <th>Billing</th>
             <th>Alloc</th>
-            <th>Onboard</th>
-            <th>End</th>
+            <th>Billing window</th>
             <th>Remarks</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((m, i) => (
-            <tr key={m.id}>
+          {rows.map((m, i) => {
+            const phase = getPhase ? getPhase(m) : 'Current'
+            return (
+            <tr key={m.id} className={phase !== 'Current' ? 'row-dim' : undefined}>
               <td>{m.sno || i + 1}</td>
               <td>{m.account || '—'}</td>
               <td>
@@ -66,8 +73,14 @@ export function TeamTable({ rows, onEdit, onDelete }) {
                 )}
               </td>
               <td>{m.allocation || '—'}</td>
-              <td>{m.onboardMonth || '—'}</td>
-              <td>{m.endDate || '—'}</td>
+              <td>
+                <div className="billing-window">
+                  <span className={`badge ${phaseBadge(phase)}`}>{phase}</span>
+                  <small>
+                    {m.onboardMonth || '—'} → {m.endDate || '—'}
+                  </small>
+                </div>
+              </td>
               <td>{m.remarks || '—'}</td>
               <td>
                 <div className="row-actions">
@@ -84,7 +97,8 @@ export function TeamTable({ rows, onEdit, onDelete }) {
                 </div>
               </td>
             </tr>
-          ))}
+            )
+          })}
         </tbody>
       </table>
     </div>

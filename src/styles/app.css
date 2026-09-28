@@ -553,6 +553,88 @@ textarea {
   font-size: 1rem;
 }
 
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.panel-head h2 {
+  margin: 0;
+}
+
+.btn-small {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.billing-window {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 7.5rem;
+}
+
+.billing-window small {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.row-dim {
+  opacity: 0.72;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.form-grid .form-hint.full {
+  grid-column: 1 / -1;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  background: #eef7f9;
+  border: 1px solid var(--line);
+}
+
+.pod-manage {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.pod-manage-list {
+  display: grid;
+  gap: 0.55rem;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.pod-manage-row {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfefe;
+}
+
+.pod-manage-row strong {
+  font-size: 0.95rem;
+}
+
 .bar-list {
   display: grid;
   gap: 0.7rem;
@@ -735,11 +817,15 @@ td {
 
 .table-wrap.team-table td:nth-child(4),
 .table-wrap.team-table td:nth-child(5),
-.table-wrap.team-table td:nth-child(13) {
+.table-wrap.team-table td:nth-child(12) {
   /* Role, Skill, Remarks — allow wrap so the row stays denser */
   white-space: normal;
   max-width: 9.5rem;
   line-height: 1.25;
+}
+
+.table-wrap.team-table td:nth-child(11) {
+  white-space: normal;
 }
 
 .table-wrap.team-table th:last-child,

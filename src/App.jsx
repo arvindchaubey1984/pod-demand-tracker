@@ -5,12 +5,15 @@ import { DemandForm, Modal, TeamForm } from './components/Forms'
 import { DemandTable, TeamTable } from './components/Tables'
 import { exportWorkbook, importWorkbook } from './utils/excel'
 import {
+  buildPodRegistry,
   computeStats,
   formatFte,
+  getAllocationPhase,
   isActiveOpenDemand,
   loadState,
   normalizeBillingStatus,
   normalizeMemberStatus,
+  normalizePodStatus,
   resetState,
   saveState,
   uid,
@@ -58,6 +61,7 @@ export default function App() {
   const [podFilter, setPodFilter] = useState('All')
   const [roleFilter, setRoleFilter] = useState('All')
   const [memberStatusFilter, setMemberStatusFilter] = useState('Active')
+  const [allocPhaseFilter, setAllocPhaseFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
@@ -76,9 +80,14 @@ export default function App() {
     return () => clearTimeout(t)
   }, [toast])
 
+  const podRegistry = useMemo(
+    () => buildPodRegistry(state.teamMembers, state.podRegistry || []),
+    [state.teamMembers, state.podRegistry],
+  )
+
   const stats = useMemo(
-    () => computeStats(state.teamMembers, state.openDemands),
-    [state.teamMembers, state.openDemands],
+    () => computeStats(state.teamMembers, state.openDemands, podRegistry),
+    [state.teamMembers, state.openDemands, podRegistry],
   )
 
   const accounts = useMemo(
@@ -117,6 +126,9 @@ export default function App() {
       ) {
         return false
       }
+      if (allocPhaseFilter !== 'All' && getAllocationPhase(m) !== allocPhaseFilter) {
+        return false
+      }
       if (!q) return true
       return [
         m.account,
@@ -142,6 +154,7 @@ export default function App() {
     podFilter,
     roleFilter,
     memberStatusFilter,
+    allocPhaseFilter,
     query,
   ])
 
@@ -234,8 +247,32 @@ export default function App() {
     setModal({ type: 'demand', mode: 'edit', id: row.id })
   }
 
+  function openManagePods() {
+    setDraft({ pods: podRegistry.map((p) => ({ ...p })) })
+    setModal({ type: 'pods' })
+  }
+
+  function setPodDraftStatus(name, status) {
+    setDraft((prev) => ({
+      ...prev,
+      pods: (prev?.pods || []).map((p) =>
+        p.name === name ? { ...p, status: normalizePodStatus(status) } : p,
+      ),
+    }))
+  }
+
   function saveModal() {
     if (!draft) return
+    if (modal.type === 'pods') {
+      setState((prev) => ({
+        ...prev,
+        podRegistry: buildPodRegistry(prev.teamMembers, draft.pods || []),
+      }))
+      notify('POD statuses saved')
+      setModal(null)
+      setDraft(null)
+      return
+    }
     if (modal.type === 'team') {
       if (!draft.role && !draft.assignee) {
         notify('Role or Assignee is required')
@@ -247,20 +284,19 @@ export default function App() {
           status: normalizeMemberStatus(draft.status),
           billingStatus: normalizeBillingStatus(draft.billingStatus),
         }
-        if (modal.mode === 'add') {
-          return {
-            ...prev,
-            teamMembers: [
-              ...prev.teamMembers,
-              { ...row, id: uid('tm'), sno: String(prev.teamMembers.length + 1) },
-            ],
-          }
-        }
+        const nextMembers =
+          modal.mode === 'add'
+            ? [
+                ...prev.teamMembers,
+                { ...row, id: uid('tm'), sno: String(prev.teamMembers.length + 1) },
+              ]
+            : prev.teamMembers.map((m) =>
+                m.id === modal.id ? { ...m, ...row } : m,
+              )
         return {
           ...prev,
-          teamMembers: prev.teamMembers.map((m) =>
-            m.id === modal.id ? { ...m, ...row } : m,
-          ),
+          teamMembers: nextMembers,
+          podRegistry: buildPodRegistry(nextMembers, prev.podRegistry || []),
         }
       })
       notify(modal.mode === 'add' ? 'Team member added' : 'Team member updated')
@@ -322,6 +358,7 @@ export default function App() {
           : prev.leadership,
         teamMembers: imported.teamMembers,
         openDemands: imported.openDemands,
+        podRegistry: buildPodRegistry(imported.teamMembers, prev.podRegistry || []),
       }))
       notify(`Imported ${imported.teamMembers.length} team + ${imported.openDemands.length} demands`)
     } catch (err) {
@@ -422,7 +459,9 @@ export default function App() {
         <>
       <section className="hero">
         <h1>Account team size & open demand tracker</h1>
-        <p className="hero-note">KPIs and charts count Active team members only</p>
+        <p className="hero-note">
+          KPIs count Active people on a current billing window, excluding Retired PODs
+        </p>
         <div className="stats">
           <div className="stat-card">
             <span>Unique team members</span>
@@ -463,9 +502,15 @@ export default function App() {
 
       <div className="panels">
         <div className="panel">
-          <h2>Team size by Account → POD</h2>
+          <div className="panel-head">
+            <h2>Team size by Account → POD</h2>
+            <button className="btn btn-ghost btn-small" type="button" onClick={openManagePods}>
+              Manage PODs
+            </button>
+          </div>
           <p className="panel-note">
-            Account total = unique people. POD rows = allocations (multi-POD people appear in each POD).
+            Current billing only. Re-assignments (old POD ended / new POD scheduled) do not double-count.
+            Retired PODs are hidden from KPIs.
           </p>
           <div className="bar-list">
             {accountPodRows.map((row) =>
@@ -579,11 +624,17 @@ export default function App() {
                 }}
               >
                 <option value="All">All PODs</option>
-                {pods.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
+                {pods.map((p) => {
+                  const meta = podRegistry.find(
+                    (x) => x.name.toLowerCase() === String(p).toLowerCase(),
+                  )
+                  const retired = normalizePodStatus(meta?.status) === 'Retired'
+                  return (
+                    <option key={p} value={p}>
+                      {retired ? `${p} (Retired)` : p}
+                    </option>
+                  )
+                })}
               </select>
               <select
                 className="field"
@@ -607,15 +658,31 @@ export default function App() {
                 <option value="Resigned">Resigned</option>
                 <option value="All">All statuses</option>
               </select>
+              <select
+                className="field"
+                value={allocPhaseFilter}
+                onChange={(e) => setAllocPhaseFilter(e.target.value)}
+              >
+                <option value="All">All billing windows</option>
+                <option value="Current">Current</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Ended">Ended</option>
+              </select>
             </div>
-            <button className="btn btn-primary" type="button" onClick={openAddTeam}>
-              + Add team member
-            </button>
+            <div className="toolbar-actions">
+              <button className="btn btn-ghost" type="button" onClick={openManagePods}>
+                Manage PODs
+              </button>
+              <button className="btn btn-primary" type="button" onClick={openAddTeam}>
+                + Add team member
+              </button>
+            </div>
           </div>
           <TeamTable
             rows={filteredTeam}
             onEdit={openEditTeam}
             onDelete={deleteTeam}
+            getPhase={getAllocationPhase}
           />
         </>
       ) : (
@@ -680,13 +747,15 @@ export default function App() {
       {modal && draft && (
         <Modal
           title={
-            modal.type === 'team'
-              ? modal.mode === 'add'
-                ? 'Add team member'
-                : 'Edit team member'
-              : modal.mode === 'add'
-                ? 'Add open demand'
-                : 'Edit open demand'
+            modal.type === 'pods'
+              ? 'Manage POD status'
+              : modal.type === 'team'
+                ? modal.mode === 'add'
+                  ? 'Add team member'
+                  : 'Edit team member'
+                : modal.mode === 'add'
+                  ? 'Add open demand'
+                  : 'Edit open demand'
           }
           onClose={() => {
             setModal(null)
@@ -710,7 +779,29 @@ export default function App() {
             </>
           }
         >
-          {modal.type === 'team' ? (
+          {modal.type === 'pods' ? (
+            <div className="pod-manage">
+              <p className="form-hint">
+                Mark a POD as <b>Retired</b> when it is shutting down. Retired PODs drop out of
+                KPIs and charts. People history remains in the Team Members table.
+              </p>
+              <div className="pod-manage-list">
+                {(draft.pods || []).map((p) => (
+                  <div className="pod-manage-row" key={p.name}>
+                    <strong>{p.name}</strong>
+                    <select
+                      className="field"
+                      value={normalizePodStatus(p.status)}
+                      onChange={(e) => setPodDraftStatus(p.name, e.target.value)}
+                    >
+                      <option value="Active">Active</option>
+                      <option value="Retired">Retired</option>
+                    </select>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : modal.type === 'team' ? (
             <TeamForm value={draft} onChange={setDraft} pods={pods} />
           ) : (
             <DemandForm value={draft} onChange={setDraft} projects={projects} />

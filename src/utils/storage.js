@@ -42,6 +42,117 @@ export function isActiveMember(member) {
   return normalizeMemberStatus(member?.status) === 'Active'
 }
 
+export const POD_STATUSES = ['Active', 'Retired']
+
+/** POD lifecycle — Retired PODs are excluded from KPIs / charts. */
+export function normalizePodStatus(status) {
+  const s = String(status || '').trim().toLowerCase()
+  if (!s) return 'Active'
+  if (s.startsWith('retir') || s.startsWith('shut') || s === 'closed' || s === 'inactive') {
+    return 'Retired'
+  }
+  return 'Active'
+}
+
+export function isRetiredPod(podName, podRegistry = []) {
+  const name = String(podName || '').trim()
+  if (!name) return false
+  const hit = podRegistry.find(
+    (p) => String(p.name || '').trim().toLowerCase() === name.toLowerCase(),
+  )
+  return normalizePodStatus(hit?.status) === 'Retired'
+}
+
+/** Merge saved POD statuses with PODs discovered on team rows. */
+export function buildPodRegistry(teamMembers = [], saved = []) {
+  const map = new Map()
+  for (const p of saved || []) {
+    const name = String(p?.name || '').trim()
+    if (!name) continue
+    map.set(name.toLowerCase(), {
+      name,
+      status: normalizePodStatus(p.status),
+    })
+  }
+  for (const m of teamMembers || []) {
+    const name = String(m?.pod || '').trim()
+    if (!name) continue
+    const key = name.toLowerCase()
+    if (!map.has(key)) {
+      map.set(key, { name, status: 'Active' })
+    }
+  }
+  return [...map.values()].sort((a, b) => a.name.localeCompare(b.name))
+}
+
+const MONTH_INDEX = {
+  jan: 0,
+  january: 0,
+  feb: 1,
+  february: 1,
+  mar: 2,
+  march: 2,
+  apr: 3,
+  april: 3,
+  may: 4,
+  jun: 5,
+  june: 5,
+  jul: 6,
+  july: 6,
+  aug: 7,
+  august: 7,
+  sep: 8,
+  sept: 8,
+  september: 8,
+  oct: 9,
+  october: 9,
+  nov: 10,
+  november: 10,
+  dec: 11,
+  december: 11,
+}
+
+/** Parse values like "April 2026", "Sep 2026", "Oct-26", "Dec-2026". */
+export function parseMonthYear(value) {
+  if (!value) return null
+  const s = String(value).trim().toLowerCase()
+  const m = s.match(
+    /\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b[\s\-./]*(\d{2,4})/i,
+  )
+  if (!m) return null
+  const monthKey = m[1].toLowerCase()
+  const month =
+    MONTH_INDEX[monthKey] ??
+    MONTH_INDEX[monthKey.slice(0, 3)] ??
+    MONTH_INDEX[monthKey.slice(0, 4)]
+  if (month == null) return null
+  let year = Number(m[2])
+  if (Number.isNaN(year)) return null
+  if (year < 100) year += 2000
+  return new Date(year, month, 1)
+}
+
+function endOfMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999)
+}
+
+/**
+ * Allocation window from onboard → end.
+ * Missing start/end = open-ended on that side.
+ */
+export function getAllocationPhase(member, asOf = new Date()) {
+  const start = parseMonthYear(member?.onboardMonth)
+  const endStart = parseMonthYear(member?.endDate)
+  const end = endStart ? endOfMonth(endStart) : null
+  if (start && asOf < start) return 'Scheduled'
+  if (end && asOf > end) return 'Ended'
+  return 'Current'
+}
+
+export function isAllocationLive(member, asOf = new Date()) {
+  return getAllocationPhase(member, asOf) === 'Current'
+}
+
 function normalizeTeamMember(m) {
   const wasNa = m.pod === 'NA'
   const pod = wasNa ? 'Shadow' : m.pod
@@ -67,19 +178,23 @@ export function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
+      const teamMembers = (parsed.teamMembers ?? []).map(normalizeTeamMember)
       return {
         ...parsed,
-        teamMembers: (parsed.teamMembers ?? []).map(normalizeTeamMember),
+        teamMembers,
         openDemands: (parsed.openDemands ?? []).map(normalizeDemand),
+        podRegistry: buildPodRegistry(teamMembers, parsed.podRegistry ?? []),
       }
     }
   } catch {
     /* ignore */
   }
+  const teamMembers = (seed.teamMembers ?? []).map(normalizeTeamMember)
   return {
     leadership: seed.leadership ?? [],
-    teamMembers: (seed.teamMembers ?? []).map(normalizeTeamMember),
+    teamMembers,
     openDemands: (seed.openDemands ?? []).map(normalizeDemand),
+    podRegistry: buildPodRegistry(teamMembers, seed.podRegistry ?? []),
   }
 }
 
@@ -156,11 +271,18 @@ export function isNonBillableStatus(status) {
   return normalizeBillingStatus(status) === 'Non-Billable'
 }
 
-export function computeStats(teamMembers, openDemands) {
-  // KPIs / charts count Active members only (exclude Released & Resigned)
+export function computeStats(teamMembers, openDemands, podRegistry = [], asOf = new Date()) {
+  // KPIs: Active people · current allocation window · non-retired POD
+  // (re-assignment rows with future/past dates do not double-count FTE)
   const activeTeam = teamMembers
     .map(normalizeTeamMember)
-    .filter((m) => (m.role || m.assignee) && isActiveMember(m))
+    .filter(
+      (m) =>
+        (m.role || m.assignee) &&
+        isActiveMember(m) &&
+        isAllocationLive(m, asOf) &&
+        !isRetiredPod(m.pod, podRegistry),
+    )
   const fte = activeTeam.reduce((sum, m) => sum + parseAllocation(m.allocation), 0)
 
   // Billing KPIs count allocation rows (what you edit), not unique people

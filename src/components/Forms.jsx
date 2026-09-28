@@ -134,15 +134,20 @@ export function TeamForm({ value, onChange, pods }) {
         <input
           value={value.endDate}
           onChange={(e) => set('endDate', e.target.value)}
-          placeholder="Dec-2026"
+          placeholder="Sep 2026"
         />
       </label>
+      <p className="form-hint full">
+        Re-assignment: keep the old POD row (set End Date when billing stops), then add a
+        new row on the new POD with Onboard = next month. KPIs only count the current billing window.
+      </p>
       <label className="full">
         Remarks
         <textarea
           rows={3}
           value={value.remarks}
           onChange={(e) => set('remarks', e.target.value)}
+          placeholder="e.g. Re-Assigned to MPB from Oct-26 onwards"
         />
       </label>
     </div>
