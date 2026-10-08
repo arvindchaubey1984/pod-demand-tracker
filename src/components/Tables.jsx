@@ -1,5 +1,9 @@
 import { useMemo, useState } from 'react'
-import { getAllocationPhase, getAssignments } from '../utils/storage'
+import {
+  getAllocationPhase,
+  getAssignments,
+  normalizeBillingStatus,
+} from '../utils/storage'
 
 function billingBadge(status) {
   const s = String(status || '').toLowerCase()
@@ -34,11 +38,14 @@ function sortAssignments(assignments) {
 }
 
 function filterAssignments(assignments, viewFilters = {}) {
-  const { pod = 'All', role = 'All', phase = 'All' } = viewFilters
+  const { pod = 'All', role = 'All', phase = 'All', billing = 'All' } = viewFilters
   return assignments.filter((a) => {
     if (pod !== 'All' && a.pod !== pod) return false
     if (role !== 'All' && a.role !== role) return false
     if (phase !== 'All' && getAllocationPhase(a) !== phase) return false
+    if (billing !== 'All' && normalizeBillingStatus(a.billingStatus) !== billing) {
+      return false
+    }
     return true
   })
 }
@@ -123,13 +130,14 @@ export function TeamTable({
   rows,
   onEdit,
   onDelete,
-  viewFilters = { pod: 'All', role: 'All', phase: 'All' },
+  viewFilters = { pod: 'All', role: 'All', phase: 'All', billing: 'All' },
 }) {
   const { sortKey, sortDir, onSort } = useColumnSort('assignee', 'asc')
   const filtersActive =
     viewFilters.pod !== 'All' ||
     viewFilters.role !== 'All' ||
-    viewFilters.phase !== 'All'
+    viewFilters.phase !== 'All' ||
+    viewFilters.billing !== 'All'
 
   const sortedRows = useMemo(() => {
     const list = [...rows]

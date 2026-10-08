@@ -16,6 +16,7 @@ import {
   isActiveOpenDemand,
   loadState,
   migrateTeamMembers,
+  normalizeBillingStatus,
   normalizeMemberStatus,
   normalizePodStatus,
   renumberDemands,
@@ -60,6 +61,7 @@ export default function App() {
   const [roleFilter, setRoleFilter] = useState('All')
   const [memberStatusFilter, setMemberStatusFilter] = useState('Active')
   const [allocPhaseFilter, setAllocPhaseFilter] = useState('Current')
+  const [billingFilter, setBillingFilter] = useState('All')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
@@ -134,9 +136,21 @@ export default function App() {
         if (allocPhaseFilter !== 'All' && getAllocationPhase(a) !== allocPhaseFilter) {
           return false
         }
+        if (
+          billingFilter !== 'All' &&
+          normalizeBillingStatus(a.billingStatus) !== billingFilter
+        ) {
+          return false
+        }
         return true
       })
-      if (!matchAssign && (podFilter !== 'All' || roleFilter !== 'All' || allocPhaseFilter !== 'All')) {
+      if (
+        !matchAssign &&
+        (podFilter !== 'All' ||
+          roleFilter !== 'All' ||
+          allocPhaseFilter !== 'All' ||
+          billingFilter !== 'All')
+      ) {
         return false
       }
       if (!q) return true
@@ -167,6 +181,7 @@ export default function App() {
     roleFilter,
     memberStatusFilter,
     allocPhaseFilter,
+    billingFilter,
     query,
   ])
 
@@ -702,6 +717,16 @@ export default function App() {
                 <option value="Scheduled">Scheduled</option>
                 <option value="Ended">Ended</option>
               </select>
+              <select
+                className="field"
+                value={billingFilter}
+                onChange={(e) => setBillingFilter(e.target.value)}
+              >
+                <option value="All">All billing</option>
+                <option value="Billable">Billable</option>
+                <option value="Non-Billable">Non-Billable</option>
+                <option value="Yet to be Billed">Yet to be Billed</option>
+              </select>
             </div>
             <div className="toolbar-actions">
               <button className="btn btn-ghost" type="button" onClick={openManagePods}>
@@ -720,6 +745,7 @@ export default function App() {
               pod: podFilter,
               role: roleFilter,
               phase: allocPhaseFilter,
+              billing: billingFilter,
             }}
           />
         </>
