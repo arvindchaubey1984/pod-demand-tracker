@@ -955,14 +955,6 @@ export default function App() {
             rows={filteredTeam}
             onEdit={openEditTeam}
             onDelete={deleteTeam}
-            certifications={certifications}
-            onOpenCerts={(person) => {
-              setCertAssigneeFilter(person.assignee || 'All')
-              setCertStatusFilter('All')
-              setCertNameFilter('All')
-              setQuery('')
-              setTab('certs')
-            }}
             viewFilters={{
               pod: podFilter,
               role: roleFilter,

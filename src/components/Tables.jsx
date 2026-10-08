@@ -1,6 +1,5 @@
 import { Fragment, useMemo, useState } from 'react'
 import {
-  certificationsForPerson,
   formatFte,
   getAllocationPhase,
   getAssignments,
@@ -152,8 +151,6 @@ export function TeamTable({
   rows,
   onEdit,
   onDelete,
-  certifications = [],
-  onOpenCerts,
   viewFilters = { pod: 'All', role: 'All', phase: 'All', billing: 'All' },
 }) {
   const { sortKey, sortDir, onSort } = useColumnSort('assignee', 'asc')
@@ -267,22 +264,6 @@ export function TeamTable({
                       Showing {shown.length} of {allAssignments.length}
                     </div>
                   ) : null}
-                  {(() => {
-                    const certs = certificationsForPerson(certifications, person)
-                    if (!certs.length) return null
-                    const done = certs.filter((c) => c.status === 'Completed').length
-                    return (
-                      <button
-                        type="button"
-                        className="cert-link"
-                        onClick={() => onOpenCerts?.(person)}
-                        title="View certifications"
-                      >
-                        {done}/{certs.length} cert
-                        {certs.length === 1 ? '' : 's'}
-                      </button>
-                    )
-                  })()}
                 </td>
                 <td>
                   <span className={`badge ${memberStatusBadge(person.status)}`}>
