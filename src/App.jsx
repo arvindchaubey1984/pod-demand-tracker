@@ -59,7 +59,7 @@ export default function App() {
   const [podFilter, setPodFilter] = useState('All')
   const [roleFilter, setRoleFilter] = useState('All')
   const [memberStatusFilter, setMemberStatusFilter] = useState('Active')
-  const [allocPhaseFilter, setAllocPhaseFilter] = useState('All')
+  const [allocPhaseFilter, setAllocPhaseFilter] = useState('Current')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
@@ -716,6 +716,11 @@ export default function App() {
             rows={filteredTeam}
             onEdit={openEditTeam}
             onDelete={deleteTeam}
+            viewFilters={{
+              pod: podFilter,
+              role: roleFilter,
+              phase: allocPhaseFilter,
+            }}
           />
         </>
       ) : (

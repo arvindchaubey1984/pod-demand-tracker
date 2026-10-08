@@ -33,9 +33,20 @@ function sortAssignments(assignments) {
   })
 }
 
-function primaryAssignment(person) {
-  const list = sortAssignments(getAssignments(person))
-  return list[0] || {}
+function filterAssignments(assignments, viewFilters = {}) {
+  const { pod = 'All', role = 'All', phase = 'All' } = viewFilters
+  return assignments.filter((a) => {
+    if (pod !== 'All' && a.pod !== pod) return false
+    if (role !== 'All' && a.role !== role) return false
+    if (phase !== 'All' && getAllocationPhase(a) !== phase) return false
+    return true
+  })
+}
+
+function primaryAssignment(person, viewFilters) {
+  const all = sortAssignments(getAssignments(person))
+  const visible = sortAssignments(filterAssignments(all, viewFilters))
+  return visible[0] || all[0] || {}
 }
 
 function compareValues(a, b) {
@@ -80,8 +91,10 @@ function useColumnSort(defaultKey = 'assignee', defaultDir = 'asc') {
   return { sortKey, sortDir, onSort }
 }
 
-function teamSortValue(person, key) {
-  const primary = primaryAssignment(person)
+function teamSortValue(person, key, viewFilters) {
+  const all = getAssignments(person)
+  const visible = filterAssignments(all, viewFilters)
+  const primary = primaryAssignment(person, viewFilters)
   switch (key) {
     case 'sno':
       return Number(person.sno) || 0
@@ -100,23 +113,36 @@ function teamSortValue(person, key) {
     case 'phase':
       return getAllocationPhase(primary)
     case 'count':
-      return getAssignments(person).length
+      return visible.length || all.length
     default:
       return person.assignee || ''
   }
 }
 
-export function TeamTable({ rows, onEdit, onDelete }) {
+export function TeamTable({
+  rows,
+  onEdit,
+  onDelete,
+  viewFilters = { pod: 'All', role: 'All', phase: 'All' },
+}) {
   const { sortKey, sortDir, onSort } = useColumnSort('assignee', 'asc')
+  const filtersActive =
+    viewFilters.pod !== 'All' ||
+    viewFilters.role !== 'All' ||
+    viewFilters.phase !== 'All'
 
   const sortedRows = useMemo(() => {
     const list = [...rows]
     const dir = sortDir === 'asc' ? 1 : -1
     list.sort(
-      (a, b) => compareValues(teamSortValue(a, sortKey), teamSortValue(b, sortKey)) * dir,
+      (a, b) =>
+        compareValues(
+          teamSortValue(a, sortKey, viewFilters),
+          teamSortValue(b, sortKey, viewFilters),
+        ) * dir,
     )
     return list
-  }, [rows, sortKey, sortDir])
+  }, [rows, sortKey, sortDir, viewFilters])
 
   if (!rows.length) {
     return <div className="empty">No team members match the current filters.</div>
@@ -190,8 +216,13 @@ export function TeamTable({ rows, onEdit, onDelete }) {
         </thead>
         <tbody>
           {sortedRows.map((person, i) => {
-            const assignments = sortAssignments(getAssignments(person))
-            const primary = assignments[0] || {}
+            const allAssignments = sortAssignments(getAssignments(person))
+            const visibleAssignments = sortAssignments(
+              filterAssignments(allAssignments, viewFilters),
+            )
+            // When filters are on, show only matching assignments; else show all
+            const shown = filtersActive ? visibleAssignments : allAssignments
+            const primary = shown[0] || allAssignments[0] || {}
             const primaryPhase = getAllocationPhase(primary)
             return (
               <tr key={person.id}>
@@ -199,6 +230,11 @@ export function TeamTable({ rows, onEdit, onDelete }) {
                 <td>{person.account || '—'}</td>
                 <td>
                   <strong>{person.assignee || '—'}</strong>
+                  {filtersActive && allAssignments.length > shown.length ? (
+                    <div className="muted-line">
+                      Showing {shown.length} of {allAssignments.length}
+                    </div>
+                  ) : null}
                 </td>
                 <td>
                   <span className={`badge ${memberStatusBadge(person.status)}`}>
@@ -214,42 +250,49 @@ export function TeamTable({ rows, onEdit, onDelete }) {
                   <span className={`badge ${phaseBadge(primaryPhase)}`}>{primaryPhase}</span>
                 </td>
                 <td>
-                  <strong>{assignments.length}</strong>
+                  <strong>{shown.length}</strong>
+                  {filtersActive && allAssignments.length !== shown.length ? (
+                    <div className="muted-line">of {allAssignments.length}</div>
+                  ) : null}
                 </td>
                 <td>
                   <div className="assignment-list">
-                    {assignments.map((a) => {
-                      const phase = getAllocationPhase(a)
-                      return (
-                        <div
-                          className={`assignment-chip ${phase !== 'Current' ? 'dim' : ''}`}
-                          key={a.id}
-                        >
-                          <div className="assignment-chip-top">
-                            <span className="badge badge-info">{a.pod || '—'}</span>
-                            <span className={`badge ${phaseBadge(phase)}`}>{phase}</span>
-                            {a.billingStatus ? (
-                              <span className={`badge ${billingBadge(a.billingStatus)}`}>
-                                {a.billingStatus}
+                    {shown.length === 0 ? (
+                      <div className="muted-line">No assignments match filters</div>
+                    ) : (
+                      shown.map((a) => {
+                        const phase = getAllocationPhase(a)
+                        return (
+                          <div
+                            className={`assignment-chip ${phase !== 'Current' ? 'dim' : ''}`}
+                            key={a.id}
+                          >
+                            <div className="assignment-chip-top">
+                              <span className="badge badge-info">{a.pod || '—'}</span>
+                              <span className={`badge ${phaseBadge(phase)}`}>{phase}</span>
+                              {a.billingStatus ? (
+                                <span className={`badge ${billingBadge(a.billingStatus)}`}>
+                                  {a.billingStatus}
+                                </span>
+                              ) : null}
+                              {a.allocation ? (
+                                <span className="alloc-pill">{a.allocation}</span>
+                              ) : null}
+                            </div>
+                            <div className="assignment-chip-meta">
+                              <span>{a.role || '—'}</span>
+                              {a.skill ? <span>· {a.skill}</span> : null}
+                              <span>
+                                · {a.onboardMonth || '—'} → {a.endDate || '—'}
                               </span>
-                            ) : null}
-                            {a.allocation ? (
-                              <span className="alloc-pill">{a.allocation}</span>
+                            </div>
+                            {a.remarks ? (
+                              <div className="assignment-chip-note">{a.remarks}</div>
                             ) : null}
                           </div>
-                          <div className="assignment-chip-meta">
-                            <span>{a.role || '—'}</span>
-                            {a.skill ? <span>· {a.skill}</span> : null}
-                            <span>
-                              · {a.onboardMonth || '—'} → {a.endDate || '—'}
-                            </span>
-                          </div>
-                          {a.remarks ? (
-                            <div className="assignment-chip-note">{a.remarks}</div>
-                          ) : null}
-                        </div>
-                      )
-                    })}
+                        )
+                      })
+                    )}
                   </div>
                 </td>
                 <td>
