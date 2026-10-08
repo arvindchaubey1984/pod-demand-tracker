@@ -755,6 +755,37 @@ textarea {
   padding: 0.12rem 0.45rem;
 }
 
+.sort-th {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.sort-th:hover,
+.sort-th.active {
+  color: var(--teal);
+}
+
+.sort-ind {
+  font-size: 0.65rem;
+  opacity: 0.55;
+}
+
+.sort-th.active .sort-ind {
+  opacity: 1;
+  color: var(--teal-deep);
+}
+
 .bar-list {
   display: grid;
   gap: 0.7rem;
