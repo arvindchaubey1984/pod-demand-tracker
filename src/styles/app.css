@@ -1021,18 +1021,19 @@ table {
 
 th,
 td {
-  padding: 0.78rem 0.85rem;
+  padding: 0.38rem 0.65rem;
   text-align: left;
   border-bottom: 1px solid var(--line);
-  vertical-align: top;
-  font-size: 0.9rem;
+  vertical-align: middle;
+  font-size: 0.88rem;
 }
 
 .table-wrap.team-table th,
 .table-wrap.team-table td {
-  padding: 0.55rem 0.5rem;
+  padding: 0.4rem 0.45rem;
   font-size: 0.82rem;
   white-space: nowrap;
+  vertical-align: top;
 }
 
 .table-wrap.team-table th {
@@ -1104,7 +1105,7 @@ tbody tr:hover {
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.22rem 0.55rem;
+  padding: 0.12rem 0.45rem;
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 700;
@@ -1138,10 +1139,11 @@ tbody tr:hover {
 .icon-btn {
   border: 1px solid var(--line);
   background: white;
-  border-radius: 10px;
-  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  padding: 0.22rem 0.45rem;
   cursor: pointer;
   color: var(--ink-soft);
+  font-size: 0.8rem;
 }
 
 .icon-btn:hover {
