@@ -4,6 +4,8 @@ import {
   DEFAULT_TEAM_ACCOUNT,
   DEFAULT_TEAM_END_DATE,
   DEFAULT_TEAM_LOCATION,
+  flattenAssignments,
+  migrateTeamMembers,
   normalizeMemberStatus,
   uid,
 } from './storage'
@@ -15,8 +17,10 @@ function clean(value) {
 }
 
 export function exportWorkbook({ teamMembers, openDemands, leadership }) {
-  const teamRows = teamMembers.map((m, i) => ({
-    'S.NO': m.sno || i + 1,
+  // One Excel row per assignment (flat) — re-groups on import
+  const flat = flattenAssignments(teamMembers)
+  const teamRows = flat.map((m, i) => ({
+    'S.NO': i + 1,
     Account: m.account || DEFAULT_TEAM_ACCOUNT,
     POD: m.pod,
     Role: m.role,
@@ -77,7 +81,7 @@ export async function importWorkbook(file) {
     ? XLSX.utils.sheet_to_json(leadSheet, { defval: '' })
     : []
 
-  const teamMembers = teamRaw
+  const flatMembers = teamRaw
     .map((row, i) => ({
       id: uid('tm'),
       sno: clean(row['S.NO'] ?? row['S.No'] ?? i + 1),
@@ -97,6 +101,8 @@ export async function importWorkbook(file) {
       remarks: clean(row.Remarks ?? ''),
     }))
     .filter((r) => r.pod || r.role || r.assignee)
+
+  const teamMembers = migrateTeamMembers(flatMembers)
 
   const openDemands = demandRaw
     .map((row, i) => ({

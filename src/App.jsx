@@ -7,11 +7,15 @@ import { exportWorkbook, importWorkbook } from './utils/excel'
 import {
   buildPodRegistry,
   computeStats,
+  countAssignments,
+  createEmptyAssignment,
+  flattenAssignments,
   formatFte,
   getAllocationPhase,
+  getAssignments,
   isActiveOpenDemand,
   loadState,
-  normalizeBillingStatus,
+  migrateTeamMembers,
   normalizeMemberStatus,
   normalizePodStatus,
   resetState,
@@ -20,24 +24,16 @@ import {
   uniquePeopleCount,
   uniqueSorted,
   DEFAULT_DEMAND_OPEN_DATE,
-  DEFAULT_TEAM_END_DATE,
   DEFAULT_TEAM_ACCOUNT,
   DEFAULT_TEAM_LOCATION,
 } from './utils/storage'
 
 const emptyTeam = {
-  pod: '',
   account: DEFAULT_TEAM_ACCOUNT,
   location: DEFAULT_TEAM_LOCATION,
-  role: '',
-  skill: '',
   assignee: '',
   status: 'Active',
-  billingStatus: 'Billable',
-  allocation: '100%',
-  onboardMonth: '',
-  endDate: DEFAULT_TEAM_END_DATE,
-  remarks: '',
+  assignments: [createEmptyAssignment()],
 }
 
 const emptyDemand = {
@@ -90,6 +86,11 @@ export default function App() {
     [state.teamMembers, state.openDemands, podRegistry],
   )
 
+  const flatAssignments = useMemo(
+    () => flattenAssignments(state.teamMembers),
+    [state.teamMembers],
+  )
+
   const accounts = useMemo(
     () => uniqueSorted(state.teamMembers, 'account'),
     [state.teamMembers],
@@ -97,18 +98,18 @@ export default function App() {
   const pods = useMemo(() => {
     const source =
       accountFilter === 'All'
-        ? state.teamMembers
-        : state.teamMembers.filter((m) => m.account === accountFilter)
+        ? flatAssignments
+        : flatAssignments.filter((m) => m.account === accountFilter)
     return uniqueSorted(source, 'pod')
-  }, [state.teamMembers, accountFilter])
+  }, [flatAssignments, accountFilter])
   const roles = useMemo(() => {
-    const source = state.teamMembers.filter((m) => {
+    const source = flatAssignments.filter((m) => {
       if (accountFilter !== 'All' && m.account !== accountFilter) return false
       if (podFilter !== 'All' && m.pod !== podFilter) return false
       return true
     })
     return uniqueSorted(source, 'role')
-  }, [state.teamMembers, accountFilter, podFilter])
+  }, [flatAssignments, accountFilter, podFilter])
   const projects = useMemo(
     () => uniqueSorted(state.openDemands, 'projectName'),
     [state.openDemands],
@@ -116,37 +117,46 @@ export default function App() {
 
   const filteredTeam = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return state.teamMembers.filter((m) => {
-      if (accountFilter !== 'All' && m.account !== accountFilter) return false
-      if (podFilter !== 'All' && m.pod !== podFilter) return false
-      if (roleFilter !== 'All' && m.role !== roleFilter) return false
+    return state.teamMembers.filter((person) => {
+      if (accountFilter !== 'All' && person.account !== accountFilter) return false
       if (
         memberStatusFilter !== 'All' &&
-        normalizeMemberStatus(m.status) !== memberStatusFilter
+        normalizeMemberStatus(person.status) !== memberStatusFilter
       ) {
         return false
       }
-      if (allocPhaseFilter !== 'All' && getAllocationPhase(m) !== allocPhaseFilter) {
+      const assignments = getAssignments(person)
+      const matchAssign = assignments.some((a) => {
+        if (podFilter !== 'All' && a.pod !== podFilter) return false
+        if (roleFilter !== 'All' && a.role !== roleFilter) return false
+        if (allocPhaseFilter !== 'All' && getAllocationPhase(a) !== allocPhaseFilter) {
+          return false
+        }
+        return true
+      })
+      if (!matchAssign && (podFilter !== 'All' || roleFilter !== 'All' || allocPhaseFilter !== 'All')) {
         return false
       }
       if (!q) return true
-      return [
-        m.account,
-        m.pod,
-        m.role,
-        m.skill,
-        m.assignee,
-        m.status,
-        m.location,
-        m.billingStatus,
-        m.allocation,
-        m.onboardMonth,
-        m.endDate,
-        m.remarks,
+      const blob = [
+        person.account,
+        person.assignee,
+        person.status,
+        person.location,
+        ...assignments.flatMap((a) => [
+          a.pod,
+          a.role,
+          a.skill,
+          a.billingStatus,
+          a.allocation,
+          a.onboardMonth,
+          a.endDate,
+          a.remarks,
+        ]),
       ]
         .join(' ')
         .toLowerCase()
-        .includes(q)
+      return blob.includes(q)
     })
   }, [
     state.teamMembers,
@@ -160,6 +170,10 @@ export default function App() {
 
   const filteredTeamPeople = useMemo(
     () => uniquePeopleCount(filteredTeam),
+    [filteredTeam],
+  )
+  const filteredAssignmentCount = useMemo(
+    () => countAssignments(filteredTeam),
     [filteredTeam],
   )
 
@@ -228,12 +242,24 @@ export default function App() {
   }
 
   function openAddTeam() {
-    setDraft({ ...emptyTeam })
+    setDraft({
+      account: DEFAULT_TEAM_ACCOUNT,
+      location: DEFAULT_TEAM_LOCATION,
+      assignee: '',
+      status: 'Active',
+      assignments: [createEmptyAssignment()],
+    })
     setModal({ type: 'team', mode: 'add' })
   }
 
   function openEditTeam(row) {
-    setDraft({ ...row })
+    const assignments = getAssignments(row)
+    setDraft({
+      ...row,
+      assignments: assignments.length
+        ? assignments.map((a) => ({ ...a }))
+        : [createEmptyAssignment()],
+    })
     setModal({ type: 'team', mode: 'edit', id: row.id })
   }
 
@@ -274,29 +300,39 @@ export default function App() {
       return
     }
     if (modal.type === 'team') {
-      if (!draft.role && !draft.assignee) {
-        notify('Role or Assignee is required')
+      const assignments = getAssignments(draft).filter(
+        (a) => a.pod || a.role || a.onboardMonth || a.endDate || a.remarks,
+      )
+      if (!draft.assignee && assignments.length === 0) {
+        notify('Assignee or at least one assignment is required')
+        return
+      }
+      if (assignments.length === 0) {
+        notify('Add at least one POD assignment')
         return
       }
       setState((prev) => {
         const row = {
-          ...draft,
+          id: modal.mode === 'edit' ? modal.id : uid('tm'),
+          sno:
+            modal.mode === 'edit'
+              ? draft.sno
+              : String(prev.teamMembers.length + 1),
+          account: draft.account || DEFAULT_TEAM_ACCOUNT,
+          assignee: draft.assignee || '',
+          location: draft.location || DEFAULT_TEAM_LOCATION,
           status: normalizeMemberStatus(draft.status),
-          billingStatus: normalizeBillingStatus(draft.billingStatus),
+          assignments,
         }
         const nextMembers =
           modal.mode === 'add'
-            ? [
-                ...prev.teamMembers,
-                { ...row, id: uid('tm'), sno: String(prev.teamMembers.length + 1) },
-              ]
-            : prev.teamMembers.map((m) =>
-                m.id === modal.id ? { ...m, ...row } : m,
-              )
+            ? [...prev.teamMembers, row]
+            : prev.teamMembers.map((m) => (m.id === modal.id ? { ...m, ...row } : m))
+        const migrated = migrateTeamMembers(nextMembers)
         return {
           ...prev,
-          teamMembers: nextMembers,
-          podRegistry: buildPodRegistry(nextMembers, prev.podRegistry || []),
+          teamMembers: migrated,
+          podRegistry: buildPodRegistry(migrated, prev.podRegistry || []),
         }
       })
       notify(modal.mode === 'add' ? 'Team member added' : 'Team member updated')
@@ -575,8 +611,8 @@ export default function App() {
           onClick={() => setTab('team')}
         >
           Team Members ({filteredTeamPeople}
-          {filteredTeam.length !== filteredTeamPeople
-            ? ` · ${filteredTeam.length} allocations`
+          {filteredAssignmentCount !== filteredTeamPeople
+            ? ` · ${filteredAssignmentCount} assignments`
             : ''}
           )
         </button>
@@ -682,7 +718,6 @@ export default function App() {
             rows={filteredTeam}
             onEdit={openEditTeam}
             onDelete={deleteTeam}
-            getPhase={getAllocationPhase}
           />
         </>
       ) : (

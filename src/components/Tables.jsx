@@ -1,3 +1,5 @@
+import { getAllocationPhase, getAssignments } from '../utils/storage'
+
 function billingBadge(status) {
   const s = String(status || '').toLowerCase()
   if (s.includes('non')) return 'badge-muted'
@@ -20,83 +22,108 @@ function phaseBadge(phase) {
   return 'badge-muted'
 }
 
-export function TeamTable({ rows, onEdit, onDelete, getPhase }) {
+function sortAssignments(assignments) {
+  const rank = { Current: 0, Scheduled: 1, Ended: 2 }
+  return [...assignments].sort((a, b) => {
+    const pa = getAllocationPhase(a)
+    const pb = getAllocationPhase(b)
+    if (rank[pa] !== rank[pb]) return rank[pa] - rank[pb]
+    return String(a.pod || '').localeCompare(String(b.pod || ''))
+  })
+}
+
+export function TeamTable({ rows, onEdit, onDelete }) {
   if (!rows.length) {
     return <div className="empty">No team members match the current filters.</div>
   }
   return (
-    <div className="table-wrap team-table">
+    <div className="table-wrap team-table person-table">
       <table>
         <thead>
           <tr>
             <th>#</th>
             <th>Account</th>
-            <th>POD</th>
-            <th>Role</th>
-            <th>Skill</th>
             <th>Assignee</th>
             <th>Status</th>
             <th>Loc</th>
-            <th>Billing</th>
-            <th>Alloc</th>
-            <th>Billing window</th>
-            <th>Remarks</th>
+            <th>Assignments (POD · role · billing window)</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((m, i) => {
-            const phase = getPhase ? getPhase(m) : 'Current'
+          {rows.map((person, i) => {
+            const assignments = sortAssignments(getAssignments(person))
             return (
-            <tr key={m.id} className={phase !== 'Current' ? 'row-dim' : undefined}>
-              <td>{m.sno || i + 1}</td>
-              <td>{m.account || '—'}</td>
-              <td>
-                <span className="badge badge-info">{m.pod || '—'}</span>
-              </td>
-              <td>{m.role || '—'}</td>
-              <td>{m.skill || '—'}</td>
-              <td>{m.assignee || '—'}</td>
-              <td>
-                <span className={`badge ${memberStatusBadge(m.status)}`}>
-                  {m.status || 'Active'}
-                </span>
-              </td>
-              <td>{m.location || '—'}</td>
-              <td>
-                {m.billingStatus ? (
-                  <span className={`badge ${billingBadge(m.billingStatus)}`}>
-                    {m.billingStatus}
+              <tr key={person.id}>
+                <td>{person.sno || i + 1}</td>
+                <td>{person.account || '—'}</td>
+                <td>
+                  <strong>{person.assignee || '—'}</strong>
+                  <div className="muted-line">
+                    {assignments.length} assignment{assignments.length === 1 ? '' : 's'}
+                  </div>
+                </td>
+                <td>
+                  <span className={`badge ${memberStatusBadge(person.status)}`}>
+                    {person.status || 'Active'}
                   </span>
-                ) : (
-                  '—'
-                )}
-              </td>
-              <td>{m.allocation || '—'}</td>
-              <td>
-                <div className="billing-window">
-                  <span className={`badge ${phaseBadge(phase)}`}>{phase}</span>
-                  <small>
-                    {m.onboardMonth || '—'} → {m.endDate || '—'}
-                  </small>
-                </div>
-              </td>
-              <td>{m.remarks || '—'}</td>
-              <td>
-                <div className="row-actions">
-                  <button className="icon-btn" onClick={() => onEdit(m)} type="button">
-                    Edit
-                  </button>
-                  <button
-                    className="icon-btn"
-                    onClick={() => onDelete(m.id)}
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
+                </td>
+                <td>{person.location || '—'}</td>
+                <td>
+                  <div className="assignment-list">
+                    {assignments.map((a) => {
+                      const phase = getAllocationPhase(a)
+                      return (
+                        <div
+                          className={`assignment-chip ${phase !== 'Current' ? 'dim' : ''}`}
+                          key={a.id}
+                        >
+                          <div className="assignment-chip-top">
+                            <span className="badge badge-info">{a.pod || '—'}</span>
+                            <span className={`badge ${phaseBadge(phase)}`}>{phase}</span>
+                            {a.billingStatus ? (
+                              <span className={`badge ${billingBadge(a.billingStatus)}`}>
+                                {a.billingStatus}
+                              </span>
+                            ) : null}
+                            {a.allocation ? (
+                              <span className="alloc-pill">{a.allocation}</span>
+                            ) : null}
+                          </div>
+                          <div className="assignment-chip-meta">
+                            <span>{a.role || '—'}</span>
+                            {a.skill ? <span>· {a.skill}</span> : null}
+                            <span>
+                              · {a.onboardMonth || '—'} → {a.endDate || '—'}
+                            </span>
+                          </div>
+                          {a.remarks ? (
+                            <div className="assignment-chip-note">{a.remarks}</div>
+                          ) : null}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </td>
+                <td>
+                  <div className="row-actions">
+                    <button
+                      className="icon-btn"
+                      onClick={() => onEdit(person)}
+                      type="button"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="icon-btn"
+                      onClick={() => onDelete(person.id)}
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
             )
           })}
         </tbody>
