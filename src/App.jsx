@@ -18,6 +18,8 @@ import {
   migrateTeamMembers,
   normalizeMemberStatus,
   normalizePodStatus,
+  renumberDemands,
+  renumberTeamMembers,
   resetState,
   saveState,
   uid,
@@ -314,10 +316,6 @@ export default function App() {
       setState((prev) => {
         const row = {
           id: modal.mode === 'edit' ? modal.id : uid('tm'),
-          sno:
-            modal.mode === 'edit'
-              ? draft.sno
-              : String(prev.teamMembers.length + 1),
           account: draft.account || DEFAULT_TEAM_ACCOUNT,
           assignee: draft.assignee || '',
           location: draft.location || DEFAULT_TEAM_LOCATION,
@@ -328,7 +326,7 @@ export default function App() {
           modal.mode === 'add'
             ? [...prev.teamMembers, row]
             : prev.teamMembers.map((m) => (m.id === modal.id ? { ...m, ...row } : m))
-        const migrated = migrateTeamMembers(nextMembers)
+        const migrated = renumberTeamMembers(migrateTeamMembers(nextMembers))
         return {
           ...prev,
           teamMembers: migrated,
@@ -342,20 +340,18 @@ export default function App() {
         return
       }
       setState((prev) => {
-        if (modal.mode === 'add') {
-          return {
-            ...prev,
-            openDemands: [
-              ...prev.openDemands,
-              { ...draft, id: uid('od'), sno: String(prev.openDemands.length + 1) },
-            ],
-          }
-        }
+        const next =
+          modal.mode === 'add'
+            ? [
+                ...prev.openDemands,
+                { ...draft, id: uid('od') },
+              ]
+            : prev.openDemands.map((d) =>
+                d.id === modal.id ? { ...d, ...draft } : d,
+              )
         return {
           ...prev,
-          openDemands: prev.openDemands.map((d) =>
-            d.id === modal.id ? { ...d, ...draft } : d,
-          ),
+          openDemands: renumberDemands(next),
         }
       })
       notify(modal.mode === 'add' ? 'Open demand added' : 'Open demand updated')
@@ -368,7 +364,9 @@ export default function App() {
     if (!window.confirm('Remove this team member?')) return
     setState((prev) => ({
       ...prev,
-      teamMembers: prev.teamMembers.filter((m) => m.id !== id),
+      teamMembers: renumberTeamMembers(
+        prev.teamMembers.filter((m) => m.id !== id),
+      ),
     }))
     notify('Team member removed')
   }
@@ -377,7 +375,7 @@ export default function App() {
     if (!window.confirm('Remove this open demand?')) return
     setState((prev) => ({
       ...prev,
-      openDemands: prev.openDemands.filter((d) => d.id !== id),
+      openDemands: renumberDemands(prev.openDemands.filter((d) => d.id !== id)),
     }))
     notify('Open demand removed')
   }

@@ -298,14 +298,31 @@ export function migrateTeamMembers(rawMembers = []) {
     }
   })
 
-  return [...groups.values()].map((person, i) => ({
-    ...person,
-    sno: person.sno || String(i + 1),
-    status: normalizeMemberStatus(person.status),
-    account: person.account || DEFAULT_TEAM_ACCOUNT,
-    location: person.location || DEFAULT_TEAM_LOCATION,
-    assignments: (person.assignments || []).map((a) => normalizeAssignment(a)),
-  }))
+  // Stable order by assignee, then force sequential S.No 1..N
+  return [...groups.values()]
+    .sort((a, b) =>
+      String(a.assignee || '').localeCompare(String(b.assignee || ''), undefined, {
+        sensitivity: 'base',
+      }),
+    )
+    .map((person, i) => ({
+      ...person,
+      sno: String(i + 1),
+      status: normalizeMemberStatus(person.status),
+      account: person.account || DEFAULT_TEAM_ACCOUNT,
+      location: person.location || DEFAULT_TEAM_LOCATION,
+      assignments: (person.assignments || []).map((a) => normalizeAssignment(a)),
+    }))
+}
+
+/** Re-number team members 1..N (keeps current array order). */
+export function renumberTeamMembers(members = []) {
+  return members.map((m, i) => ({ ...m, sno: String(i + 1) }))
+}
+
+/** Re-number open demands 1..N. */
+export function renumberDemands(demands = []) {
+  return demands.map((d, i) => ({ ...d, sno: String(i + 1) }))
 }
 
 export function loadState() {
@@ -314,10 +331,13 @@ export function loadState() {
     if (raw) {
       const parsed = JSON.parse(raw)
       const teamMembers = migrateTeamMembers(parsed.teamMembers ?? [])
+      const openDemands = renumberDemands(
+        (parsed.openDemands ?? []).map(normalizeDemand),
+      )
       return {
         ...parsed,
         teamMembers,
-        openDemands: (parsed.openDemands ?? []).map(normalizeDemand),
+        openDemands,
         podRegistry: buildPodRegistry(teamMembers, parsed.podRegistry ?? []),
       }
     }
@@ -325,10 +345,13 @@ export function loadState() {
     /* ignore */
   }
   const teamMembers = migrateTeamMembers(seed.teamMembers ?? [])
+  const openDemands = renumberDemands(
+    (seed.openDemands ?? []).map(normalizeDemand),
+  )
   return {
     leadership: seed.leadership ?? [],
     teamMembers,
-    openDemands: (seed.openDemands ?? []).map(normalizeDemand),
+    openDemands,
     podRegistry: buildPodRegistry(teamMembers, seed.podRegistry ?? []),
   }
 }

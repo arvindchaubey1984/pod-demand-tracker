@@ -195,7 +195,7 @@ export function TeamTable({ rows, onEdit, onDelete }) {
             const primaryPhase = getAllocationPhase(primary)
             return (
               <tr key={person.id}>
-                <td>{person.sno || i + 1}</td>
+                <td>{i + 1}</td>
                 <td>{person.account || '—'}</td>
                 <td>
                   <strong>{person.assignee || '—'}</strong>
@@ -388,7 +388,7 @@ export function DemandTable({ rows, onEdit, onDelete }) {
         <tbody>
           {sortedRows.map((d, i) => (
             <tr key={d.id}>
-              <td>{d.sno || i + 1}</td>
+              <td>{i + 1}</td>
               <td>
                 <span className="badge badge-info">{d.projectName || '—'}</span>
               </td>
