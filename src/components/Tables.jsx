@@ -259,11 +259,6 @@ export function TeamTable({
                 <td>{person.account || '—'}</td>
                 <td>
                   <strong>{person.assignee || '—'}</strong>
-                  {filtersActive && allAssignments.length > shown.length ? (
-                    <div className="muted-line">
-                      Showing {shown.length} of {allAssignments.length}
-                    </div>
-                  ) : null}
                 </td>
                 <td>
                   <span className={`badge ${memberStatusBadge(person.status)}`}>
