@@ -2,10 +2,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from './auth/AuthContext'
 import CommercialPanel from './components/CommercialPanel'
 import { DemandForm, Modal, TeamForm } from './components/Forms'
-import { DemandTable, TeamTable } from './components/Tables'
+import { DemandTable, ProjectsTable, TeamTable } from './components/Tables'
 import { exportWorkbook, importWorkbook } from './utils/excel'
 import {
   buildPodRegistry,
+  computeProjectSummaries,
   computeStats,
   countAssignments,
   createEmptyAssignment,
@@ -62,6 +63,8 @@ export default function App() {
   const [memberStatusFilter, setMemberStatusFilter] = useState('Active')
   const [allocPhaseFilter, setAllocPhaseFilter] = useState('Current')
   const [billingFilter, setBillingFilter] = useState('All')
+  const [projectPhaseFilter, setProjectPhaseFilter] = useState('Current')
+  const [projectRetiredFilter, setProjectRetiredFilter] = useState('Hide')
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
@@ -253,6 +256,53 @@ export default function App() {
 
   const maxAccountPod = Math.max(...accountPodRows.map((r) => r.count), 1)
   const maxProject = Math.max(...Object.values(stats.byProject), 1)
+
+  const projectSummaries = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return computeProjectSummaries(state.teamMembers, state.openDemands, podRegistry, {
+      account: accountFilter,
+      phase: projectPhaseFilter,
+      includeRetired: projectRetiredFilter !== 'Hide',
+    }).filter((row) => {
+      if (projectRetiredFilter === 'Active only' && normalizePodStatus(row.status) !== 'Active') {
+        return false
+      }
+      if (projectRetiredFilter === 'Retired only' && normalizePodStatus(row.status) !== 'Retired') {
+        return false
+      }
+      if (!q) return true
+      const blob = [
+        row.pod,
+        row.status,
+        ...(row.accounts || []),
+        ...row.people.flatMap((p) => [p.assignee, p.role, p.skill, p.billingStatus]),
+      ]
+        .join(' ')
+        .toLowerCase()
+      return blob.includes(q)
+    })
+  }, [
+    state.teamMembers,
+    state.openDemands,
+    podRegistry,
+    accountFilter,
+    projectPhaseFilter,
+    projectRetiredFilter,
+    query,
+  ])
+
+  const projectTabTotals = useMemo(() => {
+    return projectSummaries.reduce(
+      (acc, row) => {
+        acc.projects += 1
+        acc.people += row.peopleCount
+        acc.billableFte += row.billableFte
+        acc.totalFte += row.totalFte
+        return acc
+      },
+      { projects: 0, people: 0, billableFte: 0, totalFte: 0 },
+    )
+  }, [projectSummaries])
 
   function notify(message) {
     setToast(message)
@@ -631,6 +681,17 @@ export default function App() {
         </button>
         <button
           type="button"
+          className={`tab ${tab === 'projects' ? 'active' : ''}`}
+          onClick={() => setTab('projects')}
+        >
+          Projects ({projectTabTotals.projects}
+          {projectTabTotals.billableFte
+            ? ` · ${formatFte(projectTabTotals.billableFte)} billable`
+            : ''}
+          )
+        </button>
+        <button
+          type="button"
           className={`tab ${tab === 'demand' ? 'active' : ''}`}
           onClick={() => setTab('demand')}
         >
@@ -746,6 +807,78 @@ export default function App() {
               role: roleFilter,
               phase: allocPhaseFilter,
               billing: billingFilter,
+            }}
+          />
+        </>
+      ) : tab === 'projects' ? (
+        <>
+          <div className="toolbar">
+            <div className="filters">
+              <input
+                className="search"
+                placeholder="Search project, assignee, role..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <select
+                className="field"
+                value={accountFilter}
+                onChange={(e) => setAccountFilter(e.target.value)}
+              >
+                <option value="All">All Accounts</option>
+                {accounts.map((a) => (
+                  <option key={a} value={a}>
+                    {a}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="field"
+                value={projectPhaseFilter}
+                onChange={(e) => setProjectPhaseFilter(e.target.value)}
+              >
+                <option value="Current">Current assignments</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Ended">Ended</option>
+                <option value="All">All windows</option>
+              </select>
+              <select
+                className="field"
+                value={projectRetiredFilter}
+                onChange={(e) => setProjectRetiredFilter(e.target.value)}
+              >
+                <option value="Hide">Hide retired PODs</option>
+                <option value="Active only">Active PODs only</option>
+                <option value="Retired only">Retired PODs only</option>
+                <option value="Show">Show retired too</option>
+              </select>
+            </div>
+            <div className="toolbar-actions project-totals">
+              <span className="chip">
+                People <b>{projectTabTotals.people}</b>
+              </span>
+              <span className="chip">
+                Billable <b>{formatFte(projectTabTotals.billableFte)}</b>
+              </span>
+              <span className="chip">
+                Total <b>{formatFte(projectTabTotals.totalFte)}</b>
+              </span>
+            </div>
+          </div>
+          <p className="panel-note" style={{ marginTop: 0 }}>
+            Each project (POD) lists linked people and FTE by billing type. Expand a row to see
+            assignees. Open demand counts match demand project names to the POD.
+          </p>
+          <ProjectsTable
+            rows={projectSummaries}
+            onEditPerson={(personId) => {
+              const person = state.teamMembers.find((p) => p.id === personId)
+              if (person) openEditTeam(person)
+            }}
+            onOpenInTeam={(pod) => {
+              setPodFilter(pod)
+              setAllocPhaseFilter(projectPhaseFilter)
+              setTab('team')
             }}
           />
         </>

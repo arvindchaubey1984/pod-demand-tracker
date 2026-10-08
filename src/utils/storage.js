@@ -424,6 +424,126 @@ export function isNonBillableStatus(status) {
   return normalizeBillingStatus(status) === 'Non-Billable'
 }
 
+/**
+ * One row per POD/project: linked people, billable / non-billable / total FTE,
+ * and open demand positions whose projectName matches the POD.
+ */
+export function computeProjectSummaries(
+  teamMembers = [],
+  openDemands = [],
+  podRegistry = [],
+  {
+    asOf = new Date(),
+    account = 'All',
+    phase = 'Current',
+    includeRetired = true,
+  } = {},
+) {
+  const map = new Map()
+
+  function ensure(podName) {
+    const name = String(podName || '').trim() || 'Unassigned'
+    const key = name.toLowerCase()
+    if (!map.has(key)) {
+      const meta = podRegistry.find(
+        (x) => String(x.name || '').toLowerCase() === key,
+      )
+      map.set(key, {
+        pod: meta?.name || name,
+        status: normalizePodStatus(meta?.status),
+        accounts: new Set(),
+        peopleKeys: new Set(),
+        people: [],
+        assignments: 0,
+        totalFte: 0,
+        billableFte: 0,
+        nonBillableFte: 0,
+        yetToBillFte: 0,
+        billableCount: 0,
+        nonBillableCount: 0,
+        yetToBillCount: 0,
+        openPositions: 0,
+      })
+    }
+    return map.get(key)
+  }
+
+  for (const p of podRegistry) {
+    if (p?.name) ensure(p.name)
+  }
+
+  const flat = flattenAssignments(teamMembers).filter((m) => {
+    if (!(m.pod || m.assignee || m.role)) return false
+    if (account !== 'All' && m.account !== account) return false
+    if (!includeRetired && isRetiredPod(m.pod, podRegistry)) return false
+    if (phase !== 'All' && getAllocationPhase(m, asOf) !== phase) return false
+    return true
+  })
+
+  for (const m of flat) {
+    const row = ensure(m.pod || 'Unassigned')
+    if (m.account) row.accounts.add(m.account)
+    row.assignments += 1
+    const fte = parseAllocation(m.allocation)
+    row.totalFte += fte
+    const billing = normalizeBillingStatus(m.billingStatus)
+    if (billing === 'Billable') {
+      row.billableFte += fte
+      row.billableCount += 1
+    } else if (billing === 'Non-Billable') {
+      row.nonBillableFte += fte
+      row.nonBillableCount += 1
+    } else if (billing === 'Yet to be Billed') {
+      row.yetToBillFte += fte
+      row.yetToBillCount += 1
+    }
+
+    const pKey = personKey(m) || m.personId || m.id
+    if (pKey) row.peopleKeys.add(pKey)
+    row.people.push({
+      personId: m.personId || m.id,
+      assignmentId: m.assignmentId || m.id,
+      assignee: m.assignee || '',
+      account: m.account || '',
+      location: m.location || '',
+      status: m.status || 'Active',
+      role: m.role || '',
+      skill: m.skill || '',
+      billingStatus: normalizeBillingStatus(m.billingStatus) || '—',
+      allocation: m.allocation || '',
+      fte,
+      phase: getAllocationPhase(m, asOf),
+      onboardMonth: m.onboardMonth || '',
+      endDate: m.endDate || '',
+      remarks: m.remarks || '',
+    })
+  }
+
+  for (const d of openDemands.filter(isActiveOpenDemand)) {
+    const name = String(d.projectName || '').trim()
+    if (!name) continue
+    const row = ensure(name)
+    row.openPositions += Number(d.positions) || 0
+  }
+
+  return [...map.values()]
+    .map((row) => ({
+      ...row,
+      accounts: [...row.accounts].sort((a, b) => a.localeCompare(b)),
+      peopleCount: row.peopleKeys.size,
+      people: row.people.sort((a, b) =>
+        String(a.assignee || '').localeCompare(String(b.assignee || ''), undefined, {
+          sensitivity: 'base',
+        }),
+      ),
+    }))
+    .filter((row) => row.peopleCount > 0 || row.openPositions > 0 || row.assignments > 0)
+    .sort((a, b) => {
+      if (a.status !== b.status) return a.status === 'Active' ? -1 : 1
+      return b.billableFte - a.billableFte || a.pod.localeCompare(b.pod)
+    })
+}
+
 export function computeStats(teamMembers, openDemands, podRegistry = [], asOf = new Date()) {
   // Flatten assignments, then keep Active people · current window · non-retired POD
   const activeAllocations = flattenAssignments(teamMembers).filter(

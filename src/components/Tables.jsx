@@ -1,8 +1,10 @@
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import {
+  formatFte,
   getAllocationPhase,
   getAssignments,
   normalizeBillingStatus,
+  normalizePodStatus,
 } from '../utils/storage'
 
 function billingBadge(status) {
@@ -364,6 +366,271 @@ function demandSortValue(row, key) {
     default:
       return row.projectName || ''
   }
+}
+
+function projectSortValue(row, key) {
+  switch (key) {
+    case 'pod':
+      return row.pod || ''
+    case 'status':
+      return row.status || ''
+    case 'people':
+      return row.peopleCount || 0
+    case 'billable':
+      return row.billableFte || 0
+    case 'nonBillable':
+      return row.nonBillableFte || 0
+    case 'yetToBill':
+      return row.yetToBillFte || 0
+    case 'total':
+      return row.totalFte || 0
+    case 'open':
+      return row.openPositions || 0
+    default:
+      return row.pod || ''
+  }
+}
+
+export function ProjectsTable({ rows, onEditPerson, onOpenInTeam }) {
+  const { sortKey, sortDir, onSort } = useColumnSort('billable', 'desc')
+  const [expanded, setExpanded] = useState(() => new Set())
+
+  const sortedRows = useMemo(() => {
+    const list = [...rows]
+    const dir = sortDir === 'asc' ? 1 : -1
+    list.sort(
+      (a, b) =>
+        compareValues(projectSortValue(a, sortKey), projectSortValue(b, sortKey)) * dir,
+    )
+    return list
+  }, [rows, sortKey, sortDir])
+
+  function toggle(pod) {
+    setExpanded((prev) => {
+      const next = new Set(prev)
+      if (next.has(pod)) next.delete(pod)
+      else next.add(pod)
+      return next
+    })
+  }
+
+  if (!rows.length) {
+    return <div className="empty">No projects match the current filters.</div>
+  }
+
+  return (
+    <div className="table-wrap projects-table">
+      <table>
+        <thead>
+          <tr>
+            <th className="expand-col" aria-label="Expand" />
+            <SortTh label="Project" col="pod" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <SortTh
+              label="Status"
+              col="status"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <th>Account</th>
+            <SortTh
+              label="People"
+              col="people"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Billable FTE"
+              col="billable"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Non-Billable FTE"
+              col="nonBillable"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Yet to Bill FTE"
+              col="yetToBill"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Total FTE"
+              col="total"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Open demand"
+              col="open"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedRows.map((row) => {
+            const open = expanded.has(row.pod)
+            const retired = normalizePodStatus(row.status) === 'Retired'
+            return (
+              <Fragment key={row.pod}>
+                <tr className={retired ? 'row-retired' : ''}>
+                  <td>
+                    <button
+                      type="button"
+                      className={`expand-btn ${open ? 'open' : ''}`}
+                      onClick={() => toggle(row.pod)}
+                      aria-expanded={open}
+                      aria-label={open ? 'Hide people' : 'Show people'}
+                    >
+                      {open ? '▾' : '▸'}
+                    </button>
+                  </td>
+                  <td>
+                    <strong>{row.pod}</strong>
+                    <div className="muted-line">{row.assignments} assignment(s)</div>
+                  </td>
+                  <td>
+                    <span className={`badge ${retired ? 'badge-muted' : 'badge-ok'}`}>
+                      {row.status || 'Active'}
+                    </span>
+                  </td>
+                  <td>{row.accounts?.length ? row.accounts.join(', ') : '—'}</td>
+                  <td>
+                    <strong>{row.peopleCount}</strong>
+                  </td>
+                  <td>
+                    <strong className="fte-billable">{formatFte(row.billableFte)}</strong>
+                    <div className="muted-line">{row.billableCount} slots</div>
+                  </td>
+                  <td>
+                    <span>{formatFte(row.nonBillableFte)}</span>
+                    <div className="muted-line">{row.nonBillableCount} slots</div>
+                  </td>
+                  <td>
+                    <span>{formatFte(row.yetToBillFte)}</span>
+                    <div className="muted-line">{row.yetToBillCount} slots</div>
+                  </td>
+                  <td>
+                    <strong>{formatFte(row.totalFte)}</strong>
+                  </td>
+                  <td>{row.openPositions || '—'}</td>
+                  <td>
+                    <div className="row-actions">
+                      <button
+                        type="button"
+                        className="icon-btn"
+                        onClick={() => toggle(row.pod)}
+                      >
+                        {open ? 'Hide' : 'People'}
+                      </button>
+                      {onOpenInTeam ? (
+                        <button
+                          type="button"
+                          className="icon-btn"
+                          onClick={() => onOpenInTeam(row.pod)}
+                        >
+                          Team view
+                        </button>
+                      ) : null}
+                    </div>
+                  </td>
+                </tr>
+                {open ? (
+                  <tr className="project-people-row">
+                    <td colSpan={11}>
+                      {row.people.length === 0 ? (
+                        <div className="muted-line">No people linked for this filter.</div>
+                      ) : (
+                        <div className="project-people">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>Assignee</th>
+                                <th>Status</th>
+                                <th>Loc</th>
+                                <th>Role</th>
+                                <th>Billing</th>
+                                <th>Alloc</th>
+                                <th>Window</th>
+                                <th>Phase</th>
+                                <th />
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {row.people.map((p) => (
+                                <tr key={p.assignmentId || `${p.personId}-${p.role}`}>
+                                  <td>
+                                    <strong>{p.assignee || '—'}</strong>
+                                    {p.skill ? (
+                                      <div className="muted-line">{p.skill}</div>
+                                    ) : null}
+                                  </td>
+                                  <td>
+                                    <span className={`badge ${memberStatusBadge(p.status)}`}>
+                                      {p.status || 'Active'}
+                                    </span>
+                                  </td>
+                                  <td>{p.location || '—'}</td>
+                                  <td>{p.role || '—'}</td>
+                                  <td>
+                                    <span
+                                      className={`badge ${billingBadge(p.billingStatus)}`}
+                                    >
+                                      {p.billingStatus}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {p.allocation || '—'}
+                                    {p.fte ? (
+                                      <div className="muted-line">{p.fte.toFixed(2)} FTE</div>
+                                    ) : null}
+                                  </td>
+                                  <td>
+                                    {p.onboardMonth || '—'} → {p.endDate || '—'}
+                                  </td>
+                                  <td>
+                                    <span className={`badge ${phaseBadge(p.phase)}`}>
+                                      {p.phase}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {onEditPerson && p.personId ? (
+                                      <button
+                                        type="button"
+                                        className="icon-btn"
+                                        onClick={() => onEditPerson(p.personId)}
+                                      >
+                                        Edit
+                                      </button>
+                                    ) : null}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ) : null}
+              </Fragment>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 export function DemandTable({ rows, onEdit, onDelete }) {
