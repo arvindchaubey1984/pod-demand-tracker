@@ -1,11 +1,31 @@
 import { Fragment, useMemo, useState } from 'react'
 import {
+  certificationsForPerson,
   formatFte,
   getAllocationPhase,
   getAssignments,
   normalizeBillingStatus,
   normalizePodStatus,
 } from '../utils/storage'
+
+function certStatusBadge(status) {
+  const s = String(status || '').toLowerCase()
+  if (s === 'completed') return 'badge-ok'
+  if (s.includes('book')) return 'badge-info'
+  if (s === 'yts') return 'badge-muted'
+  return 'badge-warn'
+}
+
+function formatCertDate(value) {
+  if (!value) return '—'
+  const d = new Date(`${value}T00:00:00`)
+  if (Number.isNaN(d.getTime())) return value
+  return d.toLocaleDateString('en-US', {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
 
 function billingBadge(status) {
   const s = String(status || '').toLowerCase()
@@ -132,6 +152,8 @@ export function TeamTable({
   rows,
   onEdit,
   onDelete,
+  certifications = [],
+  onOpenCerts,
   viewFilters = { pod: 'All', role: 'All', phase: 'All', billing: 'All' },
 }) {
   const { sortKey, sortDir, onSort } = useColumnSort('assignee', 'asc')
@@ -245,6 +267,22 @@ export function TeamTable({
                       Showing {shown.length} of {allAssignments.length}
                     </div>
                   ) : null}
+                  {(() => {
+                    const certs = certificationsForPerson(certifications, person)
+                    if (!certs.length) return null
+                    const done = certs.filter((c) => c.status === 'Completed').length
+                    return (
+                      <button
+                        type="button"
+                        className="cert-link"
+                        onClick={() => onOpenCerts?.(person)}
+                        title="View certifications"
+                      >
+                        {done}/{certs.length} cert
+                        {certs.length === 1 ? '' : 's'}
+                      </button>
+                    )
+                  })()}
                 </td>
                 <td>
                   <span className={`badge ${memberStatusBadge(person.status)}`}>
@@ -627,6 +665,133 @@ export function ProjectsTable({ rows, onEditPerson, onOpenInTeam }) {
               </Fragment>
             )
           })}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function certSortValue(row, key) {
+  switch (key) {
+    case 'sno':
+      return Number(row.sno) || 0
+    case 'assignee':
+      return row.assignee || ''
+    case 'certification':
+      return row.certification || ''
+    case 'exam':
+      return row.tentativeExamDate || ''
+    case 'status':
+      return row.status || ''
+    case 'done':
+      return row.completionDate || ''
+    case 'linked':
+      return row.personId ? 1 : 0
+    default:
+      return row.assignee || ''
+  }
+}
+
+export function CertTable({ rows, onEdit, onDelete }) {
+  const { sortKey, sortDir, onSort } = useColumnSort('assignee', 'asc')
+
+  const sortedRows = useMemo(() => {
+    const list = [...rows]
+    const dir = sortDir === 'asc' ? 1 : -1
+    list.sort(
+      (a, b) =>
+        compareValues(certSortValue(a, sortKey), certSortValue(b, sortKey)) * dir,
+    )
+    return list
+  }, [rows, sortKey, sortDir])
+
+  if (!rows.length) {
+    return <div className="empty">No certifications match the current filters.</div>
+  }
+
+  return (
+    <div className="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <SortTh label="#" col="sno" sortKey={sortKey} sortDir={sortDir} onSort={onSort} />
+            <SortTh
+              label="Name"
+              col="assignee"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Certification to pursue"
+              col="certification"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Tentative exam date"
+              col="exam"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Status"
+              col="status"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Completion date"
+              col="done"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              label="Team link"
+              col="linked"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedRows.map((c, i) => (
+            <tr key={c.id}>
+              <td>{i + 1}</td>
+              <td>
+                <strong>{c.assignee || '—'}</strong>
+              </td>
+              <td>{c.certification || '—'}</td>
+              <td>{formatCertDate(c.tentativeExamDate)}</td>
+              <td>
+                <span className={`badge ${certStatusBadge(c.status)}`}>{c.status}</span>
+              </td>
+              <td>{formatCertDate(c.completionDate)}</td>
+              <td>
+                {c.personId ? (
+                  <span className="badge badge-ok">Linked</span>
+                ) : (
+                  <span className="badge badge-muted">Unlinked</span>
+                )}
+              </td>
+              <td>
+                <div className="row-actions">
+                  <button className="icon-btn" type="button" onClick={() => onEdit(c)}>
+                    Edit
+                  </button>
+                  <button className="icon-btn" type="button" onClick={() => onDelete(c.id)}>
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

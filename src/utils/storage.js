@@ -67,6 +67,100 @@ export function uid(prefix) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 }
 
+export const CERT_STATUSES = ['YTS', 'In progress', 'Booked Slot', 'Completed']
+
+export const CERTIFICATION_OPTIONS = [
+  'Data Engineering Associate',
+  'Data Analyst Associate',
+  'Data Engineering Professional',
+  'Generative AI Engineering',
+]
+
+/** Canonical certification progress labels. */
+export function normalizeCertStatus(status) {
+  const s = String(status || '').trim().toLowerCase()
+  if (!s) return 'YTS'
+  if (s === 'yts' || s.includes('yet to start') || s === 'not started') return 'YTS'
+  if (s.includes('book')) return 'Booked Slot'
+  if (s.includes('complete') || s === 'done' || s === 'passed') return 'Completed'
+  if (s.includes('progress') || s === 'wip' || s === 'ongoing') return 'In progress'
+  if (CERT_STATUSES.includes(String(status).trim())) return String(status).trim()
+  return 'In progress'
+}
+
+/** Normalize name for matching team members (ignore (IG)/(LoopRx) suffixes). */
+export function normalizePersonName(name) {
+  return String(name || '')
+    .replace(/\s*\([^)]*\)\s*/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+}
+
+export function findTeamMemberByName(assignee, teamMembers = []) {
+  const key = normalizePersonName(assignee)
+  if (!key) return null
+  const exact = teamMembers.find((m) => normalizePersonName(m.assignee) === key)
+  if (exact) return exact
+  return (
+    teamMembers.find((m) => {
+      const n = normalizePersonName(m.assignee)
+      return n.startsWith(key) || key.startsWith(n)
+    }) || null
+  )
+}
+
+export function createEmptyCertification(overrides = {}) {
+  return {
+    id: uid('cert'),
+    personId: '',
+    assignee: '',
+    certification: '',
+    tentativeExamDate: '',
+    status: 'YTS',
+    completionDate: '',
+    ...overrides,
+  }
+}
+
+export function normalizeCertification(c = {}, teamMembers = []) {
+  const assignee = String(c.assignee || '').trim()
+  const linked =
+    (c.personId && teamMembers.find((m) => m.id === c.personId)) ||
+    findTeamMemberByName(assignee, teamMembers)
+  return {
+    id: c.id || uid('cert'),
+    personId: linked?.id || c.personId || '',
+    assignee: linked?.assignee || assignee,
+    certification: String(c.certification || '').trim(),
+    tentativeExamDate: String(c.tentativeExamDate || '').trim(),
+    status: normalizeCertStatus(c.status),
+    completionDate: String(c.completionDate || '').trim(),
+  }
+}
+
+export function migrateCertifications(raw = [], teamMembers = []) {
+  return (Array.isArray(raw) ? raw : [])
+    .map((c) => normalizeCertification(c, teamMembers))
+    .filter((c) => c.assignee || c.certification)
+    .map((c, i) => ({ ...c, sno: String(i + 1) }))
+}
+
+export function renumberCertifications(rows = []) {
+  return rows.map((c, i) => ({ ...c, sno: String(i + 1) }))
+}
+
+export function certificationsForPerson(certifications = [], person) {
+  if (!person) return []
+  const id = person.id
+  const key = normalizePersonName(person.assignee)
+  return certifications.filter(
+    (c) =>
+      (id && c.personId === id) ||
+      (key && normalizePersonName(c.assignee) === key),
+  )
+}
+
 export function createEmptyAssignment(overrides = {}) {
   return {
     id: uid('as'),
@@ -334,10 +428,17 @@ export function loadState() {
       const openDemands = renumberDemands(
         (parsed.openDemands ?? []).map(normalizeDemand),
       )
+      const seedCerts = seed.certifications ?? []
+      const savedCerts = parsed.certifications
+      const certifications = migrateCertifications(
+        Array.isArray(savedCerts) && savedCerts.length ? savedCerts : seedCerts,
+        teamMembers,
+      )
       return {
         ...parsed,
         teamMembers,
         openDemands,
+        certifications,
         podRegistry: buildPodRegistry(teamMembers, parsed.podRegistry ?? []),
       }
     }
@@ -352,6 +453,7 @@ export function loadState() {
     leadership: seed.leadership ?? [],
     teamMembers,
     openDemands,
+    certifications: migrateCertifications(seed.certifications ?? [], teamMembers),
     podRegistry: buildPodRegistry(teamMembers, seed.podRegistry ?? []),
   }
 }

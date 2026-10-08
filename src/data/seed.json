@@ -1196,5 +1196,127 @@
                             "demandOpenDate":  "2026-08-01",
                             "onboardedMember":  ""
                         }
-                    ]
+                    ],
+    "certifications": [
+      {
+        "id": "cert-1",
+        "assignee": "Sateesh Sappa",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-10-30",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-2",
+        "assignee": "Rama Devi Ganireddy",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-10-30",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-3",
+        "assignee": "Lakshmi B",
+        "certification": "Data Analyst Associate",
+        "tentativeExamDate": "2026-10-15",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-4",
+        "assignee": "Kiran Chandramouli",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-08-23",
+        "status": "Completed",
+        "completionDate": "2026-08-23"
+      },
+      {
+        "id": "cert-5",
+        "assignee": "Supritha Ramaswamy",
+        "certification": "Data Analyst Associate",
+        "tentativeExamDate": "2026-11-15",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-6",
+        "assignee": "Abhiram Mudumba",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-10-30",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-7",
+        "assignee": "Balaraju Vankayalapati",
+        "certification": "Generative AI Engineering",
+        "tentativeExamDate": "2026-11-20",
+        "status": "YTS",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-8",
+        "assignee": "Sai Abhinav Sakilam",
+        "certification": "Data Engineering Professional",
+        "tentativeExamDate": "2026-12-10",
+        "status": "Booked Slot",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-9",
+        "assignee": "Vinay Medipally",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-10-30",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-10",
+        "assignee": "Padmaja Pydivada",
+        "certification": "Data Analyst Associate",
+        "tentativeExamDate": "2026-11-05",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-11",
+        "assignee": "Sri Divya Bokka",
+        "certification": "Data Analyst Associate",
+        "tentativeExamDate": "2026-10-20",
+        "status": "Booked Slot",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-12",
+        "assignee": "Mahesh Bodasangi",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-11-28",
+        "status": "YTS",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-13",
+        "assignee": "Radhika Bolisetty",
+        "certification": "Generative AI Engineering",
+        "tentativeExamDate": "2026-12-05",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-14",
+        "assignee": "Sivaji Vadlapatiaji",
+        "certification": "Data Engineering Professional",
+        "tentativeExamDate": "2026-12-15",
+        "status": "In progress",
+        "completionDate": ""
+      },
+      {
+        "id": "cert-15",
+        "assignee": "Uday Kiran Adluri",
+        "certification": "Data Engineering Associate",
+        "tentativeExamDate": "2026-10-30",
+        "status": "In progress",
+        "completionDate": ""
+      }
+    ]
 }

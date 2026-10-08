@@ -1,6 +1,9 @@
 import {
+  CERT_STATUSES,
+  CERTIFICATION_OPTIONS,
   createEmptyAssignment,
   normalizeBillingStatus,
+  normalizeCertStatus,
   normalizeMemberStatus,
 } from '../utils/storage'
 
@@ -215,6 +218,84 @@ export function TeamForm({ value, onChange, pods }) {
           <option value="Leadership" />
         </datalist>
       </div>
+    </div>
+  )
+}
+
+export function CertForm({ value, onChange, teamMembers = [] }) {
+  const set = (key, v) => onChange({ ...value, [key]: v })
+  const names = [...new Set(teamMembers.map((m) => m.assignee).filter(Boolean))].sort(
+    (a, b) => a.localeCompare(b),
+  )
+
+  function onPickAssignee(name) {
+    const person = teamMembers.find((m) => m.assignee === name)
+    onChange({
+      ...value,
+      assignee: name,
+      personId: person?.id || '',
+    })
+  }
+
+  return (
+    <div className="form-grid">
+      <label>
+        Team member
+        <input
+          list="cert-assignee-options"
+          value={value.assignee || ''}
+          onChange={(e) => onPickAssignee(e.target.value)}
+          placeholder="Select or type name"
+        />
+        <datalist id="cert-assignee-options">
+          {names.map((n) => (
+            <option key={n} value={n} />
+          ))}
+        </datalist>
+      </label>
+      <label>
+        Certification to pursue
+        <input
+          list="cert-name-options"
+          value={value.certification || ''}
+          onChange={(e) => set('certification', e.target.value)}
+          placeholder="e.g. Data Engineering Associate"
+        />
+        <datalist id="cert-name-options">
+          {CERTIFICATION_OPTIONS.map((c) => (
+            <option key={c} value={c} />
+          ))}
+        </datalist>
+      </label>
+      <label>
+        Tentative exam date
+        <input
+          type="date"
+          value={value.tentativeExamDate || ''}
+          onChange={(e) => set('tentativeExamDate', e.target.value)}
+        />
+      </label>
+      <label>
+        Status
+        <select
+          value={normalizeCertStatus(value.status)}
+          onChange={(e) => set('status', e.target.value)}
+        >
+          {CERT_STATUSES.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        Completion date
+        <input
+          type="date"
+          value={value.completionDate || ''}
+          onChange={(e) => set('completionDate', e.target.value)}
+        />
+      </label>
     </div>
   )
 }

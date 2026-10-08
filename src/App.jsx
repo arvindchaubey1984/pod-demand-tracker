@@ -1,25 +1,32 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from './auth/AuthContext'
 import CommercialPanel from './components/CommercialPanel'
-import { DemandForm, Modal, TeamForm } from './components/Forms'
-import { DemandTable, ProjectsTable, TeamTable } from './components/Tables'
+import { CertForm, DemandForm, Modal, TeamForm } from './components/Forms'
+import { CertTable, DemandTable, ProjectsTable, TeamTable } from './components/Tables'
 import { exportWorkbook, importWorkbook } from './utils/excel'
 import {
+  CERT_STATUSES,
+  CERTIFICATION_OPTIONS,
   buildPodRegistry,
   computeProjectSummaries,
   computeStats,
   countAssignments,
   createEmptyAssignment,
+  createEmptyCertification,
   flattenAssignments,
   formatFte,
   getAllocationPhase,
   getAssignments,
   isActiveOpenDemand,
   loadState,
+  migrateCertifications,
   migrateTeamMembers,
   normalizeBillingStatus,
+  normalizeCertStatus,
   normalizeMemberStatus,
+  normalizePersonName,
   normalizePodStatus,
+  renumberCertifications,
   renumberDemands,
   renumberTeamMembers,
   resetState,
@@ -68,6 +75,9 @@ export default function App() {
   const [projectFilter, setProjectFilter] = useState('All')
   const [locationFilter, setLocationFilter] = useState('All')
   const [demandStatusFilter, setDemandStatusFilter] = useState('Active')
+  const [certStatusFilter, setCertStatusFilter] = useState('All')
+  const [certNameFilter, setCertNameFilter] = useState('All')
+  const [certAssigneeFilter, setCertAssigneeFilter] = useState('All')
   const [modal, setModal] = useState(null)
   const [draft, setDraft] = useState(null)
   const [toast, setToast] = useState('')
@@ -304,6 +314,61 @@ export default function App() {
     )
   }, [projectSummaries])
 
+  const certifications = useMemo(
+    () => migrateCertifications(state.certifications || [], state.teamMembers),
+    [state.certifications, state.teamMembers],
+  )
+
+  const certNames = useMemo(() => {
+    const fromData = uniqueSorted(certifications, 'certification')
+    return [...new Set([...CERTIFICATION_OPTIONS, ...fromData])].sort((a, b) =>
+      a.localeCompare(b),
+    )
+  }, [certifications])
+
+  const certAssignees = useMemo(
+    () => uniqueSorted(certifications, 'assignee'),
+    [certifications],
+  )
+
+  const filteredCerts = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return certifications.filter((c) => {
+      if (certStatusFilter !== 'All' && normalizeCertStatus(c.status) !== certStatusFilter) {
+        return false
+      }
+      if (certNameFilter !== 'All' && c.certification !== certNameFilter) return false
+      if (certAssigneeFilter !== 'All') {
+        if (normalizePersonName(c.assignee) !== normalizePersonName(certAssigneeFilter)) {
+          return false
+        }
+      }
+      if (!q) return true
+      return [c.assignee, c.certification, c.status, c.tentativeExamDate, c.completionDate]
+        .join(' ')
+        .toLowerCase()
+        .includes(q)
+    })
+  }, [
+    certifications,
+    certStatusFilter,
+    certNameFilter,
+    certAssigneeFilter,
+    query,
+  ])
+
+  const certStats = useMemo(() => {
+    const counts = { total: certifications.length, completed: 0, inProgress: 0, booked: 0, yts: 0 }
+    for (const c of certifications) {
+      const s = normalizeCertStatus(c.status)
+      if (s === 'Completed') counts.completed += 1
+      else if (s === 'Booked Slot') counts.booked += 1
+      else if (s === 'YTS') counts.yts += 1
+      else counts.inProgress += 1
+    }
+    return counts
+  }, [certifications])
+
   function notify(message) {
     setToast(message)
   }
@@ -345,6 +410,33 @@ export default function App() {
     setModal({ type: 'pods' })
   }
 
+  function openAddCert(person) {
+    setDraft(
+      createEmptyCertification(
+        person
+          ? { assignee: person.assignee || '', personId: person.id || '' }
+          : {},
+      ),
+    )
+    setModal({ type: 'cert', mode: 'add' })
+  }
+
+  function openEditCert(row) {
+    setDraft({ ...row })
+    setModal({ type: 'cert', mode: 'edit', id: row.id })
+  }
+
+  function deleteCert(id) {
+    if (!window.confirm('Remove this certification record?')) return
+    setState((prev) => ({
+      ...prev,
+      certifications: renumberCertifications(
+        (prev.certifications || []).filter((c) => c.id !== id),
+      ),
+    }))
+    notify('Certification removed')
+  }
+
   function setPodDraftStatus(name, status) {
     setDraft((prev) => ({
       ...prev,
@@ -362,6 +454,49 @@ export default function App() {
         podRegistry: buildPodRegistry(prev.teamMembers, draft.pods || []),
       }))
       notify('POD statuses saved')
+      setModal(null)
+      setDraft(null)
+      return
+    }
+    if (modal.type === 'cert') {
+      if (!draft.assignee?.trim()) {
+        notify('Team member name is required')
+        return
+      }
+      if (!draft.certification?.trim()) {
+        notify('Certification name is required')
+        return
+      }
+      setState((prev) => {
+        const members = prev.teamMembers
+        const normalized = migrateCertifications(
+          [
+            {
+              ...draft,
+              id: modal.mode === 'edit' ? modal.id : uid('cert'),
+              status: normalizeCertStatus(draft.status),
+              completionDate:
+                normalizeCertStatus(draft.status) === 'Completed'
+                  ? draft.completionDate || draft.tentativeExamDate || ''
+                  : draft.completionDate || '',
+            },
+          ],
+          members,
+        )[0]
+        const next =
+          modal.mode === 'add'
+            ? [...(prev.certifications || []), normalized]
+            : (prev.certifications || []).map((c) =>
+                c.id === modal.id ? { ...c, ...normalized, id: modal.id } : c,
+              )
+        return {
+          ...prev,
+          certifications: renumberCertifications(
+            migrateCertifications(next, members),
+          ),
+        }
+      })
+      notify(modal.mode === 'add' ? 'Certification added' : 'Certification updated')
       setModal(null)
       setDraft(null)
       return
@@ -395,6 +530,7 @@ export default function App() {
         return {
           ...prev,
           teamMembers: migrated,
+          certifications: migrateCertifications(prev.certifications || [], migrated),
           podRegistry: buildPodRegistry(migrated, prev.podRegistry || []),
         }
       })
@@ -457,9 +593,17 @@ export default function App() {
           : prev.leadership,
         teamMembers: imported.teamMembers,
         openDemands: imported.openDemands,
+        certifications:
+          imported.certifications?.length
+            ? imported.certifications
+            : migrateCertifications(prev.certifications || [], imported.teamMembers),
         podRegistry: buildPodRegistry(imported.teamMembers, prev.podRegistry || []),
       }))
-      notify(`Imported ${imported.teamMembers.length} team + ${imported.openDemands.length} demands`)
+      const certCount = imported.certifications?.length || 0
+      notify(
+        `Imported ${imported.teamMembers.length} team + ${imported.openDemands.length} demands` +
+          (certCount ? ` + ${certCount} certifications` : ''),
+      )
     } catch (err) {
       console.error(err)
       notify('Import failed. Use the Team Members / Open Demands workbook.')
@@ -692,6 +836,15 @@ export default function App() {
         </button>
         <button
           type="button"
+          className={`tab ${tab === 'certs' ? 'active' : ''}`}
+          onClick={() => setTab('certs')}
+        >
+          Certifications ({certStats.total}
+          {certStats.completed ? ` · ${certStats.completed} done` : ''}
+          )
+        </button>
+        <button
+          type="button"
           className={`tab ${tab === 'demand' ? 'active' : ''}`}
           onClick={() => setTab('demand')}
         >
@@ -802,6 +955,14 @@ export default function App() {
             rows={filteredTeam}
             onEdit={openEditTeam}
             onDelete={deleteTeam}
+            certifications={certifications}
+            onOpenCerts={(person) => {
+              setCertAssigneeFilter(person.assignee || 'All')
+              setCertStatusFilter('All')
+              setCertNameFilter('All')
+              setQuery('')
+              setTab('certs')
+            }}
             viewFilters={{
               pod: podFilter,
               role: roleFilter,
@@ -882,6 +1043,79 @@ export default function App() {
             }}
           />
         </>
+      ) : tab === 'certs' ? (
+        <>
+          <div className="toolbar">
+            <div className="filters">
+              <input
+                className="search"
+                placeholder="Search name, certification, status..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <select
+                className="field"
+                value={certAssigneeFilter}
+                onChange={(e) => setCertAssigneeFilter(e.target.value)}
+              >
+                <option value="All">All people</option>
+                {certAssignees.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="field"
+                value={certNameFilter}
+                onChange={(e) => setCertNameFilter(e.target.value)}
+              >
+                <option value="All">All certifications</option>
+                {certNames.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="field"
+                value={certStatusFilter}
+                onChange={(e) => setCertStatusFilter(e.target.value)}
+              >
+                <option value="All">All statuses</option>
+                {CERT_STATUSES.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="toolbar-actions project-totals">
+              <span className="chip">
+                In progress <b>{certStats.inProgress}</b>
+              </span>
+              <span className="chip">
+                Booked <b>{certStats.booked}</b>
+              </span>
+              <span className="chip">
+                Completed <b>{certStats.completed}</b>
+              </span>
+              <button className="btn btn-primary" type="button" onClick={() => openAddCert()}>
+                + Add certification
+              </button>
+            </div>
+          </div>
+          <p className="panel-note" style={{ marginTop: 0 }}>
+            Certifications link to team members by name. Linked rows match a person in Team
+            Members (e.g. Lakshmi B → Lakshmi B (LoopRx)). Import a Certifications sheet via
+            Excel to bulk-load.
+          </p>
+          <CertTable
+            rows={filteredCerts}
+            onEdit={openEditCert}
+            onDelete={deleteCert}
+          />
+        </>
       ) : (
         <>
           <div className="toolbar">
@@ -946,13 +1180,17 @@ export default function App() {
           title={
             modal.type === 'pods'
               ? 'Manage POD status'
-              : modal.type === 'team'
+              : modal.type === 'cert'
                 ? modal.mode === 'add'
-                  ? 'Add team member'
-                  : 'Edit team member'
-                : modal.mode === 'add'
-                  ? 'Add open demand'
-                  : 'Edit open demand'
+                  ? 'Add certification'
+                  : 'Edit certification'
+                : modal.type === 'team'
+                  ? modal.mode === 'add'
+                    ? 'Add team member'
+                    : 'Edit team member'
+                  : modal.mode === 'add'
+                    ? 'Add open demand'
+                    : 'Edit open demand'
           }
           onClose={() => {
             setModal(null)
@@ -998,6 +1236,12 @@ export default function App() {
                 ))}
               </div>
             </div>
+          ) : modal.type === 'cert' ? (
+            <CertForm
+              value={draft}
+              onChange={setDraft}
+              teamMembers={state.teamMembers}
+            />
           ) : modal.type === 'team' ? (
             <TeamForm value={draft} onChange={setDraft} pods={pods} />
           ) : (

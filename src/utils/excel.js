@@ -5,10 +5,30 @@ import {
   DEFAULT_TEAM_END_DATE,
   DEFAULT_TEAM_LOCATION,
   flattenAssignments,
+  migrateCertifications,
   migrateTeamMembers,
+  normalizeCertStatus,
   normalizeMemberStatus,
   uid,
 } from './storage'
+
+function excelDate(value) {
+  if (value == null || value === '') return ''
+  if (typeof value === 'number' && XLSX.SSF?.parse_date_code) {
+    const d = XLSX.SSF.parse_date_code(value)
+    if (!d) return String(value)
+    const mm = String(d.m).padStart(2, '0')
+    const dd = String(d.d).padStart(2, '0')
+    return `${d.y}-${mm}-${dd}`
+  }
+  const s = clean(value)
+  // MM/DD/YYYY → YYYY-MM-DD
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/)
+  if (m) {
+    return `${m[3]}-${m[1].padStart(2, '0')}-${m[2].padStart(2, '0')}`
+  }
+  return s
+}
 
 function clean(value) {
   return String(value ?? '')
@@ -16,7 +36,7 @@ function clean(value) {
     .trim()
 }
 
-export function exportWorkbook({ teamMembers, openDemands, leadership }) {
+export function exportWorkbook({ teamMembers, openDemands, leadership, certifications = [] }) {
   // One Excel row per assignment (flat) — re-groups on import
   const flat = flattenAssignments(teamMembers)
   const teamRows = flat.map((m, i) => ({
@@ -53,11 +73,22 @@ export function exportWorkbook({ teamMembers, openDemands, leadership }) {
     Status: d.status || 'Open',
   }))
 
+  const certRows = (certifications || []).map((c, i) => ({
+    'S.No': c.sno || i + 1,
+    Name: c.assignee,
+    'Certification to Pursue': c.certification,
+    'Tentative Exam Date': c.tentativeExamDate,
+    Status: c.status,
+    'Completion Date': c.completionDate || '',
+  }))
+
   const wb = XLSX.utils.book_new()
   const teamSheet = XLSX.utils.json_to_sheet(teamRows)
   XLSX.utils.book_append_sheet(wb, teamSheet, 'Team Members')
   const demandSheet = XLSX.utils.json_to_sheet(demandRows)
   XLSX.utils.book_append_sheet(wb, demandSheet, 'Open Demands')
+  const certSheet = XLSX.utils.json_to_sheet(certRows)
+  XLSX.utils.book_append_sheet(wb, certSheet, 'Certifications')
   const leadSheet = XLSX.utils.json_to_sheet(leadershipRows)
   XLSX.utils.book_append_sheet(wb, leadSheet, 'Leadership')
   XLSX.writeFile(wb, `PoD-Team-Demand-${new Date().toISOString().slice(0, 10)}.xlsx`)
@@ -72,6 +103,10 @@ export async function importWorkbook(file) {
   const demandSheet =
     wb.Sheets['Open Demands'] || wb.Sheets[wb.SheetNames[1]]
   const leadSheet = wb.Sheets['Leadership']
+  const certSheet =
+    wb.Sheets.Certifications ||
+    wb.Sheets.Certification ||
+    wb.Sheets['Certification Details']
 
   const teamRaw = XLSX.utils.sheet_to_json(teamSheet, { defval: '' })
   const demandRaw = demandSheet
@@ -79,6 +114,9 @@ export async function importWorkbook(file) {
     : []
   const leadRaw = leadSheet
     ? XLSX.utils.sheet_to_json(leadSheet, { defval: '' })
+    : []
+  const certRaw = certSheet
+    ? XLSX.utils.sheet_to_json(certSheet, { defval: '' })
     : []
 
   const flatMembers = teamRaw
@@ -134,5 +172,26 @@ export async function importWorkbook(file) {
     }))
     .filter((r) => r.role || r.assignee)
 
-  return { teamMembers, openDemands, leadership }
+  const certifications = migrateCertifications(
+    certRaw
+      .map((row) => ({
+        id: uid('cert'),
+        assignee: clean(row.Name ?? row.Assignee ?? row['Team Member'] ?? ''),
+        certification: clean(
+          row['Certification to Pursue'] ??
+            row.Certification ??
+            row['Certification Name'] ??
+            '',
+        ),
+        tentativeExamDate: excelDate(
+          row['Tentative Exam Date'] ?? row['Exam Date'] ?? '',
+        ),
+        status: normalizeCertStatus(clean(row.Status ?? '')),
+        completionDate: excelDate(row['Completion Date'] ?? ''),
+      }))
+      .filter((r) => r.assignee || r.certification),
+    teamMembers,
+  )
+
+  return { teamMembers, openDemands, leadership, certifications }
 }
