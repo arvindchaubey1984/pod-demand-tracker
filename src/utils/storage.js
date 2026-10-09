@@ -1,7 +1,8 @@
 import seed from '../data/seed.json'
 import { inferSkillFromRole } from './skills'
 
-const STORAGE_KEY = 'winfo-pod-demand-v1'
+// Bump when published seed should replace stale browser caches on both hosts.
+const STORAGE_KEY = 'winfo-pod-demand-v2'
 export const DEFAULT_DEMAND_OPEN_DATE = '2026-08-01'
 export const DEFAULT_TEAM_END_DATE = 'Dec-2026'
 export const DEFAULT_TEAM_ACCOUNT = 'McKesson'

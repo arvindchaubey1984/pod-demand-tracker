@@ -1,1322 +1,2095 @@
-﻿{
-    "exportedAt":  "2026-08-10T10:11:38.7868688+05:30",
-    "source":  "PoD - Team Member Mapping.xlsx",
-    "leadership":  [
-                       {
-                           "id":  "ld-2",
-                           "role":  "Executive Sponsor",
-                           "assignee":  "Nagaraja Krovi",
-                           "allocation":  "Shared"
-                       },
-                       {
-                           "id":  "ld-3",
-                           "role":  "Engagement Partner",
-                           "assignee":  "Lalit Barik",
-                           "allocation":  "Shared"
-                       },
-                       {
-                           "id":  "ld-4",
-                           "role":  "Delivery Lead",
-                           "assignee":  "Arvind Chaubey",
-                           "allocation":  "Shared"
-                       }
-                   ],
-    "teamMembers":  [
-                        {
-                            "id":  "tm-2",
-                            "sno":  "1",
-                            "pod":  "Velocity",
-                            "role":  "Technical Manager",
-                            "assignee":  "Praveen Bulusu",
-                            "billingStatus":  "Billable",
-                            "allocation":  "80%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-3",
-                            "sno":  "2",
-                            "pod":  "Velocity",
-                            "role":  "Scrum Master",
-                            "assignee":  "Arjun Uppu",
-                            "billingStatus":  "Billable",
-                            "allocation":  "50%",
-                            "onboardMonth":  "May 2026, Eswar in April",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-4",
-                            "sno":  "3",
-                            "pod":  "Velocity",
-                            "role":  "Solution Architect - Onsite",
-                            "assignee":  "Vinay Kaparthi",
-                            "billingStatus":  "Billable",
-                            "allocation":  "30%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-5",
-                            "sno":  "4",
-                            "pod":  "Velocity",
-                            "role":  "DevOps Solution Architect",
-                            "assignee":  "Venkata Muthadi",
-                            "billingStatus":  "Billable",
-                            "allocation":  "20%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-6",
-                            "sno":  "5",
-                            "pod":  "Velocity",
-                            "role":  "Business Analyst",
-                            "assignee":  "Silpa Bitra",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-7",
-                            "sno":  "6",
-                            "pod":  "Velocity",
-                            "role":  "Senior Data Engg 1",
-                            "assignee":  "Ramesh Vanakayalapati",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-8",
-                            "sno":  "7",
-                            "pod":  "Velocity",
-                            "role":  "Senior Data Engg 2",
-                            "assignee":  "Sai Pratusha Karri",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-9",
-                            "sno":  "8",
-                            "pod":  "Velocity",
-                            "role":  "Sr QA Engineer",
-                            "assignee":  "Padmaja Pydivada",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-10",
-                            "sno":  "9",
-                            "pod":  "Velocity",
-                            "role":  "Sr Report Developer 1",
-                            "assignee":  "Sri Divya Bokka",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-11",
-                            "sno":  "10",
-                            "pod":  "Velocity",
-                            "role":  "Senior DevOps - 01",
-                            "assignee":  "Sumera Banu",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-12",
-                            "sno":  "11",
-                            "pod":  "Velocity",
-                            "role":  "Quality Engineer",
-                            "assignee":  "Sai Jayanth M",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-13",
-                            "sno":  "12",
-                            "pod":  "Velocity",
-                            "role":  "UX Engineer",
-                            "assignee":  "Vinay Medipally",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-14",
-                            "sno":  "13",
-                            "pod":  "Velocity",
-                            "role":  "Report Developer 3",
-                            "assignee":  "Rushmitha P",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-15",
-                            "sno":  "14",
-                            "pod":  "Velocity",
-                            "role":  "Data Engg 3",
-                            "assignee":  "K Rama Reddy",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-16",
-                            "sno":  "15",
-                            "pod":  "R\u0026D",
-                            "role":  "Solution Architect - Onsite",
-                            "assignee":  "Vinay Kaparthi",
-                            "billingStatus":  "Billable",
-                            "allocation":  "70%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-17",
-                            "sno":  "16",
-                            "pod":  "R\u0026D",
-                            "role":  "Technical Manager",
-                            "assignee":  "Vinod patangey",
-                            "billingStatus":  "Billable",
-                            "allocation":  "50%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-18",
-                            "sno":  "17",
-                            "pod":  "R\u0026D",
-                            "role":  "DevOps Solution Architect",
-                            "assignee":  "Venkata Muthadi",
-                            "billingStatus":  "Billable",
-                            "allocation":  "20%",
-                            "onboardMonth":  "Sachin is helping here",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-19",
-                            "sno":  "18",
-                            "pod":  "R\u0026D",
-                            "role":  "UI \u0026 Backend Developer",
-                            "assignee":  "Upendra G",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-20",
-                            "sno":  "19",
-                            "pod":  "R\u0026D",
-                            "role":  "DBx + BI Report",
-                            "assignee":  "Praveen Jagarapu",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-21",
-                            "sno":  "20",
-                            "pod":  "R\u0026D",
-                            "role":  "Data Prod/BA",
-                            "assignee":  "Abhiram Mudumba",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-22",
-                            "sno":  "21",
-                            "pod":  "R\u0026D",
-                            "role":  "S/W AI Engineer",
-                            "assignee":  "Sai Abhinav Sakilam",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-23",
-                            "sno":  "22",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Technical Manager",
-                            "assignee":  "Vinod patangey",
-                            "billingStatus":  "Billable",
-                            "allocation":  "50%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-24",
-                            "sno":  "23",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Scrum Master",
-                            "assignee":  "Arjun Uppu",
-                            "billingStatus":  "Billable",
-                            "allocation":  "60%",
-                            "onboardMonth":  "May-26",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-25",
-                            "sno":  "24",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "DevOps Solution Architect",
-                            "assignee":  "Venkata Muthadi",
-                            "billingStatus":  "Billable",
-                            "allocation":  "20%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-26",
-                            "sno":  "25",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Business Analyst",
-                            "assignee":  "Swapna Katukam",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "Jun-26",
-                            "remarks":  "Divya K in April /May",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-27",
-                            "sno":  "26",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Senior Data Engg",
-                            "assignee":  "Mahesh Bodasangi",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-28",
-                            "sno":  "27",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Data Engg",
-                            "assignee":  "Sai Kotesh",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "Replacement with Madhusudan on hold",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-29",
-                            "sno":  "28",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Sr QA Engineer",
-                            "assignee":  "Radhika Bolisetty",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-30",
-                            "sno":  "29",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "QA Engineer",
-                            "assignee":  "Supritha Ramaswamy",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-31",
-                            "sno":  "30",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Senior DevOps - 01",
-                            "assignee":  "Sivaji Vadlapatiaji",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-32",
-                            "sno":  "31",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Front End Developer (React)",
-                            "assignee":  "Reyesa B",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "May-26",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-33",
-                            "sno":  "32",
-                            "pod":  "LoopRx (VRR, MENA, MONA)",
-                            "role":  "Backend Developer",
-                            "assignee":  "Uday Kiran Adluri",
-                            "billingStatus":  "Billable",
-                            "allocation":  "100%",
-                            "onboardMonth":  "May-26",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-34",
-                            "sno":  "33",
-                            "pod":  "UA",
-                            "role":  "Onshore Lead/POC (Partial)",
-                            "assignee":  "Vamsi N",
-                            "billingStatus":  "Yet to Start",
-                            "allocation":  "20%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-35",
-                            "sno":  "34",
-                            "pod":  "UA",
-                            "role":  "Sr BA",
-                            "assignee":  "Divya K",
-                            "billingStatus":  "Yet to Start",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-36",
-                            "sno":  "35",
-                            "pod":  "UA",
-                            "role":  "Data Engineer",
-                            "assignee":  "Rafi Sheik",
-                            "billingStatus":  "Yet to Start",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-37",
-                            "sno":  "36",
-                            "pod":  "UA",
-                            "role":  ".Net Engineer",
-                            "assignee":  "Phaneendra S",
-                            "billingStatus":  "Yet to Start",
-                            "allocation":  "100%",
-                            "onboardMonth":  "",
-                            "remarks":  "Needs Replacement",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-38",
-                            "sno":  "37",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-39",
-                            "sno":  "38",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-40",
-                            "sno":  "39",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-41",
-                            "sno":  "40",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-42",
-                            "sno":  "41",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-43",
-                            "sno":  "42",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-44",
-                            "sno":  "43",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-45",
-                            "sno":  "44",
-                            "pod":  "IG",
-                            "role":  "",
-                            "assignee":  "",
-                            "billingStatus":  "",
-                            "allocation":  "",
-                            "onboardMonth":  "",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-46",
-                            "sno":  "45",
-                            "pod":  "Shadow",
-                            "role":  "Backend Developer",
-                            "assignee":  "Chaitanya T",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-47",
-                            "sno":  "46",
-                            "pod":  "Shadow",
-                            "role":  "DevOps Engineer",
-                            "assignee":  "Shiva Sundilla",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "April 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-48",
-                            "sno":  "47",
-                            "pod":  "Shadow",
-                            "role":  "Frontend Developer",
-                            "assignee":  "Balaraju Vankayalapati",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "(R \u0026 D)",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-49",
-                            "sno":  "48",
-                            "pod":  "Shadow",
-                            "role":  "Scrum Master",
-                            "assignee":  "Lavanya Tadepalli",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "R\u0026D",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-50",
-                            "sno":  "49",
-                            "pod":  "Shadow",
-                            "role":  "Data Engineer",
-                            "assignee":  "Ajay Durga",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-51",
-                            "sno":  "50",
-                            "pod":  "Shadow",
-                            "role":  "Frontend Developer",
-                            "assignee":  "Sravani K",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "Will move to Velocity in Aug",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-52",
-                            "sno":  "51",
-                            "pod":  "Shadow",
-                            "role":  "Sai Ajay",
-                            "assignee":  "Backend Developer",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-53",
-                            "sno":  "52",
-                            "pod":  "Shadow",
-                            "role":  "QA Engineer",
-                            "assignee":  "Ashish V (IG)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-54",
-                            "sno":  "53",
-                            "pod":  "Shadow",
-                            "role":  "Data Engineer (IG)",
-                            "assignee":  "Jakka Sreehari (IG)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "May 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-55",
-                            "sno":  "54",
-                            "pod":  "Shadow",
-                            "role":  "Frontend Developer",
-                            "assignee":  "Rupesh (IG)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "June 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-56",
-                            "sno":  "55",
-                            "pod":  "Shadow",
-                            "role":  "Frontend Developer",
-                            "assignee":  "Suvarna (IG)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "July 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-57",
-                            "sno":  "56",
-                            "pod":  "Shadow",
-                            "role":  "Backend Developer",
-                            "assignee":  "Jagadeesh (LoopRx)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "June 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-58",
-                            "sno":  "57",
-                            "pod":  "Shadow",
-                            "role":  "QA Engineer",
-                            "assignee":  "Eshvi S (LoopRx)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "June 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        },
-                        {
-                            "id":  "tm-59",
-                            "sno":  "58",
-                            "pod":  "Shadow",
-                            "role":  "Business Analyst",
-                            "assignee":  "Lakshmi B (LoopRx)",
-                            "billingStatus":  "Non-Billable",
-                            "allocation":  "",
-                            "onboardMonth":  "June 2026",
-                            "remarks":  "",
-                            "account":  "McKesson",
-                            "location":  "India",
-                            "endDate":  "Dec-2026"
-                        }
-                    ],
-    "openDemands":  [
-                        {
-                            "id":  "od-2",
-                            "sno":  "1",
-                            "projectName":  "MHx",
-                            "role":  "Transformation Lead",
-                            "location":  "USA",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-3",
-                            "sno":  "2",
-                            "projectName":  "MHx",
-                            "role":  "DBx Data Architect",
-                            "location":  "USA",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-4",
-                            "sno":  "3",
-                            "projectName":  "MHx",
-                            "role":  "Full Stack Engineer (C#)",
-                            "location":  "USA",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-5",
-                            "sno":  "4",
-                            "projectName":  "MHx",
-                            "role":  "BA",
-                            "location":  "USA",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-6",
-                            "sno":  "5",
-                            "projectName":  "MHx",
-                            "role":  "Data Engg 1",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-7",
-                            "sno":  "6",
-                            "projectName":  "MHx",
-                            "role":  "AI Engg 1",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-8",
-                            "sno":  "7",
-                            "projectName":  "MHx",
-                            "role":  "Data Engg 2",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-9",
-                            "sno":  "8",
-                            "projectName":  "MHx",
-                            "role":  "Automation Test Engg",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-10",
-                            "sno":  "9",
-                            "projectName":  "IG",
-                            "role":  "Databricks Solution Architect",
-                            "location":  "USA",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-11",
-                            "sno":  "10",
-                            "projectName":  "IG",
-                            "role":  "Databricks Solution Architect",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-12",
-                            "sno":  "11",
-                            "projectName":  "IG",
-                            "role":  "BA with Scrum Master",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-13",
-                            "sno":  "12",
-                            "projectName":  "IG",
-                            "role":  "PowerBI Developer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-14",
-                            "sno":  "13",
-                            "projectName":  "IG",
-                            "role":  "Databricks Engineer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-15",
-                            "sno":  "14",
-                            "projectName":  "IG",
-                            "role":  "Databricks Engineer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-16",
-                            "sno":  "15",
-                            "projectName":  "IG",
-                            "role":  "Full Stack .Net/React Developer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-17",
-                            "sno":  "16",
-                            "projectName":  "IG",
-                            "role":  "DevOps Engineer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-18",
-                            "sno":  "17",
-                            "projectName":  "IG",
-                            "role":  "ETL QA Tester",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-19",
-                            "sno":  "18",
-                            "projectName":  "TGG",
-                            "role":  ".Net - Technical Lead",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-20",
-                            "sno":  "19",
-                            "projectName":  "Statestreet",
-                            "role":  "Solution Architect / POC Lead",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-21",
-                            "sno":  "20",
-                            "projectName":  "Statestreet",
-                            "role":  "Agentic AI / LLM Engineer (Lead)",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-22",
-                            "sno":  "21",
-                            "projectName":  "Statestreet",
-                            "role":  "Backend / MCP Developer (Python or .NET)",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-23",
-                            "sno":  "22",
-                            "projectName":  "Statestreet",
-                            "role":  "Data / RAG Engineer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-24",
-                            "sno":  "23",
-                            "projectName":  "Statestreet",
-                            "role":  "CRIMS / CRD Functional SME",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-25",
-                            "sno":  "24",
-                            "projectName":  "Statestreet",
-                            "role":  "Full-stack / Front-end Developer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-26",
-                            "sno":  "25",
-                            "projectName":  "Statestreet",
-                            "role":  "Azure Cloud / DevOps Engineer",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-27",
-                            "sno":  "26",
-                            "projectName":  "Statestreet",
-                            "role":  "QA Lead (From WinfoTest)",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-28",
-                            "sno":  "27",
-                            "projectName":  "",
-                            "role":  "TPM",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-29",
-                            "sno":  "28",
-                            "projectName":  "",
-                            "role":  "TPM",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-30",
-                            "sno":  "29",
-                            "projectName":  "UA",
-                            "role":  ".NET+ React JS",
-                            "location":  "India",
-                            "newOrReplacement":  "Replacement of Phaneendra",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        },
-                        {
-                            "id":  "od-31",
-                            "sno":  "30",
-                            "projectName":  "IG",
-                            "role":  ".NET",
-                            "location":  "India",
-                            "newOrReplacement":  "New",
-                            "positions":  1,
-                            "status":  "Open",
-                            "demandOpenDate":  "2026-08-01",
-                            "onboardedMember":  ""
-                        }
-                    ],
-    "certifications": [
-      {
-        "id": "cert-1",
-        "assignee": "Sateesh Sappa",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-10-30",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-2",
-        "assignee": "Rama Devi Ganireddy",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-10-30",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-3",
-        "assignee": "Lakshmi B",
-        "certification": "Data Analyst Associate",
-        "tentativeExamDate": "2026-10-15",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-4",
-        "assignee": "Kiran Chandramouli",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-08-23",
-        "status": "Completed",
-        "completionDate": "2026-08-23"
-      },
-      {
-        "id": "cert-5",
-        "assignee": "Supritha Ramaswamy",
-        "certification": "Data Analyst Associate",
-        "tentativeExamDate": "2026-11-15",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-6",
-        "assignee": "Abhiram Mudumba",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-10-30",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-7",
-        "assignee": "Balaraju Vankayalapati",
-        "certification": "Generative AI Engineering",
-        "tentativeExamDate": "2026-11-20",
-        "status": "YTS",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-8",
-        "assignee": "Sai Abhinav Sakilam",
-        "certification": "Data Engineering Professional",
-        "tentativeExamDate": "2026-12-10",
-        "status": "Booked Slot",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-9",
-        "assignee": "Vinay Medipally",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-10-30",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-10",
-        "assignee": "Padmaja Pydivada",
-        "certification": "Data Analyst Associate",
-        "tentativeExamDate": "2026-11-05",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-11",
-        "assignee": "Sri Divya Bokka",
-        "certification": "Data Analyst Associate",
-        "tentativeExamDate": "2026-10-20",
-        "status": "Booked Slot",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-12",
-        "assignee": "Mahesh Bodasangi",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-11-28",
-        "status": "YTS",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-13",
-        "assignee": "Radhika Bolisetty",
-        "certification": "Generative AI Engineering",
-        "tentativeExamDate": "2026-12-05",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-14",
-        "assignee": "Sivaji Vadlapatiaji",
-        "certification": "Data Engineering Professional",
-        "tentativeExamDate": "2026-12-15",
-        "status": "In progress",
-        "completionDate": ""
-      },
-      {
-        "id": "cert-15",
-        "assignee": "Uday Kiran Adluri",
-        "certification": "Data Engineering Associate",
-        "tentativeExamDate": "2026-10-30",
-        "status": "In progress",
-        "completionDate": ""
-      }
-    ]
+{
+  "leadership": [
+    {
+      "id": "ld-1791539049536-rvgna",
+      "role": "Executive Sponsor",
+      "assignee": "Nagaraja Krovi",
+      "allocation": "Shared"
+    },
+    {
+      "id": "ld-1791539049536-u5id4",
+      "role": "Engagement Partner",
+      "assignee": "Lalit Barik",
+      "allocation": "Shared"
+    },
+    {
+      "id": "ld-1791539049537-1evb6",
+      "role": "Delivery Lead",
+      "assignee": "Arvind Chaubey",
+      "allocation": "Shared"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "tm-1791539049521-9i0le",
+      "sno": "1",
+      "account": "McKesson",
+      "assignee": "Abhiram Mudumba",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-9i0le",
+          "pod": "R&D",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to MPB from Oct-26 onwards"
+        },
+        {
+          "id": "tm-1791539049522-gpy2q",
+          "pod": "MPB",
+          "role": "BA / Data Analyst",
+          "skill": "Business Analyst",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from R&D from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-j2w8o",
+      "sno": "2",
+      "account": "McKesson",
+      "assignee": "Ajay Durga",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-j2w8o",
+          "pod": "R&D",
+          "role": "Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-jup53",
+      "sno": "3",
+      "account": "McKesson",
+      "assignee": "Arjun Kallepuram",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-jup53",
+          "pod": "UA 2.0",
+          "role": "Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-tmwsc",
+      "sno": "4",
+      "account": "McKesson",
+      "assignee": "Arjun Kumar Uppu",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-tmwsc",
+          "pod": "Velocity",
+          "role": "Scrum Master",
+          "skill": "Agile / SM",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "May 2026, Eswar in April",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049521-oxktu",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Scrum Master",
+          "skill": "Agile / SM",
+          "billingStatus": "Billable",
+          "allocation": "60%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-w4yef",
+      "sno": "5",
+      "account": "McKesson",
+      "assignee": "Arman Gupta",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-w4yef",
+          "pod": "IG",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Billable",
+          "allocation": "0%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to UA2.0 PoD from Oct'26"
+        },
+        {
+          "id": "tm-1791539049522-u5s4i",
+          "pod": "UA 2.0",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-o9291",
+      "sno": "6",
+      "account": "McKesson",
+      "assignee": "Ashish V",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-o9291",
+          "pod": "Shadow",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "Dec 2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-d1wzz",
+      "sno": "7",
+      "account": "McKesson",
+      "assignee": "Ashok Ravupalli",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-d1wzz",
+          "pod": "UA 2.0",
+          "role": "Sr Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-vqq78",
+      "sno": "8",
+      "account": "McKesson",
+      "assignee": "Balaraju Vankayalapati",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-vqq78",
+          "pod": "R&D",
+          "role": "Frontend Developer",
+          "skill": "Java, Springboot, ReactJS",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049522-w7yxh",
+          "pod": "MPB",
+          "role": "Full Stack Developer(Java + React)",
+          "skill": "Java, SpringBoot",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from R&D Shadow from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-mbfsb",
+      "sno": "9",
+      "account": "McKesson",
+      "assignee": "Chaitanya T",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-mbfsb",
+          "pod": "Velocity",
+          "role": "Backend Developer",
+          "skill": "Java, SpringBoot",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "April 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-fsmb0",
+      "sno": "10",
+      "account": "McKesson",
+      "assignee": "Dhana Lakshmi Divya Kolla",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-fsmb0",
+          "pod": "UA",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-e8po1",
+      "sno": "11",
+      "account": "McKesson",
+      "assignee": "Eshvi Sahu",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-e8po1",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "June 2026",
+          "endDate": "Mar 2027",
+          "remarks": "MONA"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-f437m",
+      "sno": "12",
+      "account": "McKesson",
+      "assignee": "Eshwar Chary Poddar",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-f437m",
+          "pod": "IG",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "0%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to MPB PoD from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-mc61t",
+      "sno": "13",
+      "account": "McKesson",
+      "assignee": "Eshwar Poddar",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-mc61t",
+          "pod": "MPB",
+          "role": "QA Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from IG from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-d6ndw",
+      "sno": "14",
+      "account": "McKesson",
+      "assignee": "Geetha Challa",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-d6ndw",
+          "pod": "MPB",
+          "role": "Scrum Master",
+          "skill": "Scrum Master",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-i5emu",
+      "sno": "15",
+      "account": "McKesson",
+      "assignee": "Geetha Sowmya Challa",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-i5emu",
+          "pod": "R&D",
+          "role": "Scrum Master",
+          "skill": "Scrum Master",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Dec-2026",
+          "remarks": "Replacement of Lavanya. IG, R&D , Velocity"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-sfwx4",
+      "sno": "16",
+      "account": "McKesson",
+      "assignee": "Jagadeesh Reddagoni",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-sfwx4",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Backend Developer",
+          "skill": "ReactJS",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "June 2026",
+          "endDate": "Mar 2027",
+          "remarks": "MONA"
+        },
+        {
+          "id": "tm-1791539049522-4449b",
+          "pod": "UA 2.0",
+          "role": "Full Stack Engr (Java)",
+          "skill": "Java, SpringBoot",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-rmbxa",
+      "sno": "17",
+      "account": "McKesson",
+      "assignee": "Jakka Sreehari",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-rmbxa",
+          "pod": "Shadow",
+          "role": "Data Engineer",
+          "skill": "Databricks",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "Dec 2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-pfrje",
+      "sno": "18",
+      "account": "McKesson",
+      "assignee": "Joshi Lekkala",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-pfrje",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Mar 2027",
+          "remarks": "LoopRx"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-aiclv",
+      "sno": "19",
+      "account": "McKesson",
+      "assignee": "K Rama Reddy",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-aiclv",
+          "pod": "Velocity",
+          "role": "Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-xmepg",
+      "sno": "20",
+      "account": "McKesson",
+      "assignee": "Kiran Chandramouli",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-xmepg",
+          "pod": "Shadow",
+          "role": "TPM",
+          "skill": "Delivery / TPM",
+          "billingStatus": "Yet to be Billed",
+          "allocation": "100%",
+          "onboardMonth": "Jul 2026",
+          "endDate": "Sep-2026",
+          "remarks": "Billable from 1st Oct in LoopRx, R&D"
+        },
+        {
+          "id": "tm-1791539049522-lm2mr",
+          "pod": "R&D",
+          "role": "Technical Project Manager",
+          "skill": "TPM",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "Oct-2026",
+          "endDate": "Dec-2026",
+          "remarks": "Vinod was prior to Sep'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-u9szo",
+      "sno": "21",
+      "account": "McKesson",
+      "assignee": "Lakshmi Boga",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-u9szo",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "June 2026",
+          "endDate": "Mar 2027",
+          "remarks": "MONA"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-93ho1",
+      "sno": "22",
+      "account": "McKesson",
+      "assignee": "Lavanya Tadepalli",
+      "location": "India",
+      "status": "Resigned",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-93ho1",
+          "pod": "Shadow",
+          "role": "Scrum Master",
+          "skill": "Agile / SM",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "02-09-2026",
+          "remarks": "R&D, Resigned"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-5viz8",
+      "sno": "23",
+      "account": "McKesson",
+      "assignee": "Mahesh Bodasingi",
+      "location": "India",
+      "status": "Resigned",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-5viz8",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Senior Data Engineer",
+          "skill": "Databricks",
+          "billingStatus": "Non-Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Sep 2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-r9nn8",
+      "sno": "24",
+      "account": "McKesson",
+      "assignee": "Mohd Irshad Mansoori",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-r9nn8",
+          "pod": "UA 2.0",
+          "role": "Senior QA Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-bnkqo",
+      "sno": "25",
+      "account": "McKesson",
+      "assignee": "Padmaja Pydivada",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-bnkqo",
+          "pod": "Velocity",
+          "role": "Sr QA Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-hf3j1",
+      "sno": "26",
+      "account": "McKesson",
+      "assignee": "Prashanth Kumar Kadam",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-hf3j1",
+          "pod": "IG",
+          "role": "Report Developer",
+          "skill": "Power-BI Developer",
+          "billingStatus": "Billable",
+          "allocation": "0%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Onboarded on 13th Aug. Moved to Shadow"
+        },
+        {
+          "id": "tm-1791539049522-pp3x7",
+          "pod": "Shadow",
+          "role": "Power-BI Developer",
+          "skill": "BI / Reporting",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Dec-2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-l63o4",
+      "sno": "27",
+      "account": "McKesson",
+      "assignee": "Praveen Bulusu",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-l63o4",
+          "pod": "Velocity",
+          "role": "Technical Manager",
+          "skill": "Delivery / TPM",
+          "billingStatus": "Billable",
+          "allocation": "80%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-3xnrb",
+      "sno": "28",
+      "account": "McKesson",
+      "assignee": "Praveen Jagarapu",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-3xnrb",
+          "pod": "R&D",
+          "role": "Senior Data Engineer",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to MPB from Oct-26 onwards"
+        },
+        {
+          "id": "tm-1791539049522-tzj30",
+          "pod": "MPB",
+          "role": "DE / Data Analyst",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from R&D from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-vybsy",
+      "sno": "29",
+      "account": "McKesson",
+      "assignee": "Radha Budigi",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-vybsy",
+          "pod": "IG",
+          "role": "Report Developer",
+          "skill": "Power-BI Developer",
+          "billingStatus": "Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to MPB PoD from Oct'26"
+        },
+        {
+          "id": "tm-1791539049522-1gap0",
+          "pod": "MPB",
+          "role": "Report Developer",
+          "skill": "Power-BI Developer",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from IG from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-rzp3r",
+      "sno": "30",
+      "account": "McKesson",
+      "assignee": "Radhika Bolisetty",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-rzp3r",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Sr Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-agxsy",
+      "sno": "31",
+      "account": "McKesson",
+      "assignee": "Rafi Sheik",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-agxsy",
+          "pod": "UA",
+          "role": "Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Dec 2026",
+          "remarks": "Re-Assigned to MPB from Oct-26 onwards(50%)"
+        },
+        {
+          "id": "tm-1791539049522-ogtzf",
+          "pod": "UA 2.0",
+          "role": "Sr Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-inveh",
+      "sno": "32",
+      "account": "McKesson",
+      "assignee": "Rama Devi",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-inveh",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Data Engineer",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct-2026",
+          "endDate": "Dec-2026",
+          "remarks": "VRR, Replacement of Mahesh. Moved from IG Pod from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-pks04",
+      "sno": "33",
+      "account": "McKesson",
+      "assignee": "Rama Devi Ganireddy",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-pks04",
+          "pod": "IG",
+          "role": "Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to LoopRx PoD from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-4r0f1",
+      "sno": "34",
+      "account": "McKesson",
+      "assignee": "Ramesh Vanakayalapati",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-4r0f1",
+          "pod": "Velocity",
+          "role": "Senior Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-154cv",
+      "sno": "35",
+      "account": "McKesson",
+      "assignee": "Ravi Kumar Ch",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-154cv",
+          "pod": "UA 2.0",
+          "role": "Scrum Master",
+          "skill": "Scrum Master",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-wo382",
+      "sno": "36",
+      "account": "McKesson",
+      "assignee": "Rayeesa Banu",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-wo382",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Frontend Developer",
+          "skill": "Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": "Allocated for MONA/MENA"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-ax6q5",
+      "sno": "37",
+      "account": "McKesson",
+      "assignee": "Rupesh Mudavath",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-ax6q5",
+          "pod": "Shadow",
+          "role": "Frontend Developer",
+          "skill": "ReactJS",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "June 2026",
+          "endDate": "Dec 2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-z6vit",
+      "sno": "38",
+      "account": "McKesson",
+      "assignee": "Rushmitha P",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-z6vit",
+          "pod": "Velocity",
+          "role": "Report Developer",
+          "skill": "BI / Reporting",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-4y41s",
+      "sno": "39",
+      "account": "McKesson",
+      "assignee": "Sachin Kumar",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-4y41s",
+          "pod": "IG",
+          "role": "DevOps Engineer",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to UA2.0 PoD from Oct'26"
+        },
+        {
+          "id": "tm-1791539049522-aw369",
+          "pod": "MPB",
+          "role": "DevOps",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from IG from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-1zfqw",
+      "sno": "40",
+      "account": "McKesson",
+      "assignee": "Sai Abhinav Sakilam",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-1zfqw",
+          "pod": "R&D",
+          "role": "S/W AI Engineer",
+          "skill": "AI / ML",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-bk6xn",
+      "sno": "41",
+      "account": "McKesson",
+      "assignee": "Sai Ajay Areti",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-bk6xn",
+          "pod": "Shadow",
+          "role": "Backend Developer",
+          "skill": "Python, FastAPI",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "Dec 2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-lhmk3",
+      "sno": "42",
+      "account": "McKesson",
+      "assignee": "Sai Jayanth M",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-lhmk3",
+          "pod": "Velocity",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-3exae",
+      "sno": "43",
+      "account": "McKesson",
+      "assignee": "Sai Koteswara Rao Chinni",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-3exae",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Data Engineer",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-m9ghj",
+      "sno": "44",
+      "account": "McKesson",
+      "assignee": "Sai Pratusha Karri",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-m9ghj",
+          "pod": "Velocity",
+          "role": "Senior Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-ezb4u",
+      "sno": "45",
+      "account": "McKesson",
+      "assignee": "Sateesh Sappa",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-ezb4u",
+          "pod": "IG",
+          "role": "Data Engineer",
+          "skill": "Data Engineering",
+          "billingStatus": "Billable",
+          "allocation": "",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to MPB PoD from Oct'26"
+        },
+        {
+          "id": "tm-1791539049522-g20th",
+          "pod": "MPB",
+          "role": "Data Engineer",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from IG from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-1jkvm",
+      "sno": "46",
+      "account": "McKesson",
+      "assignee": "Shiva Sundilla",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-1jkvm",
+          "pod": "Shadow",
+          "role": "DevOps Engineer",
+          "skill": "DevOps",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "April 2026",
+          "endDate": "Sep 2026",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049522-04i5y",
+          "pod": "UA 2.0",
+          "role": "Sr DevOps Engineer",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-m8ldl",
+      "sno": "47",
+      "account": "McKesson",
+      "assignee": "Silpa Bitra",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-m8ldl",
+          "pod": "Velocity",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-q4jf4",
+      "sno": "48",
+      "account": "McKesson",
+      "assignee": "Sivaji Vadlapatiaji",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-q4jf4",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Senior DevOps Engineer",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-qnuox",
+      "sno": "49",
+      "account": "McKesson",
+      "assignee": "Sravani Kadamanchi",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-qnuox",
+          "pod": "Velocity",
+          "role": "Frontend Developer",
+          "skill": "Java, Sprintboot, ReactJS",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "May 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-khirb",
+      "sno": "50",
+      "account": "McKesson",
+      "assignee": "Sri Divya Bokka",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-khirb",
+          "pod": "Velocity",
+          "role": "Sr Report Developer",
+          "skill": "BI / Reporting",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-alyim",
+      "sno": "51",
+      "account": "McKesson",
+      "assignee": "Sumera Banu",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-alyim",
+          "pod": "Velocity",
+          "role": "Senior DevOps Engineer",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-wonr0",
+      "sno": "52",
+      "account": "McKesson",
+      "assignee": "Supritha Ramaswamy",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-wonr0",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-o2cw7",
+      "sno": "53",
+      "account": "McKesson",
+      "assignee": "Suvarna Kumar Vasamshetty",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-o2cw7",
+          "pod": "Shadow",
+          "role": "Backend Developer",
+          "skill": ".NET",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "July 2026",
+          "endDate": "Dec 2026",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-ahee1",
+      "sno": "54",
+      "account": "McKesson",
+      "assignee": "Suvarna Yanumala",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-ahee1",
+          "pod": "UA 2.0",
+          "role": "Sr Frontend (React)",
+          "skill": "ReactJS",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-kffjk",
+      "sno": "55",
+      "account": "McKesson",
+      "assignee": "Swapna Katukam",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-kffjk",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Business Analyst",
+          "skill": "BA / DA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": "Divya K in April /May"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049522-gmryz",
+      "sno": "56",
+      "account": "McKesson",
+      "assignee": "Tathagata Dhar",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049522-gmryz",
+          "pod": "UA 2.0",
+          "role": "QA Engineer",
+          "skill": "QA",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-wcz8m",
+      "sno": "57",
+      "account": "McKesson",
+      "assignee": "Uday Kiran Adluri",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-wcz8m",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Backend Developer",
+          "skill": "Engineering",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": "Allocated for MONA/MENA"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-2aesu",
+      "sno": "58",
+      "account": "McKesson",
+      "assignee": "Upendra Gandi",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-2aesu",
+          "pod": "R&D",
+          "role": "Backend Developer",
+          "skill": "Java, Springboot ReactJS",
+          "billingStatus": "Billable",
+          "allocation": "0%",
+          "onboardMonth": "April 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to UA2.0 from Oct-26 onwards"
+        },
+        {
+          "id": "tm-1791539049522-9strt",
+          "pod": "UA 2.0",
+          "role": "Sr Frontend (React)",
+          "skill": "Java, SpringBoot",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-vav6j",
+      "sno": "59",
+      "account": "McKesson",
+      "assignee": "Vamsi Nori",
+      "location": "USA",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-vav6j",
+          "pod": "UA",
+          "role": "Tech Lead",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "20%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049522-s3l8l",
+          "pod": "UA 2.0",
+          "role": "Solution Architect",
+          "skill": "Databricks",
+          "billingStatus": "Billable",
+          "allocation": "80%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-xkuoe",
+      "sno": "60",
+      "account": "McKesson",
+      "assignee": "Venkata Muthadi",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-xkuoe",
+          "pod": "Velocity",
+          "role": "DevOps Solution Architect",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "20%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049521-amcsm",
+          "pod": "R&D",
+          "role": "DevOps Solution Architect",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "20%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": "Sachin is helping here"
+        },
+        {
+          "id": "tm-1791539049521-zf8g0",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "DevOps Solution Architect",
+          "skill": "DevOps",
+          "billingStatus": "Billable",
+          "allocation": "20%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-z26hp",
+      "sno": "61",
+      "account": "McKesson",
+      "assignee": "Vijendra Reddy",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-z26hp",
+          "pod": "UA",
+          "role": ".Net Engineer",
+          "skill": ".NET",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Onboarded on 11th Aug"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-ss68p",
+      "sno": "62",
+      "account": "McKesson",
+      "assignee": "Vinay Kaparthi",
+      "location": "USA",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-ss68p",
+          "pod": "Velocity",
+          "role": "Solution Architect",
+          "skill": "Architecture",
+          "billingStatus": "Billable",
+          "allocation": "30%",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049521-e41gd",
+          "pod": "R&D",
+          "role": "Solution Architect",
+          "skill": "Architecture",
+          "billingStatus": "Billable",
+          "allocation": "",
+          "onboardMonth": "April 2026",
+          "endDate": "Jan 2027",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049522-61yol",
+          "pod": "IG",
+          "role": "Solution Architect",
+          "skill": "Architecture",
+          "billingStatus": "Billable",
+          "allocation": "0%",
+          "onboardMonth": "Aug 2026",
+          "endDate": "Sep 2026",
+          "remarks": "Re-Assigned to MPB PoD from Oct'26"
+        },
+        {
+          "id": "tm-1791539049522-rppob",
+          "pod": "MPB",
+          "role": "Solution Architect",
+          "skill": "Architecture",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar 2027",
+          "remarks": "Moved from IG from Oct'26"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-kgx88",
+      "sno": "63",
+      "account": "McKesson",
+      "assignee": "Vinay Medipally",
+      "location": "India",
+      "status": "Active",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-kgx88",
+          "pod": "Velocity",
+          "role": "UX Engineer",
+          "skill": "UX / Design",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "April 2026",
+          "endDate": "Aug 2026",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791539049522-sodth",
+          "pod": "Shadow",
+          "role": "UX Engineer",
+          "skill": "UX/UI",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "Sep 2026",
+          "endDate": "Dec-2026",
+          "remarks": "Came out of Velocity PoD"
+        }
+      ]
+    },
+    {
+      "id": "tm-1791539049521-i50v2",
+      "sno": "64",
+      "account": "McKesson",
+      "assignee": "Vinod patangey",
+      "location": "India",
+      "status": "Resigned",
+      "assignments": [
+        {
+          "id": "tm-1791539049521-i50v2",
+          "pod": "R&D",
+          "role": "Technical Manager",
+          "skill": "Delivery / TPM",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "April 2026",
+          "endDate": "30-09-2026",
+          "remarks": "Resigned. LWD-30th Sep"
+        },
+        {
+          "id": "tm-1791539049521-lxndm",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Technical Manager",
+          "skill": "Delivery / TPM",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "April 2026",
+          "endDate": "30-09-2026",
+          "remarks": "LWD-30th Sep"
+        }
+      ]
+    }
+  ],
+  "openDemands": [
+    {
+      "id": "od-1791539049536-00vhq",
+      "sno": "1",
+      "projectName": "MHx",
+      "role": "Transformation Lead",
+      "location": "USA",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-h8yy1",
+      "sno": "2",
+      "projectName": "MHx",
+      "role": "DBx Data Architect",
+      "location": "USA",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-gha5m",
+      "sno": "3",
+      "projectName": "MHx",
+      "role": "Full Stack Engineer (C#)",
+      "location": "USA",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-7016n",
+      "sno": "4",
+      "projectName": "MHx",
+      "role": "BA",
+      "location": "USA",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-ev3gl",
+      "sno": "5",
+      "projectName": "MHx",
+      "role": "Data Engg 1",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-8xe6g",
+      "sno": "6",
+      "projectName": "MHx",
+      "role": "AI Engg 1",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-0pf37",
+      "sno": "7",
+      "projectName": "MHx",
+      "role": "Data Engg 2",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-mhtgv",
+      "sno": "8",
+      "projectName": "MHx",
+      "role": "Automation Test Engg",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-0mqey",
+      "sno": "9",
+      "projectName": "IG",
+      "role": "Databricks Solution Architect",
+      "location": "USA",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-aha6n",
+      "sno": "10",
+      "projectName": "IG",
+      "role": "Databricks Solution Architect",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-1f671",
+      "sno": "11",
+      "projectName": "IG",
+      "role": "BA with Scrum Master",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-3o6hh",
+      "sno": "12",
+      "projectName": "IG",
+      "role": "PowerBI Developer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-97rk7",
+      "sno": "13",
+      "projectName": "IG",
+      "role": "Databricks Engineer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-kwm32",
+      "sno": "14",
+      "projectName": "IG",
+      "role": "Databricks Engineer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-1elxq",
+      "sno": "15",
+      "projectName": "IG",
+      "role": "Full Stack .Net/React Developer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-binza",
+      "sno": "16",
+      "projectName": "IG",
+      "role": "DevOps Engineer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-j0asm",
+      "sno": "17",
+      "projectName": "IG",
+      "role": "ETL QA Tester",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-hyfe8",
+      "sno": "18",
+      "projectName": "TGG",
+      "role": ".Net - Technical Lead",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-hwgpq",
+      "sno": "19",
+      "projectName": "Statestreet",
+      "role": "Solution Architect / POC Lead",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-1nzsi",
+      "sno": "20",
+      "projectName": "Statestreet",
+      "role": "Agentic AI / LLM Engineer (Lead)",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-qtwkg",
+      "sno": "21",
+      "projectName": "Statestreet",
+      "role": "Backend / MCP Developer (Python or .NET)",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-imrox",
+      "sno": "22",
+      "projectName": "Statestreet",
+      "role": "Data / RAG Engineer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-dd4ir",
+      "sno": "23",
+      "projectName": "Statestreet",
+      "role": "CRIMS / CRD Functional SME",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-bic6c",
+      "sno": "24",
+      "projectName": "Statestreet",
+      "role": "Full-stack / Front-end Developer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-bxk3r",
+      "sno": "25",
+      "projectName": "Statestreet",
+      "role": "Azure Cloud / DevOps Engineer",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-wg5ow",
+      "sno": "26",
+      "projectName": "Statestreet",
+      "role": "QA Lead (From WinfoTest)",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-2w9d4",
+      "sno": "27",
+      "projectName": "",
+      "role": "TPM",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-6q2p7",
+      "sno": "28",
+      "projectName": "",
+      "role": "TPM",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "",
+      "newOrReplacement": "New",
+      "positions": 1,
+      "status": "Open"
+    },
+    {
+      "id": "od-1791539049536-nmlb1",
+      "sno": "29",
+      "projectName": "UA",
+      "role": ".NET+ React JS",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "Suvarna",
+      "newOrReplacement": "Replacement of Phaneendra. Suvarna selected. Joining on 11th Aug",
+      "positions": 1,
+      "status": "Filled"
+    },
+    {
+      "id": "od-1791539049536-w43fk",
+      "sno": "30",
+      "projectName": "IG",
+      "role": ".NET",
+      "location": "India",
+      "demandOpenDate": "2026-08-01",
+      "onboardedMember": "Vijendra",
+      "newOrReplacement": "Joining on 13th Aug",
+      "positions": 1,
+      "status": "Filled"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-1",
+      "assignee": "Sateesh Sappa",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-2",
+      "assignee": "Rama Devi Ganireddy",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-3",
+      "assignee": "Lakshmi B",
+      "certification": "Data Analyst Associate",
+      "tentativeExamDate": "2026-10-15",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-4",
+      "assignee": "Kiran Chandramouli",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-08-23",
+      "status": "Completed",
+      "completionDate": "2026-08-23"
+    },
+    {
+      "id": "cert-5",
+      "assignee": "Supritha Ramaswamy",
+      "certification": "Data Analyst Associate",
+      "tentativeExamDate": "2026-11-15",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-6",
+      "assignee": "Abhiram Mudumba",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-7",
+      "assignee": "Balaraju Vankayalapati",
+      "certification": "Generative AI Engineering",
+      "tentativeExamDate": "2026-11-20",
+      "status": "YTS",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-8",
+      "assignee": "Sai Abhinav Sakilam",
+      "certification": "Data Engineering Professional",
+      "tentativeExamDate": "2026-12-10",
+      "status": "Booked Slot",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-9",
+      "assignee": "Vinay Medipally",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-10",
+      "assignee": "Padmaja Pydivada",
+      "certification": "Data Analyst Associate",
+      "tentativeExamDate": "2026-11-05",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-11",
+      "assignee": "Sri Divya Bokka",
+      "certification": "Data Analyst Associate",
+      "tentativeExamDate": "2026-10-20",
+      "status": "Booked Slot",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-12",
+      "assignee": "Mahesh Bodasangi",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-11-28",
+      "status": "YTS",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-13",
+      "assignee": "Radhika Bolisetty",
+      "certification": "Generative AI Engineering",
+      "tentativeExamDate": "2026-12-05",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-14",
+      "assignee": "Sivaji Vadlapatiaji",
+      "certification": "Data Engineering Professional",
+      "tentativeExamDate": "2026-12-15",
+      "status": "In progress",
+      "completionDate": ""
+    },
+    {
+      "id": "cert-15",
+      "assignee": "Uday Kiran Adluri",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": ""
+    }
+  ],
+  "podRegistry": []
 }
