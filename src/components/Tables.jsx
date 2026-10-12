@@ -77,12 +77,105 @@ function primaryAssignment(person, viewFilters) {
   return visible[0] || all[0] || {}
 }
 
+/** Display order for Team Members: named roles first, Non-Billable last. */
+const ROLE_ORDER = [
+  'tpm',
+  'scrum',
+  'ba',
+  'data',
+  'qa',
+  'frontend',
+  'backend',
+  'pbi',
+  'other',
+]
+
+function roleFamily(role) {
+  const r = String(role || '')
+    .trim()
+    .toLowerCase()
+  if (!r) return 'other'
+  if (/\btpm\b/.test(r) || r.includes('technical project manager')) return 'tpm'
+  if (r.includes('scrum')) return 'scrum'
+  // BA before Data Analyst catch-alls; DE / Data Analyst → data
+  if (/\bde\b/.test(r) && r.includes('data analyst')) return 'data'
+  if (
+    r === 'ba' ||
+    /\bba\b/.test(r) ||
+    r.includes('business analyst') ||
+    (r.includes('data analyst') && !r.includes('engineer'))
+  ) {
+    return 'ba'
+  }
+  if (r.includes('data engineer') || r.includes('data eng')) return 'data'
+  if (/\bqa\b/.test(r) || r.includes('quality engineer') || r.includes('quality assurance')) {
+    return 'qa'
+  }
+  if (r.includes('frontend') || r.includes('front end') || r.includes('front-end')) {
+    return 'frontend'
+  }
+  if (
+    r.includes('backend') ||
+    r.includes('back end') ||
+    r.includes('back-end') ||
+    r.includes('full stack') ||
+    r.includes('fullstack')
+  ) {
+    return 'backend'
+  }
+  if (
+    r.includes('power-bi') ||
+    r.includes('power bi') ||
+    /\bpbi\b/.test(r) ||
+    r.includes('report developer')
+  ) {
+    return 'pbi'
+  }
+  return 'other'
+}
+
+function roleOrderRank(role) {
+  const idx = ROLE_ORDER.indexOf(roleFamily(role))
+  return idx === -1 ? ROLE_ORDER.length - 1 : idx
+}
+
+/** Non-Billable rows sink below billable / yet-to-bill. */
+function billingOrderRank(status) {
+  const s = normalizeBillingStatus(status)
+  if (s === 'Non-Billable') return 2
+  if (s === 'Yet to be Billed') return 1
+  if (s === 'Billable') return 0
+  return 1
+}
+
 function compareValues(a, b) {
   if (typeof a === 'number' && typeof b === 'number') return a - b
   return String(a ?? '').localeCompare(String(b ?? ''), undefined, {
     sensitivity: 'base',
     numeric: true,
   })
+}
+
+function compareTeamRows(a, b, sortKey, sortDir, viewFilters) {
+  const dir = sortDir === 'asc' ? 1 : -1
+  if (sortKey === 'roleOrder' || sortKey === 'role') {
+    const pa = primaryAssignment(a, viewFilters)
+    const pb = primaryAssignment(b, viewFilters)
+    const billing =
+      (billingOrderRank(pa.billingStatus) - billingOrderRank(pb.billingStatus)) * dir
+    if (billing) return billing
+    const role = (roleOrderRank(pa.role) - roleOrderRank(pb.role)) * dir
+    if (role) return role
+    return (
+      compareValues(a.assignee || '', b.assignee || '') * (sortKey === 'roleOrder' ? 1 : dir)
+    )
+  }
+  return (
+    compareValues(
+      teamSortValue(a, sortKey, viewFilters),
+      teamSortValue(b, sortKey, viewFilters),
+    ) * dir
+  )
 }
 
 function SortTh({ label, col, sortKey, sortDir, onSort }) {
@@ -137,7 +230,8 @@ function teamSortValue(person, key, viewFilters) {
     case 'pod':
       return primary.pod || ''
     case 'role':
-      return primary.role || ''
+    case 'roleOrder':
+      return roleOrderRank(primary.role)
     case 'phase':
       return getAllocationPhase(primary)
     case 'count':
@@ -153,7 +247,7 @@ export function TeamTable({
   onDelete,
   viewFilters = { pod: 'All', role: 'All', phase: 'All', billing: 'All' },
 }) {
-  const { sortKey, sortDir, onSort } = useColumnSort('assignee', 'asc')
+  const { sortKey, sortDir, onSort } = useColumnSort('roleOrder', 'asc')
   const filtersActive =
     viewFilters.pod !== 'All' ||
     viewFilters.role !== 'All' ||
@@ -162,14 +256,7 @@ export function TeamTable({
 
   const sortedRows = useMemo(() => {
     const list = [...rows]
-    const dir = sortDir === 'asc' ? 1 : -1
-    list.sort(
-      (a, b) =>
-        compareValues(
-          teamSortValue(a, sortKey, viewFilters),
-          teamSortValue(b, sortKey, viewFilters),
-        ) * dir,
-    )
+    list.sort((a, b) => compareTeamRows(a, b, sortKey, sortDir, viewFilters))
     return list
   }, [rows, sortKey, sortDir, viewFilters])
 
@@ -220,7 +307,7 @@ export function TeamTable({
             />
             <SortTh
               label="Role"
-              col="role"
+              col="roleOrder"
               sortKey={sortKey}
               sortDir={sortDir}
               onSort={onSort}
