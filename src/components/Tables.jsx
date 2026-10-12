@@ -77,14 +77,17 @@ function primaryAssignment(person, viewFilters) {
   return visible[0] || all[0] || {}
 }
 
-/** Display order for Team Members: named roles first, Non-Billable last. */
+/**
+ * Display order for Team Members.
+ * TPM / Solution Architect / USA roles share the first band; Non-Billable sinks last.
+ */
 const ROLE_ORDER = [
-  'tpm',
+  'lead', // TPM, Solution Architect, USA roles
   'scrum',
   'ba',
   'data',
   'qa',
-  'frontend',
+  'frontend', // Frontend + Full Stack
   'backend',
   'pbi',
   'other',
@@ -95,7 +98,19 @@ function roleFamily(role) {
     .trim()
     .toLowerCase()
   if (!r) return 'other'
-  if (/\btpm\b/.test(r) || r.includes('technical project manager')) return 'tpm'
+  // TPM · Solution Architect · USA-facing lead roles
+  if (
+    /\btpm\b/.test(r) ||
+    r.includes('technical project manager') ||
+    r.includes('solution architect') ||
+    r.includes('solutions architect') ||
+    /\busa\b/.test(r) ||
+    r.includes('(usa)') ||
+    r.endsWith(' usa') ||
+    r.startsWith('usa ')
+  ) {
+    return 'lead'
+  }
   if (r.includes('scrum')) return 'scrum'
   // BA before Data Analyst catch-alls; DE / Data Analyst → data
   if (/\bde\b/.test(r) && r.includes('data analyst')) return 'data'
@@ -111,16 +126,16 @@ function roleFamily(role) {
   if (/\bqa\b/.test(r) || r.includes('quality engineer') || r.includes('quality assurance')) {
     return 'qa'
   }
-  if (r.includes('frontend') || r.includes('front end') || r.includes('front-end')) {
-    return 'frontend'
-  }
   if (
-    r.includes('backend') ||
-    r.includes('back end') ||
-    r.includes('back-end') ||
+    r.includes('frontend') ||
+    r.includes('front end') ||
+    r.includes('front-end') ||
     r.includes('full stack') ||
     r.includes('fullstack')
   ) {
+    return 'frontend'
+  }
+  if (r.includes('backend') || r.includes('back end') || r.includes('back-end')) {
     return 'backend'
   }
   if (
