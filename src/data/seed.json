@@ -1,19 +1,19 @@
 {
   "leadership": [
     {
-      "id": "ld-1791539049536-rvgna",
+      "id": "ld-1791791258213-f36op",
       "role": "Executive Sponsor",
       "assignee": "Nagaraja Krovi",
       "allocation": "Shared"
     },
     {
-      "id": "ld-1791539049536-u5id4",
+      "id": "ld-1791791258213-npe99",
       "role": "Engagement Partner",
       "assignee": "Lalit Barik",
       "allocation": "Shared"
     },
     {
-      "id": "ld-1791539049537-1evb6",
+      "id": "ld-1791791258213-v0pb5",
       "role": "Delivery Lead",
       "assignee": "Arvind Chaubey",
       "allocation": "Shared"
@@ -21,7 +21,7 @@
   ],
   "teamMembers": [
     {
-      "id": "tm-1791539049521-9i0le",
+      "id": "tm-1791791258185-dnp9h",
       "sno": "1",
       "account": "McKesson",
       "assignee": "Abhiram Mudumba",
@@ -29,7 +29,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-9i0le",
+          "id": "tm-1791791258185-dnp9h",
           "pod": "R&D",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -40,7 +40,7 @@
           "remarks": "Re-Assigned to MPB from Oct-26 onwards"
         },
         {
-          "id": "tm-1791539049522-gpy2q",
+          "id": "tm-1791791258186-qytnq",
           "pod": "MPB",
           "role": "BA / Data Analyst",
           "skill": "Business Analyst",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-j2w8o",
+      "id": "tm-1791791258186-kmxzn",
       "sno": "2",
       "account": "McKesson",
       "assignee": "Ajay Durga",
@@ -61,7 +61,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-j2w8o",
+          "id": "tm-1791791258186-kmxzn",
           "pod": "R&D",
           "role": "Data Engineer",
           "skill": "Data Engineering",
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-jup53",
+      "id": "tm-1791791258186-ny5ec",
       "sno": "3",
       "account": "McKesson",
       "assignee": "Arjun Kallepuram",
@@ -82,7 +82,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-jup53",
+          "id": "tm-1791791258186-ny5ec",
           "pod": "UA 2.0",
           "role": "Data Engineer",
           "skill": "Data Engineering",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "id": "tm-1791539049521-tmwsc",
+      "id": "tm-1791791258186-w6nyt",
       "sno": "4",
       "account": "McKesson",
       "assignee": "Arjun Kumar Uppu",
@@ -103,7 +103,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-tmwsc",
+          "id": "tm-1791791258186-w6nyt",
           "pod": "Velocity",
           "role": "Scrum Master",
           "skill": "Agile / SM",
@@ -114,7 +114,7 @@
           "remarks": ""
         },
         {
-          "id": "tm-1791539049521-oxktu",
+          "id": "tm-1791791258186-bh2l8",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Scrum Master",
           "skill": "Agile / SM",
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "id": "tm-1791539049521-w4yef",
+      "id": "tm-1791791258186-861gi",
       "sno": "5",
       "account": "McKesson",
       "assignee": "Arman Gupta",
@@ -135,7 +135,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-w4yef",
+          "id": "tm-1791791258186-861gi",
           "pod": "IG",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -146,7 +146,7 @@
           "remarks": "Re-Assigned to UA2.0 PoD from Oct'26"
         },
         {
-          "id": "tm-1791539049522-u5s4i",
+          "id": "tm-1791791258186-tnmwq",
           "pod": "UA 2.0",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-o9291",
+      "id": "tm-1791791258186-8407l",
       "sno": "6",
       "account": "McKesson",
       "assignee": "Ashish V",
@@ -167,20 +167,31 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-o9291",
-          "pod": "Shadow",
+          "id": "tm-1791791258186-8407l",
+          "pod": "IG",
           "role": "Quality Engineer",
           "skill": "QA",
           "billingStatus": "Non-Billable",
           "allocation": "",
           "onboardMonth": "May 2026",
-          "endDate": "Dec 2026",
+          "endDate": "Sep 2026",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791791258186-rp23n",
+          "pod": "MPB",
+          "role": "Quality Engineer",
+          "skill": "QA",
+          "billingStatus": "Non-Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Dec-2026",
           "remarks": ""
         }
       ]
     },
     {
-      "id": "tm-1791539049522-d1wzz",
+      "id": "tm-1791791258186-6u6cl",
       "sno": "7",
       "account": "McKesson",
       "assignee": "Ashok Ravupalli",
@@ -188,7 +199,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-d1wzz",
+          "id": "tm-1791791258186-6u6cl",
           "pod": "UA 2.0",
           "role": "Sr Data Engineer",
           "skill": "Data Engineering",
@@ -201,7 +212,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-vqq78",
+      "id": "tm-1791791258186-8e097",
       "sno": "8",
       "account": "McKesson",
       "assignee": "Balaraju Vankayalapati",
@@ -209,23 +220,23 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-vqq78",
+          "id": "tm-1791791258186-8e097",
           "pod": "R&D",
           "role": "Frontend Developer",
           "skill": "Java, Springboot, ReactJS",
           "billingStatus": "Non-Billable",
           "allocation": "",
           "onboardMonth": "May 2026",
-          "endDate": "Mar 2027",
+          "endDate": "Sep 2026",
           "remarks": ""
         },
         {
-          "id": "tm-1791539049522-w7yxh",
+          "id": "tm-1791791258186-huczu",
           "pod": "MPB",
           "role": "Full Stack Developer(Java + React)",
           "skill": "Java, SpringBoot",
           "billingStatus": "Billable",
-          "allocation": "100%",
+          "allocation": "50%",
           "onboardMonth": "Oct 2026",
           "endDate": "Mar 2027",
           "remarks": "Moved from R&D Shadow from Oct'26"
@@ -233,7 +244,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-mbfsb",
+      "id": "tm-1791791258186-i23v1",
       "sno": "9",
       "account": "McKesson",
       "assignee": "Chaitanya T",
@@ -241,7 +252,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-mbfsb",
+          "id": "tm-1791791258186-i23v1",
           "pod": "Velocity",
           "role": "Backend Developer",
           "skill": "Java, SpringBoot",
@@ -254,7 +265,7 @@
       ]
     },
     {
-      "id": "tm-1791539049521-fsmb0",
+      "id": "tm-1791791258186-5j8xm",
       "sno": "10",
       "account": "McKesson",
       "assignee": "Dhana Lakshmi Divya Kolla",
@@ -262,7 +273,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-fsmb0",
+          "id": "tm-1791791258186-5j8xm",
           "pod": "UA",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -275,7 +286,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-e8po1",
+      "id": "tm-1791791258186-dsm52",
       "sno": "11",
       "account": "McKesson",
       "assignee": "Eshvi Sahu",
@@ -283,7 +294,7 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-e8po1",
+          "id": "tm-1791791258186-dsm52",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Quality Engineer",
           "skill": "QA",
@@ -296,7 +307,7 @@
       ]
     },
     {
-      "id": "tm-1791539049522-f437m",
+      "id": "tm-1791791258186-ombwk",
       "sno": "12",
       "account": "McKesson",
       "assignee": "Eshwar Chary Poddar",
@@ -304,102 +315,82 @@
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-f437m",
+          "id": "tm-1791791258186-ombwk",
           "pod": "IG",
           "role": "Quality Engineer",
           "skill": "QA",
           "billingStatus": "Billable",
-          "allocation": "0%",
+          "allocation": "100%",
           "onboardMonth": "Aug 2026",
           "endDate": "Sep 2026",
           "remarks": "Re-Assigned to MPB PoD from Oct'26"
-        }
-      ]
-    },
-    {
-      "id": "tm-1791539049522-mc61t",
-      "sno": "13",
-      "account": "McKesson",
-      "assignee": "Eshwar Poddar",
-      "location": "India",
-      "status": "Active",
-      "assignments": [
+        },
         {
-          "id": "tm-1791539049522-mc61t",
+          "id": "tm-1791791258186-07oue",
           "pod": "MPB",
-          "role": "QA Engineer",
+          "role": "Quality Engineer",
           "skill": "QA",
           "billingStatus": "Billable",
           "allocation": "100%",
           "onboardMonth": "Oct 2026",
-          "endDate": "Mar 2027",
-          "remarks": "Moved from IG from Oct'26"
-        }
-      ]
-    },
-    {
-      "id": "tm-1791539049522-d6ndw",
-      "sno": "14",
-      "account": "McKesson",
-      "assignee": "Geetha Challa",
-      "location": "India",
-      "status": "Active",
-      "assignments": [
-        {
-          "id": "tm-1791539049522-d6ndw",
-          "pod": "MPB",
-          "role": "Scrum Master",
-          "skill": "Scrum Master",
-          "billingStatus": "Billable",
-          "allocation": "50%",
-          "onboardMonth": "Oct 2026",
-          "endDate": "Mar 2027",
+          "endDate": "Mar-2027",
           "remarks": ""
         }
       ]
     },
     {
-      "id": "tm-1791539049522-i5emu",
-      "sno": "15",
+      "id": "tm-1791791258186-13250",
+      "sno": "13",
       "account": "McKesson",
       "assignee": "Geetha Sowmya Challa",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-i5emu",
+          "id": "tm-1791791258186-13250",
           "pod": "R&D",
           "role": "Scrum Master",
           "skill": "Scrum Master",
           "billingStatus": "Non-Billable",
           "allocation": "",
           "onboardMonth": "Aug 2026",
-          "endDate": "Dec-2026",
+          "endDate": "Sep-2026",
           "remarks": "Replacement of Lavanya. IG, R&D , Velocity"
+        },
+        {
+          "id": "tm-1791791258186-feon2",
+          "pod": "MPB",
+          "role": "Scrum Master",
+          "skill": "Scrum Master",
+          "billingStatus": "Billable",
+          "allocation": "100%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Mar-2027",
+          "remarks": ""
         }
       ]
     },
     {
-      "id": "tm-1791539049522-sfwx4",
-      "sno": "16",
+      "id": "tm-1791791258186-j18a0",
+      "sno": "14",
       "account": "McKesson",
       "assignee": "Jagadeesh Reddagoni",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-sfwx4",
+          "id": "tm-1791791258186-j18a0",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Backend Developer",
           "skill": "ReactJS",
           "billingStatus": "Non-Billable",
           "allocation": "",
           "onboardMonth": "June 2026",
-          "endDate": "Mar 2027",
+          "endDate": "Sep 2026",
           "remarks": "MONA"
         },
         {
-          "id": "tm-1791539049522-4449b",
+          "id": "tm-1791791258186-ww73r",
           "pod": "UA 2.0",
           "role": "Full Stack Engr (Java)",
           "skill": "Java, SpringBoot",
@@ -412,15 +403,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-rmbxa",
-      "sno": "17",
+      "id": "tm-1791791258186-f1jt7",
+      "sno": "15",
       "account": "McKesson",
       "assignee": "Jakka Sreehari",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-rmbxa",
+          "id": "tm-1791791258186-f1jt7",
           "pod": "Shadow",
           "role": "Data Engineer",
           "skill": "Databricks",
@@ -433,15 +424,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-pfrje",
-      "sno": "18",
+      "id": "tm-1791791258186-k5jo5",
+      "sno": "16",
       "account": "McKesson",
       "assignee": "Joshi Lekkala",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-pfrje",
+          "id": "tm-1791791258186-k5jo5",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Quality Engineer",
           "skill": "QA",
@@ -454,15 +445,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-aiclv",
-      "sno": "19",
+      "id": "tm-1791791258186-7kuk6",
+      "sno": "17",
       "account": "McKesson",
       "assignee": "K Rama Reddy",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-aiclv",
+          "id": "tm-1791791258186-7kuk6",
           "pod": "Velocity",
           "role": "Data Engineer",
           "skill": "Data Engineering",
@@ -475,15 +466,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-xmepg",
-      "sno": "20",
+      "id": "tm-1791791258186-410ha",
+      "sno": "18",
       "account": "McKesson",
       "assignee": "Kiran Chandramouli",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-xmepg",
+          "id": "tm-1791791258186-410ha",
           "pod": "Shadow",
           "role": "TPM",
           "skill": "Delivery / TPM",
@@ -494,7 +485,7 @@
           "remarks": "Billable from 1st Oct in LoopRx, R&D"
         },
         {
-          "id": "tm-1791539049522-lm2mr",
+          "id": "tm-1791791258186-ddu4t",
           "pod": "R&D",
           "role": "Technical Project Manager",
           "skill": "TPM",
@@ -503,19 +494,30 @@
           "onboardMonth": "Oct-2026",
           "endDate": "Dec-2026",
           "remarks": "Vinod was prior to Sep'26"
+        },
+        {
+          "id": "tm-1791791258186-bzkn2",
+          "pod": "LoopRx (VRR, MENA, MONA)",
+          "role": "Technical Project Manager",
+          "skill": "Delivery / TPM",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "Oct-2026",
+          "endDate": "Dec-2026",
+          "remarks": ""
         }
       ]
     },
     {
-      "id": "tm-1791539049522-u9szo",
-      "sno": "21",
+      "id": "tm-1791791258186-213in",
+      "sno": "19",
       "account": "McKesson",
       "assignee": "Lakshmi Boga",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-u9szo",
+          "id": "tm-1791791258186-213in",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -528,15 +530,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-93ho1",
-      "sno": "22",
+      "id": "tm-1791791258186-04xd2",
+      "sno": "20",
       "account": "McKesson",
       "assignee": "Lavanya Tadepalli",
       "location": "India",
       "status": "Resigned",
       "assignments": [
         {
-          "id": "tm-1791539049522-93ho1",
+          "id": "tm-1791791258186-04xd2",
           "pod": "Shadow",
           "role": "Scrum Master",
           "skill": "Agile / SM",
@@ -549,15 +551,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-5viz8",
-      "sno": "23",
+      "id": "tm-1791791258186-t66v1",
+      "sno": "21",
       "account": "McKesson",
       "assignee": "Mahesh Bodasingi",
       "location": "India",
       "status": "Resigned",
       "assignments": [
         {
-          "id": "tm-1791539049521-5viz8",
+          "id": "tm-1791791258186-t66v1",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Senior Data Engineer",
           "skill": "Databricks",
@@ -570,15 +572,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-r9nn8",
-      "sno": "24",
+      "id": "tm-1791791258186-krq9u",
+      "sno": "22",
       "account": "McKesson",
       "assignee": "Mohd Irshad Mansoori",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-r9nn8",
+          "id": "tm-1791791258186-krq9u",
           "pod": "UA 2.0",
           "role": "Senior QA Engineer",
           "skill": "QA",
@@ -591,15 +593,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-bnkqo",
-      "sno": "25",
+      "id": "tm-1791791258186-610jb",
+      "sno": "23",
       "account": "McKesson",
       "assignee": "Padmaja Pydivada",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-bnkqo",
+          "id": "tm-1791791258186-610jb",
           "pod": "Velocity",
           "role": "Sr QA Engineer",
           "skill": "QA",
@@ -612,15 +614,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-hf3j1",
-      "sno": "26",
+      "id": "tm-1791791258186-r0fjb",
+      "sno": "24",
       "account": "McKesson",
       "assignee": "Prashanth Kumar Kadam",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-hf3j1",
+          "id": "tm-1791791258186-r0fjb",
           "pod": "IG",
           "role": "Report Developer",
           "skill": "Power-BI Developer",
@@ -631,7 +633,7 @@
           "remarks": "Onboarded on 13th Aug. Moved to Shadow"
         },
         {
-          "id": "tm-1791539049522-pp3x7",
+          "id": "tm-1791791258186-ywazz",
           "pod": "Shadow",
           "role": "Power-BI Developer",
           "skill": "BI / Reporting",
@@ -644,15 +646,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-l63o4",
-      "sno": "27",
+      "id": "tm-1791791258186-sk09n",
+      "sno": "25",
       "account": "McKesson",
       "assignee": "Praveen Bulusu",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-l63o4",
+          "id": "tm-1791791258186-sk09n",
           "pod": "Velocity",
           "role": "Technical Manager",
           "skill": "Delivery / TPM",
@@ -665,15 +667,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-3xnrb",
-      "sno": "28",
+      "id": "tm-1791791258186-a3d71",
+      "sno": "26",
       "account": "McKesson",
       "assignee": "Praveen Jagarapu",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-3xnrb",
+          "id": "tm-1791791258186-a3d71",
           "pod": "R&D",
           "role": "Senior Data Engineer",
           "skill": "Databricks",
@@ -684,7 +686,7 @@
           "remarks": "Re-Assigned to MPB from Oct-26 onwards"
         },
         {
-          "id": "tm-1791539049522-tzj30",
+          "id": "tm-1791791258186-pg2bh",
           "pod": "MPB",
           "role": "DE / Data Analyst",
           "skill": "Databricks",
@@ -697,15 +699,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-vybsy",
-      "sno": "29",
+      "id": "tm-1791791258186-5plaa",
+      "sno": "27",
       "account": "McKesson",
       "assignee": "Radha Budigi",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-vybsy",
+          "id": "tm-1791791258186-5plaa",
           "pod": "IG",
           "role": "Report Developer",
           "skill": "Power-BI Developer",
@@ -716,7 +718,7 @@
           "remarks": "Re-Assigned to MPB PoD from Oct'26"
         },
         {
-          "id": "tm-1791539049522-1gap0",
+          "id": "tm-1791791258186-w84io",
           "pod": "MPB",
           "role": "Report Developer",
           "skill": "Power-BI Developer",
@@ -729,15 +731,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-rzp3r",
-      "sno": "30",
+      "id": "tm-1791791258186-uirai",
+      "sno": "28",
       "account": "McKesson",
       "assignee": "Radhika Bolisetty",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-rzp3r",
+          "id": "tm-1791791258186-uirai",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Sr Quality Engineer",
           "skill": "QA",
@@ -750,15 +752,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-agxsy",
-      "sno": "31",
+      "id": "tm-1791791258186-zco79",
+      "sno": "29",
       "account": "McKesson",
       "assignee": "Rafi Sheik",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-agxsy",
+          "id": "tm-1791791258186-zco79",
           "pod": "UA",
           "role": "Data Engineer",
           "skill": "Data Engineering",
@@ -769,7 +771,7 @@
           "remarks": "Re-Assigned to MPB from Oct-26 onwards(50%)"
         },
         {
-          "id": "tm-1791539049522-ogtzf",
+          "id": "tm-1791791258186-6aymk",
           "pod": "UA 2.0",
           "role": "Sr Data Engineer",
           "skill": "Data Engineering",
@@ -782,15 +784,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-inveh",
-      "sno": "32",
+      "id": "tm-1791791258186-riklr",
+      "sno": "30",
       "account": "McKesson",
       "assignee": "Rama Devi",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-inveh",
+          "id": "tm-1791791258186-riklr",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Data Engineer",
           "skill": "Databricks",
@@ -803,15 +805,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-pks04",
-      "sno": "33",
+      "id": "tm-1791791258186-p1uxc",
+      "sno": "31",
       "account": "McKesson",
       "assignee": "Rama Devi Ganireddy",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-pks04",
+          "id": "tm-1791791258186-p1uxc",
           "pod": "IG",
           "role": "Data Engineer",
           "skill": "Data Engineering",
@@ -824,15 +826,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-4r0f1",
-      "sno": "34",
+      "id": "tm-1791791258186-7751u",
+      "sno": "32",
       "account": "McKesson",
       "assignee": "Ramesh Vanakayalapati",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-4r0f1",
+          "id": "tm-1791791258186-7751u",
           "pod": "Velocity",
           "role": "Senior Data Engineer",
           "skill": "Data Engineering",
@@ -845,15 +847,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-154cv",
-      "sno": "35",
+      "id": "tm-1791791258186-zhw31",
+      "sno": "33",
       "account": "McKesson",
       "assignee": "Ravi Kumar Ch",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-154cv",
+          "id": "tm-1791791258186-zhw31",
           "pod": "UA 2.0",
           "role": "Scrum Master",
           "skill": "Scrum Master",
@@ -866,15 +868,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-wo382",
-      "sno": "36",
+      "id": "tm-1791791258186-uq3f8",
+      "sno": "34",
       "account": "McKesson",
       "assignee": "Rayeesa Banu",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-wo382",
+          "id": "tm-1791791258186-uq3f8",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Frontend Developer",
           "skill": "Engineering",
@@ -887,36 +889,47 @@
       ]
     },
     {
-      "id": "tm-1791539049522-ax6q5",
-      "sno": "37",
+      "id": "tm-1791791258186-d85ob",
+      "sno": "35",
       "account": "McKesson",
       "assignee": "Rupesh Mudavath",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-ax6q5",
+          "id": "tm-1791791258186-d85ob",
           "pod": "Shadow",
           "role": "Frontend Developer",
           "skill": "ReactJS",
           "billingStatus": "Non-Billable",
           "allocation": "",
           "onboardMonth": "June 2026",
-          "endDate": "Dec 2026",
+          "endDate": "Sep 2026",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791791258186-oedgd",
+          "pod": "MPB",
+          "role": "Frontend Developer",
+          "skill": "ReactJS",
+          "billingStatus": "Billable",
+          "allocation": "50%",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Dec-2026",
           "remarks": ""
         }
       ]
     },
     {
-      "id": "tm-1791539049521-z6vit",
-      "sno": "38",
+      "id": "tm-1791791258186-4pvwa",
+      "sno": "36",
       "account": "McKesson",
       "assignee": "Rushmitha P",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-z6vit",
+          "id": "tm-1791791258186-4pvwa",
           "pod": "Velocity",
           "role": "Report Developer",
           "skill": "BI / Reporting",
@@ -929,15 +942,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-4y41s",
-      "sno": "39",
+      "id": "tm-1791791258186-6b9tq",
+      "sno": "37",
       "account": "McKesson",
       "assignee": "Sachin Kumar",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-4y41s",
+          "id": "tm-1791791258186-6b9tq",
           "pod": "IG",
           "role": "DevOps Engineer",
           "skill": "DevOps",
@@ -948,7 +961,7 @@
           "remarks": "Re-Assigned to UA2.0 PoD from Oct'26"
         },
         {
-          "id": "tm-1791539049522-aw369",
+          "id": "tm-1791791258186-10h3b",
           "pod": "MPB",
           "role": "DevOps",
           "skill": "DevOps",
@@ -961,15 +974,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-1zfqw",
-      "sno": "40",
+      "id": "tm-1791791258186-u3h2x",
+      "sno": "38",
       "account": "McKesson",
       "assignee": "Sai Abhinav Sakilam",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-1zfqw",
+          "id": "tm-1791791258186-u3h2x",
           "pod": "R&D",
           "role": "S/W AI Engineer",
           "skill": "AI / ML",
@@ -982,15 +995,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-bk6xn",
-      "sno": "41",
+      "id": "tm-1791791258186-s93hx",
+      "sno": "39",
       "account": "McKesson",
       "assignee": "Sai Ajay Areti",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-bk6xn",
+          "id": "tm-1791791258186-s93hx",
           "pod": "Shadow",
           "role": "Backend Developer",
           "skill": "Python, FastAPI",
@@ -1003,15 +1016,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-lhmk3",
-      "sno": "42",
+      "id": "tm-1791791258186-br9rd",
+      "sno": "40",
       "account": "McKesson",
       "assignee": "Sai Jayanth M",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-lhmk3",
+          "id": "tm-1791791258186-br9rd",
           "pod": "Velocity",
           "role": "Quality Engineer",
           "skill": "QA",
@@ -1024,15 +1037,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-3exae",
-      "sno": "43",
+      "id": "tm-1791791258186-sc9of",
+      "sno": "41",
       "account": "McKesson",
       "assignee": "Sai Koteswara Rao Chinni",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-3exae",
+          "id": "tm-1791791258186-sc9of",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Data Engineer",
           "skill": "Databricks",
@@ -1045,15 +1058,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-m9ghj",
-      "sno": "44",
+      "id": "tm-1791791258186-xye8w",
+      "sno": "42",
       "account": "McKesson",
       "assignee": "Sai Pratusha Karri",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-m9ghj",
+          "id": "tm-1791791258186-xye8w",
           "pod": "Velocity",
           "role": "Senior Data Engineer",
           "skill": "Data Engineering",
@@ -1066,15 +1079,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-ezb4u",
-      "sno": "45",
+      "id": "tm-1791791258186-x5w2i",
+      "sno": "43",
       "account": "McKesson",
       "assignee": "Sateesh Sappa",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-ezb4u",
+          "id": "tm-1791791258186-x5w2i",
           "pod": "IG",
           "role": "Data Engineer",
           "skill": "Data Engineering",
@@ -1085,7 +1098,7 @@
           "remarks": "Re-Assigned to MPB PoD from Oct'26"
         },
         {
-          "id": "tm-1791539049522-g20th",
+          "id": "tm-1791791258186-pkkwz",
           "pod": "MPB",
           "role": "Data Engineer",
           "skill": "Databricks",
@@ -1098,15 +1111,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-1jkvm",
-      "sno": "46",
+      "id": "tm-1791791258186-ryog7",
+      "sno": "44",
       "account": "McKesson",
       "assignee": "Shiva Sundilla",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-1jkvm",
+          "id": "tm-1791791258186-ryog7",
           "pod": "Shadow",
           "role": "DevOps Engineer",
           "skill": "DevOps",
@@ -1117,7 +1130,7 @@
           "remarks": ""
         },
         {
-          "id": "tm-1791539049522-04i5y",
+          "id": "tm-1791791258186-0shoj",
           "pod": "UA 2.0",
           "role": "Sr DevOps Engineer",
           "skill": "DevOps",
@@ -1130,15 +1143,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-m8ldl",
-      "sno": "47",
+      "id": "tm-1791791258186-y23sg",
+      "sno": "45",
       "account": "McKesson",
       "assignee": "Silpa Bitra",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-m8ldl",
+          "id": "tm-1791791258186-y23sg",
           "pod": "Velocity",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -1151,15 +1164,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-q4jf4",
-      "sno": "48",
+      "id": "tm-1791791258186-jhetk",
+      "sno": "46",
       "account": "McKesson",
       "assignee": "Sivaji Vadlapatiaji",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-q4jf4",
+          "id": "tm-1791791258186-jhetk",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Senior DevOps Engineer",
           "skill": "DevOps",
@@ -1172,36 +1185,36 @@
       ]
     },
     {
-      "id": "tm-1791539049522-qnuox",
-      "sno": "49",
+      "id": "tm-1791791258186-hlikq",
+      "sno": "47",
       "account": "McKesson",
       "assignee": "Sravani Kadamanchi",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-qnuox",
+          "id": "tm-1791791258186-hlikq",
           "pod": "Velocity",
           "role": "Frontend Developer",
           "skill": "Java, Sprintboot, ReactJS",
-          "billingStatus": "Non-Billable",
+          "billingStatus": "Billable",
           "allocation": "",
-          "onboardMonth": "May 2026",
+          "onboardMonth": "Aug 2026",
           "endDate": "Mar 2027",
-          "remarks": ""
+          "remarks": "Billable from Aug in Velocity"
         }
       ]
     },
     {
-      "id": "tm-1791539049521-khirb",
-      "sno": "50",
+      "id": "tm-1791791258186-t2u8g",
+      "sno": "48",
       "account": "McKesson",
       "assignee": "Sri Divya Bokka",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-khirb",
+          "id": "tm-1791791258186-t2u8g",
           "pod": "Velocity",
           "role": "Sr Report Developer",
           "skill": "BI / Reporting",
@@ -1214,15 +1227,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-alyim",
-      "sno": "51",
+      "id": "tm-1791791258186-lte5g",
+      "sno": "49",
       "account": "McKesson",
       "assignee": "Sumera Banu",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-alyim",
+          "id": "tm-1791791258186-lte5g",
           "pod": "Velocity",
           "role": "Senior DevOps Engineer",
           "skill": "DevOps",
@@ -1235,15 +1248,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-wonr0",
-      "sno": "52",
+      "id": "tm-1791791258186-dkfm7",
+      "sno": "50",
       "account": "McKesson",
       "assignee": "Supritha Ramaswamy",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-wonr0",
+          "id": "tm-1791791258186-dkfm7",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Quality Engineer",
           "skill": "QA",
@@ -1256,36 +1269,47 @@
       ]
     },
     {
-      "id": "tm-1791539049522-o2cw7",
-      "sno": "53",
+      "id": "tm-1791791258186-xopqh",
+      "sno": "51",
       "account": "McKesson",
       "assignee": "Suvarna Kumar Vasamshetty",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-o2cw7",
-          "pod": "Shadow",
+          "id": "tm-1791791258186-xopqh",
+          "pod": "IG",
           "role": "Backend Developer",
           "skill": ".NET",
           "billingStatus": "Non-Billable",
           "allocation": "",
           "onboardMonth": "July 2026",
-          "endDate": "Dec 2026",
+          "endDate": "Sep 2026",
+          "remarks": ""
+        },
+        {
+          "id": "tm-1791791258186-s9rf5",
+          "pod": "MPB",
+          "role": "Backend Developer",
+          "skill": ".NET",
+          "billingStatus": "Non-Billable",
+          "allocation": "",
+          "onboardMonth": "Oct 2026",
+          "endDate": "Dec-2026",
           "remarks": ""
         }
       ]
     },
     {
-      "id": "tm-1791539049522-ahee1",
-      "sno": "54",
+      "id": "tm-1791791258186-334sa",
+      "sno": "52",
       "account": "McKesson",
       "assignee": "Suvarna Yanumala",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-ahee1",
+          "id": "tm-1791791258186-334sa",
           "pod": "UA 2.0",
           "role": "Sr Frontend (React)",
           "skill": "ReactJS",
@@ -1298,15 +1322,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-kffjk",
-      "sno": "55",
+      "id": "tm-1791791258186-qfly2",
+      "sno": "53",
       "account": "McKesson",
       "assignee": "Swapna Katukam",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-kffjk",
+          "id": "tm-1791791258186-qfly2",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Business Analyst",
           "skill": "BA / DA",
@@ -1319,15 +1343,15 @@
       ]
     },
     {
-      "id": "tm-1791539049522-gmryz",
-      "sno": "56",
+      "id": "tm-1791791258186-i6c9w",
+      "sno": "54",
       "account": "McKesson",
       "assignee": "Tathagata Dhar",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049522-gmryz",
+          "id": "tm-1791791258186-i6c9w",
           "pod": "UA 2.0",
           "role": "QA Engineer",
           "skill": "QA",
@@ -1340,15 +1364,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-wcz8m",
-      "sno": "57",
+      "id": "tm-1791791258186-ye9qr",
+      "sno": "55",
       "account": "McKesson",
       "assignee": "Uday Kiran Adluri",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-wcz8m",
+          "id": "tm-1791791258186-ye9qr",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Backend Developer",
           "skill": "Engineering",
@@ -1361,15 +1385,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-2aesu",
-      "sno": "58",
+      "id": "tm-1791791258186-omhpd",
+      "sno": "56",
       "account": "McKesson",
       "assignee": "Upendra Gandi",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-2aesu",
+          "id": "tm-1791791258186-omhpd",
           "pod": "R&D",
           "role": "Backend Developer",
           "skill": "Java, Springboot ReactJS",
@@ -1380,7 +1404,7 @@
           "remarks": "Re-Assigned to UA2.0 from Oct-26 onwards"
         },
         {
-          "id": "tm-1791539049522-9strt",
+          "id": "tm-1791791258186-mxjub",
           "pod": "UA 2.0",
           "role": "Sr Frontend (React)",
           "skill": "Java, SpringBoot",
@@ -1393,15 +1417,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-vav6j",
-      "sno": "59",
+      "id": "tm-1791791258186-5ihxz",
+      "sno": "57",
       "account": "McKesson",
       "assignee": "Vamsi Nori",
       "location": "USA",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-vav6j",
+          "id": "tm-1791791258186-5ihxz",
           "pod": "UA",
           "role": "Tech Lead",
           "skill": "Databricks",
@@ -1412,7 +1436,7 @@
           "remarks": ""
         },
         {
-          "id": "tm-1791539049522-s3l8l",
+          "id": "tm-1791791258186-kpxck",
           "pod": "UA 2.0",
           "role": "Solution Architect",
           "skill": "Databricks",
@@ -1425,15 +1449,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-xkuoe",
-      "sno": "60",
+      "id": "tm-1791791258186-488x2",
+      "sno": "58",
       "account": "McKesson",
       "assignee": "Venkata Muthadi",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-xkuoe",
+          "id": "tm-1791791258186-488x2",
           "pod": "Velocity",
           "role": "DevOps Solution Architect",
           "skill": "DevOps",
@@ -1444,7 +1468,7 @@
           "remarks": ""
         },
         {
-          "id": "tm-1791539049521-amcsm",
+          "id": "tm-1791791258186-9qg6m",
           "pod": "R&D",
           "role": "DevOps Solution Architect",
           "skill": "DevOps",
@@ -1455,7 +1479,7 @@
           "remarks": "Sachin is helping here"
         },
         {
-          "id": "tm-1791539049521-zf8g0",
+          "id": "tm-1791791258186-o234k",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "DevOps Solution Architect",
           "skill": "DevOps",
@@ -1468,15 +1492,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-z26hp",
-      "sno": "61",
+      "id": "tm-1791791258186-q5tic",
+      "sno": "59",
       "account": "McKesson",
       "assignee": "Vijendra Reddy",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-z26hp",
+          "id": "tm-1791791258186-q5tic",
           "pod": "UA",
           "role": ".Net Engineer",
           "skill": ".NET",
@@ -1489,48 +1513,37 @@
       ]
     },
     {
-      "id": "tm-1791539049521-ss68p",
-      "sno": "62",
+      "id": "tm-1791791258186-rpby6",
+      "sno": "60",
       "account": "McKesson",
       "assignee": "Vinay Kaparthi",
       "location": "USA",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-ss68p",
+          "id": "tm-1791791258186-rpby6",
           "pod": "Velocity",
           "role": "Solution Architect",
           "skill": "Architecture",
           "billingStatus": "Billable",
           "allocation": "30%",
           "onboardMonth": "April 2026",
-          "endDate": "Jan 2027",
+          "endDate": "Jul 2026",
           "remarks": ""
         },
         {
-          "id": "tm-1791539049521-e41gd",
-          "pod": "R&D",
-          "role": "Solution Architect",
-          "skill": "Architecture",
-          "billingStatus": "Billable",
-          "allocation": "",
-          "onboardMonth": "April 2026",
-          "endDate": "Jan 2027",
-          "remarks": ""
-        },
-        {
-          "id": "tm-1791539049522-61yol",
+          "id": "tm-1791791258186-z8iuq",
           "pod": "IG",
           "role": "Solution Architect",
           "skill": "Architecture",
           "billingStatus": "Billable",
-          "allocation": "0%",
+          "allocation": "100%",
           "onboardMonth": "Aug 2026",
           "endDate": "Sep 2026",
           "remarks": "Re-Assigned to MPB PoD from Oct'26"
         },
         {
-          "id": "tm-1791539049522-rppob",
+          "id": "tm-1791791258186-nnl2w",
           "pod": "MPB",
           "role": "Solution Architect",
           "skill": "Architecture",
@@ -1543,15 +1556,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-kgx88",
-      "sno": "63",
+      "id": "tm-1791791258186-s0gge",
+      "sno": "61",
       "account": "McKesson",
       "assignee": "Vinay Medipally",
       "location": "India",
       "status": "Active",
       "assignments": [
         {
-          "id": "tm-1791539049521-kgx88",
+          "id": "tm-1791791258186-s0gge",
           "pod": "Velocity",
           "role": "UX Engineer",
           "skill": "UX / Design",
@@ -1562,7 +1575,7 @@
           "remarks": ""
         },
         {
-          "id": "tm-1791539049522-sodth",
+          "id": "tm-1791791258186-mmv52",
           "pod": "Shadow",
           "role": "UX Engineer",
           "skill": "UX/UI",
@@ -1575,15 +1588,15 @@
       ]
     },
     {
-      "id": "tm-1791539049521-i50v2",
-      "sno": "64",
+      "id": "tm-1791791258186-1m9y2",
+      "sno": "62",
       "account": "McKesson",
       "assignee": "Vinod patangey",
       "location": "India",
       "status": "Resigned",
       "assignments": [
         {
-          "id": "tm-1791539049521-i50v2",
+          "id": "tm-1791791258186-1m9y2",
           "pod": "R&D",
           "role": "Technical Manager",
           "skill": "Delivery / TPM",
@@ -1594,7 +1607,7 @@
           "remarks": "Resigned. LWD-30th Sep"
         },
         {
-          "id": "tm-1791539049521-lxndm",
+          "id": "tm-1791791258186-e6c2j",
           "pod": "LoopRx (VRR, MENA, MONA)",
           "role": "Technical Manager",
           "skill": "Delivery / TPM",
@@ -1609,7 +1622,7 @@
   ],
   "openDemands": [
     {
-      "id": "od-1791539049536-00vhq",
+      "id": "od-1791791258211-7cpr7",
       "sno": "1",
       "projectName": "MHx",
       "role": "Transformation Lead",
@@ -1621,7 +1634,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-h8yy1",
+      "id": "od-1791791258211-3hydk",
       "sno": "2",
       "projectName": "MHx",
       "role": "DBx Data Architect",
@@ -1633,7 +1646,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-gha5m",
+      "id": "od-1791791258211-15tdr",
       "sno": "3",
       "projectName": "MHx",
       "role": "Full Stack Engineer (C#)",
@@ -1645,7 +1658,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-7016n",
+      "id": "od-1791791258211-1bim2",
       "sno": "4",
       "projectName": "MHx",
       "role": "BA",
@@ -1657,7 +1670,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-ev3gl",
+      "id": "od-1791791258212-baql7",
       "sno": "5",
       "projectName": "MHx",
       "role": "Data Engg 1",
@@ -1669,7 +1682,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-8xe6g",
+      "id": "od-1791791258212-hbelh",
       "sno": "6",
       "projectName": "MHx",
       "role": "AI Engg 1",
@@ -1681,7 +1694,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-0pf37",
+      "id": "od-1791791258212-d25lb",
       "sno": "7",
       "projectName": "MHx",
       "role": "Data Engg 2",
@@ -1693,7 +1706,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-mhtgv",
+      "id": "od-1791791258212-2pp0n",
       "sno": "8",
       "projectName": "MHx",
       "role": "Automation Test Engg",
@@ -1705,7 +1718,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-0mqey",
+      "id": "od-1791791258212-htg2n",
       "sno": "9",
       "projectName": "IG",
       "role": "Databricks Solution Architect",
@@ -1717,7 +1730,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-aha6n",
+      "id": "od-1791791258213-nkgek",
       "sno": "10",
       "projectName": "IG",
       "role": "Databricks Solution Architect",
@@ -1729,7 +1742,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-1f671",
+      "id": "od-1791791258213-itzcw",
       "sno": "11",
       "projectName": "IG",
       "role": "BA with Scrum Master",
@@ -1741,7 +1754,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-3o6hh",
+      "id": "od-1791791258213-lin7g",
       "sno": "12",
       "projectName": "IG",
       "role": "PowerBI Developer",
@@ -1753,7 +1766,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-97rk7",
+      "id": "od-1791791258213-clim6",
       "sno": "13",
       "projectName": "IG",
       "role": "Databricks Engineer",
@@ -1765,7 +1778,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-kwm32",
+      "id": "od-1791791258213-xpwo8",
       "sno": "14",
       "projectName": "IG",
       "role": "Databricks Engineer",
@@ -1777,7 +1790,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-1elxq",
+      "id": "od-1791791258213-6ka0h",
       "sno": "15",
       "projectName": "IG",
       "role": "Full Stack .Net/React Developer",
@@ -1789,7 +1802,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-binza",
+      "id": "od-1791791258213-1lqtd",
       "sno": "16",
       "projectName": "IG",
       "role": "DevOps Engineer",
@@ -1801,7 +1814,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-j0asm",
+      "id": "od-1791791258213-e155f",
       "sno": "17",
       "projectName": "IG",
       "role": "ETL QA Tester",
@@ -1813,7 +1826,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-hyfe8",
+      "id": "od-1791791258213-xr9i3",
       "sno": "18",
       "projectName": "TGG",
       "role": ".Net - Technical Lead",
@@ -1825,7 +1838,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-hwgpq",
+      "id": "od-1791791258213-3yi9m",
       "sno": "19",
       "projectName": "Statestreet",
       "role": "Solution Architect / POC Lead",
@@ -1837,7 +1850,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-1nzsi",
+      "id": "od-1791791258213-5u831",
       "sno": "20",
       "projectName": "Statestreet",
       "role": "Agentic AI / LLM Engineer (Lead)",
@@ -1849,7 +1862,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-qtwkg",
+      "id": "od-1791791258213-hk1m4",
       "sno": "21",
       "projectName": "Statestreet",
       "role": "Backend / MCP Developer (Python or .NET)",
@@ -1861,7 +1874,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-imrox",
+      "id": "od-1791791258213-yqk8i",
       "sno": "22",
       "projectName": "Statestreet",
       "role": "Data / RAG Engineer",
@@ -1873,7 +1886,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-dd4ir",
+      "id": "od-1791791258213-rzkn2",
       "sno": "23",
       "projectName": "Statestreet",
       "role": "CRIMS / CRD Functional SME",
@@ -1885,7 +1898,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-bic6c",
+      "id": "od-1791791258213-j1uza",
       "sno": "24",
       "projectName": "Statestreet",
       "role": "Full-stack / Front-end Developer",
@@ -1897,7 +1910,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-bxk3r",
+      "id": "od-1791791258213-ulpdi",
       "sno": "25",
       "projectName": "Statestreet",
       "role": "Azure Cloud / DevOps Engineer",
@@ -1909,7 +1922,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-wg5ow",
+      "id": "od-1791791258213-n1742",
       "sno": "26",
       "projectName": "Statestreet",
       "role": "QA Lead (From WinfoTest)",
@@ -1921,7 +1934,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-2w9d4",
+      "id": "od-1791791258213-kdn1d",
       "sno": "27",
       "projectName": "",
       "role": "TPM",
@@ -1933,7 +1946,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-6q2p7",
+      "id": "od-1791791258213-z4ygd",
       "sno": "28",
       "projectName": "",
       "role": "TPM",
@@ -1945,7 +1958,7 @@
       "status": "Open"
     },
     {
-      "id": "od-1791539049536-nmlb1",
+      "id": "od-1791791258213-49nop",
       "sno": "29",
       "projectName": "UA",
       "role": ".NET+ React JS",
@@ -1957,7 +1970,7 @@
       "status": "Filled"
     },
     {
-      "id": "od-1791539049536-w43fk",
+      "id": "od-1791791258213-w5sa6",
       "sno": "30",
       "projectName": "IG",
       "role": ".NET",
@@ -1971,124 +1984,334 @@
   ],
   "certifications": [
     {
-      "id": "cert-1",
+      "id": "cert-1791791258213-iqh5w",
+      "personId": "tm-1791791258186-x5w2i",
       "assignee": "Sateesh Sappa",
       "certification": "Data Engineering Associate",
       "tentativeExamDate": "2026-10-30",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "1"
     },
     {
-      "id": "cert-2",
+      "id": "cert-1791791258214-w6za9",
+      "personId": "tm-1791791258186-p1uxc",
       "assignee": "Rama Devi Ganireddy",
       "certification": "Data Engineering Associate",
-      "tentativeExamDate": "2026-10-30",
-      "status": "In progress",
-      "completionDate": ""
+      "tentativeExamDate": "2026-01-10",
+      "status": "Completed",
+      "completionDate": "2026-01-10",
+      "sno": "2"
     },
     {
-      "id": "cert-3",
-      "assignee": "Lakshmi B",
+      "id": "cert-1791791258214-su68n",
+      "personId": "tm-1791791258186-213in",
+      "assignee": "Lakshmi Boga",
       "certification": "Data Analyst Associate",
       "tentativeExamDate": "2026-10-15",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "3"
     },
     {
-      "id": "cert-4",
+      "id": "cert-1791791258214-tn52g",
+      "personId": "tm-1791791258186-410ha",
       "assignee": "Kiran Chandramouli",
       "certification": "Data Engineering Associate",
       "tentativeExamDate": "2026-08-23",
       "status": "Completed",
-      "completionDate": "2026-08-23"
+      "completionDate": "2026-08-23",
+      "sno": "4"
     },
     {
-      "id": "cert-5",
+      "id": "cert-1791791258214-9wko3",
+      "personId": "tm-1791791258186-dkfm7",
       "assignee": "Supritha Ramaswamy",
       "certification": "Data Analyst Associate",
       "tentativeExamDate": "2026-11-15",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "5"
     },
     {
-      "id": "cert-6",
+      "id": "cert-1791791258214-wiw50",
+      "personId": "tm-1791791258185-dnp9h",
       "assignee": "Abhiram Mudumba",
       "certification": "Data Engineering Associate",
       "tentativeExamDate": "2026-10-30",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "6"
     },
     {
-      "id": "cert-7",
+      "id": "cert-1791791258214-ktqj7",
+      "personId": "tm-1791791258186-8e097",
       "assignee": "Balaraju Vankayalapati",
       "certification": "Generative AI Engineering",
       "tentativeExamDate": "2026-11-20",
       "status": "YTS",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "7"
     },
     {
-      "id": "cert-8",
+      "id": "cert-1791791258214-0wsdo",
+      "personId": "tm-1791791258186-u3h2x",
       "assignee": "Sai Abhinav Sakilam",
       "certification": "Data Engineering Professional",
       "tentativeExamDate": "2026-12-10",
       "status": "Booked Slot",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "8"
     },
     {
-      "id": "cert-9",
+      "id": "cert-1791791258214-398oo",
+      "personId": "tm-1791791258186-s0gge",
       "assignee": "Vinay Medipally",
       "certification": "Data Engineering Associate",
       "tentativeExamDate": "2026-10-30",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "9"
     },
     {
-      "id": "cert-10",
+      "id": "cert-1791791258214-p8qon",
+      "personId": "tm-1791791258186-610jb",
       "assignee": "Padmaja Pydivada",
       "certification": "Data Analyst Associate",
       "tentativeExamDate": "2026-11-05",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "10"
     },
     {
-      "id": "cert-11",
+      "id": "cert-1791791258214-i8kyr",
+      "personId": "tm-1791791258186-t2u8g",
       "assignee": "Sri Divya Bokka",
       "certification": "Data Analyst Associate",
       "tentativeExamDate": "2026-10-20",
       "status": "Booked Slot",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "11"
     },
     {
-      "id": "cert-12",
+      "id": "cert-1791791258214-my25d",
+      "personId": "",
       "assignee": "Mahesh Bodasangi",
       "certification": "Data Engineering Associate",
       "tentativeExamDate": "2026-11-28",
       "status": "YTS",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "12"
     },
     {
-      "id": "cert-13",
+      "id": "cert-1791791258214-w6wu6",
+      "personId": "tm-1791791258186-uirai",
       "assignee": "Radhika Bolisetty",
       "certification": "Generative AI Engineering",
       "tentativeExamDate": "2026-12-05",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "13"
     },
     {
-      "id": "cert-14",
+      "id": "cert-1791791258214-6aq8w",
+      "personId": "tm-1791791258186-jhetk",
       "assignee": "Sivaji Vadlapatiaji",
       "certification": "Data Engineering Professional",
       "tentativeExamDate": "2026-12-15",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "14"
     },
     {
-      "id": "cert-15",
+      "id": "cert-1791791258214-0l1kb",
+      "personId": "tm-1791791258186-ye9qr",
       "assignee": "Uday Kiran Adluri",
       "certification": "Data Engineering Associate",
       "tentativeExamDate": "2026-10-30",
       "status": "In progress",
-      "completionDate": ""
+      "completionDate": "",
+      "sno": "15"
+    },
+    {
+      "id": "cert-1791791258214-0201k",
+      "personId": "tm-1791791258186-a3d71",
+      "assignee": "Praveen Jagarapu",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-16",
+      "status": "Booked Slot",
+      "completionDate": "",
+      "sno": "16"
+    },
+    {
+      "id": "cert-1791791258214-zzht2",
+      "personId": "tm-1791791258186-br9rd",
+      "assignee": "Sai Jayanth M",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-28",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "17"
+    },
+    {
+      "id": "cert-1791791258214-fvfm6",
+      "personId": "tm-1791791258186-sk09n",
+      "assignee": "Praveen Bulusu",
+      "certification": "Generative AI Engineering",
+      "tentativeExamDate": "2026-11-28",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "18"
+    },
+    {
+      "id": "cert-1791791258214-4fhg8",
+      "personId": "tm-1791791258186-zco79",
+      "assignee": "Rafi Sheik",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-11-02",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "19"
+    },
+    {
+      "id": "cert-1791791258214-uf6h7",
+      "personId": "tm-1791791258186-xye8w",
+      "assignee": "Sai Pratusha Karri",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-11-06",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "20"
+    },
+    {
+      "id": "cert-1791791258214-1nh5a",
+      "personId": "tm-1791791258186-7kuk6",
+      "assignee": "K Rama Reddy",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-11-06",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "21"
+    },
+    {
+      "id": "cert-1791791258214-ef4ay",
+      "personId": "tm-1791791258186-sc9of",
+      "assignee": "Sai Koteswara Rao Chinni",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "22"
+    },
+    {
+      "id": "cert-1791791258214-toa1o",
+      "personId": "tm-1791791258186-5plaa",
+      "assignee": "Radha Budigi",
+      "certification": "Data Analyst Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "23"
+    },
+    {
+      "id": "cert-1791791258214-sso0f",
+      "personId": "tm-1791791258186-7751u",
+      "assignee": "Ramesh Vanakayalapati",
+      "certification": "Data Engineering Professional",
+      "tentativeExamDate": "2026-10-26",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "24"
+    },
+    {
+      "id": "cert-1791791258214-026b7",
+      "personId": "tm-1791791258186-r0fjb",
+      "assignee": "Prashanth Kumar Kadam",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "25"
+    },
+    {
+      "id": "cert-1791791258214-ing0i",
+      "personId": "tm-1791791258186-k5jo5",
+      "assignee": "Joshi Lekkala",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "26"
+    },
+    {
+      "id": "cert-1791791258214-40anu",
+      "personId": "tm-1791791258186-4pvwa",
+      "assignee": "Rushmitha P",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-11-06",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "27"
+    },
+    {
+      "id": "cert-1791791258214-d4d50",
+      "personId": "tm-1791791258186-5j8xm",
+      "assignee": "Dhana Lakshmi Divya Kolla",
+      "certification": "Data Analyst Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "28"
+    },
+    {
+      "id": "cert-1791791258214-sgbbd",
+      "personId": "tm-1791791258186-qfly2",
+      "assignee": "Swapna Katukam",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "29"
+    },
+    {
+      "id": "cert-1791791258214-74qa7",
+      "personId": "tm-1791791258186-i23v1",
+      "assignee": "Chaitanya T",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "30"
+    },
+    {
+      "id": "cert-1791791258214-jlfk8",
+      "personId": "tm-1791791258186-f1jt7",
+      "assignee": "Jakka Sreehari",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "31"
+    },
+    {
+      "id": "cert-1791791258214-r6l8q",
+      "personId": "tm-1791791258186-kmxzn",
+      "assignee": "Ajay Durga",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "32"
+    },
+    {
+      "id": "cert-1791791258214-1g17w",
+      "personId": "tm-1791791258186-ny5ec",
+      "assignee": "Arjun Kallepuram",
+      "certification": "Data Engineering Associate",
+      "tentativeExamDate": "2026-10-30",
+      "status": "In progress",
+      "completionDate": "",
+      "sno": "33"
     }
   ],
   "podRegistry": []
