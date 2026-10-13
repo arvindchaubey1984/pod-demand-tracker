@@ -134,6 +134,12 @@ export default function App() {
 
   const filteredTeam = useMemo(() => {
     const q = query.trim().toLowerCase()
+    const assignFiltersOn =
+      podFilter !== 'All' ||
+      roleFilter !== 'All' ||
+      allocPhaseFilter !== 'All' ||
+      billingFilter !== 'All'
+
     return state.teamMembers.filter((person) => {
       if (accountFilter !== 'All' && person.account !== accountFilter) return false
       if (
@@ -143,7 +149,9 @@ export default function App() {
         return false
       }
       const assignments = getAssignments(person)
-      const matchAssign = assignments.some((a) => {
+      // Scope search + row match to assignments that pass the active view filters
+      // (e.g. Current window) so "non-billable" does not hit Ended history.
+      const visibleAssignments = assignments.filter((a) => {
         if (podFilter !== 'All' && a.pod !== podFilter) return false
         if (roleFilter !== 'All' && a.role !== roleFilter) return false
         if (allocPhaseFilter !== 'All' && getAllocationPhase(a) !== allocPhaseFilter) {
@@ -157,22 +165,15 @@ export default function App() {
         }
         return true
       })
-      if (
-        !matchAssign &&
-        (podFilter !== 'All' ||
-          roleFilter !== 'All' ||
-          allocPhaseFilter !== 'All' ||
-          billingFilter !== 'All')
-      ) {
-        return false
-      }
+      if (assignFiltersOn && visibleAssignments.length === 0) return false
       if (!q) return true
+      const searchAssignments = assignFiltersOn ? visibleAssignments : assignments
       const blob = [
         person.account,
         person.assignee,
         person.status,
         person.location,
-        ...assignments.flatMap((a) => [
+        ...searchAssignments.flatMap((a) => [
           a.pod,
           a.role,
           a.skill,
